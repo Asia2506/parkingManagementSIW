@@ -18,10 +18,36 @@ public class DipendenteCC {
 	private String cognome;
 	private String azienda;
 	private String targa;
-	
-	
-	
-	/*----METODI EQUALS AND HASHCODE----*/
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getCognome() {
+		return cognome;
+	}
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+	public String getAzienda() {
+		return azienda;
+	}
+	public void setAzienda(String azienda) {
+		this.azienda = azienda;
+	}
+	public String getTarga() {
+		return targa;
+	}
+	public void setTarga(String targa) {
+		this.targa = targa;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(azienda, cognome, nome, targa);
@@ -37,44 +63,6 @@ public class DipendenteCC {
 		DipendenteCC other = (DipendenteCC) obj;
 		return Objects.equals(azienda, other.azienda) && Objects.equals(cognome, other.cognome)
 				&& Objects.equals(nome, other.nome) && Objects.equals(targa, other.targa);
-	}
-	
-	
-	
-	/*----METODI GETTERS AND SETTERS----*/
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	
-	public String getCognome() {
-		return cognome;
-	}
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
-	}
-	
-	public String getAzienda() {
-		return azienda;
-	}
-	public void setAzienda(String azienda) {
-		this.azienda = azienda;
-	}
-	
-	public String getTarga() {
-		return targa;
-	}
-	public void setTarga(String targa) {
-		this.targa = targa;
-	}
-	
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
 	}
 	
 

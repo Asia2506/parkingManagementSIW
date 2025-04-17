@@ -13,10 +13,30 @@ public class Utente {
 		private String nome;
 		private String cognome;
 		private String password;
-		
-		
-		
-		/*----METODI EQUALS AND HASHCODE----*/
+		public String getUsername() {
+			return username;
+		}
+		public void setUsername(String username) {
+			this.username = username;
+		}
+		public String getNome() {
+			return nome;
+		}
+		public void setNome(String nome) {
+			this.nome = nome;
+		}
+		public String getCognome() {
+			return cognome;
+		}
+		public void setCognome(String cognome) {
+			this.cognome = cognome;
+		}
+		public String getPassword() {
+			return password;
+		}
+		public void setPassword(String password) {
+			this.password = password;
+		}
 		@Override
 		public int hashCode() {
 			return Objects.hash(username);
@@ -32,37 +52,5 @@ public class Utente {
 			Utente other = (Utente) obj;
 			return Objects.equals(username, other.username);
 		}
-		
-		
-		
-		/*----METODI GETTERS AND SETTERS----*/
-		public String getUsername() {
-			return username;
-		}
-		public void setUsername(String username) {
-			this.username = username;
-		}
-		
-		public String getNome() {
-			return nome;
-		}
-		public void setNome(String nome) {
-			this.nome = nome;
-		}
-		
-		public String getCognome() {
-			return cognome;
-		}
-		public void setCognome(String cognome) {
-			this.cognome = cognome;
-		}
-		
-		public String getPassword() {
-			return password;
-		}
-		public void setPassword(String password) {
-			this.password = password;
-		}
-		
 		
 }
