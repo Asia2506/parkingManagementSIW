@@ -13,24 +13,10 @@ public class Tessera {
 	private int numero;
 	private LocalDate dataEmissione;
 	private LocalDate dataScadenza;
-	public int getNumero() {
-		return numero;
-	}
-	public void setNumero(int numero) {
-		this.numero = numero;
-	}
-	public LocalDate getDataEmissione() {
-		return dataEmissione;
-	}
-	public void setDataEmissione(LocalDate dataEmissione) {
-		this.dataEmissione = dataEmissione;
-	}
-	public LocalDate getDataScadenza() {
-		return dataScadenza;
-	}
-	public void setDataScadenza(LocalDate dataScadenza) {
-		this.dataScadenza = dataScadenza;
-	}
+	
+	
+	
+	/*----METODI EQUALS AND HASHCODE----*/
 	@Override
 	public int hashCode() {
 		return Objects.hash(numero);
@@ -47,6 +33,29 @@ public class Tessera {
 		return numero == other.numero;
 	}
 	
+	
+	
+	/*----METODI GETTERS AND SETTERS----*/
+	public int getNumero() {
+		return numero;
+	}
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+	
+	public LocalDate getDataEmissione() {
+		return dataEmissione;
+	}
+	public void setDataEmissione(LocalDate dataEmissione) {
+		this.dataEmissione = dataEmissione;
+	}
+	
+	public LocalDate getDataScadenza() {
+		return dataScadenza;
+	}
+	public void setDataScadenza(LocalDate dataScadenza) {
+		this.dataScadenza = dataScadenza;
+	}
 	
 	
 }

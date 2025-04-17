@@ -10,20 +10,14 @@ public class ClienteEsterno {
 	
 	@Id
 	private String nome;
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
+	
+	
+	
+	/*----METODI EUQALS AND HASHCODE----*/
 	@Override
 	public int hashCode() {
 		return Objects.hash(nome);
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -35,5 +29,16 @@ public class ClienteEsterno {
 		ClienteEsterno other = (ClienteEsterno) obj;
 		return Objects.equals(nome, other.nome);
 	}
+	
+	
+	
+	/*----METODI GETTERS AND SETTERS----*/
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 	
 }

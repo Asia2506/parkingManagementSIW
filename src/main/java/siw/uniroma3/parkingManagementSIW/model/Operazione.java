@@ -17,24 +17,10 @@ public class Operazione {
 	private LocalDate data;
 	//private tipologiaOperazione tipo;
 	private String tipoPagamento;
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public LocalDate getData() {
-		return data;
-	}
-	public void setData(LocalDate data) {
-		this.data = data;
-	}
-	public String getTipoPagamento() {
-		return tipoPagamento;
-	}
-	public void setTipoPagamento(String tipoPagamento) {
-		this.tipoPagamento = tipoPagamento;
-	}
+	
+	
+	
+	/*----METODI EQUALS AND HASHCODE----*/
 	@Override
 	public int hashCode() {
 		return Objects.hash(data, tipoPagamento);
@@ -50,6 +36,30 @@ public class Operazione {
 		Operazione other = (Operazione) obj;
 		return Objects.equals(data, other.data) && Objects.equals(tipoPagamento, other.tipoPagamento);
 	}
+	
+	
+	/*----METODI GETTERS AND SETTERS----*/
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	
+	public LocalDate getData() {
+		return data;
+	}
+	public void setData(LocalDate data) {
+		this.data = data;
+	}
+	
+	public String getTipoPagamento() {
+		return tipoPagamento;
+	}
+	public void setTipoPagamento(String tipoPagamento) {
+		this.tipoPagamento = tipoPagamento;
+	}
+	
 	
 	
 	

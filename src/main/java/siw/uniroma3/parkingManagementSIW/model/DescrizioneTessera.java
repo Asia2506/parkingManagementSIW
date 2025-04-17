@@ -17,30 +17,9 @@ public class DescrizioneTessera {
 	private String descrizione;
 	private float importo;
 	
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public String getTipoTessera() {
-		return tipoTessera;
-	}
-	public void setTipoTessera(String tipoTessera) {
-		this.tipoTessera = tipoTessera;
-	}
-	public String getDescrizione() {
-		return descrizione;
-	}
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
-	public float getImporto() {
-		return importo;
-	}
-	public void setImporto(float importo) {
-		this.importo = importo;
-	}
+	
+	
+	/*----METODI EQUALS AND HASHCODE----*/
 	@Override
 	public int hashCode() {
 		return Objects.hash(descrizione, importo, tipoTessera);
@@ -57,6 +36,38 @@ public class DescrizioneTessera {
 		return Objects.equals(descrizione, other.descrizione)
 				&& Float.floatToIntBits(importo) == Float.floatToIntBits(other.importo)
 				&& Objects.equals(tipoTessera, other.tipoTessera);
+	}
+	
+	
+	
+	
+	/*----METODI GETTERS AND SETTERS----*/
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	
+	public String getTipoTessera() {
+		return tipoTessera;
+	}
+	public void setTipoTessera(String tipoTessera) {
+		this.tipoTessera = tipoTessera;
+	}
+	
+	public String getDescrizione() {
+		return descrizione;
+	}
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+	
+	public float getImporto() {
+		return importo;
+	}
+	public void setImporto(float importo) {
+		this.importo = importo;
 	}
 	
 
