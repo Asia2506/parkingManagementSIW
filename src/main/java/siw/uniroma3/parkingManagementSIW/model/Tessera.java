@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Tessera {
@@ -13,6 +14,10 @@ public class Tessera {
 	private int numero;
 	private LocalDate dataEmissione;
 	private LocalDate dataScadenza;
+	
+	@OneToOne
+	private Cliente titolare;
+
 	
 	
 	
