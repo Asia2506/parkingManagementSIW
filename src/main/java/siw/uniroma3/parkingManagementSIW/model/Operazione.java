@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Operazione {
@@ -19,8 +20,8 @@ public class Operazione {
 	private String tipoPagamento;
 	private float cauzione;
 	private float importo;
-	
-	
+	@ManyToOne
+	private Tessera tessera;
 
 	/*----METODI EQUALS AND HASHCODE----*/
 	@Override
@@ -78,7 +79,7 @@ public class Operazione {
 	public void setTipoOperazione(String tipoOperazione) {
 		this.tipoOperazione = TipoOperazione.valueOf(tipoOperazione.toUpperCase());
 		switch (this.tipoOperazione) {
-			case CANCELLAZIONE:
+			case RESTITUZIONE:
 				this.cauzione = -10;
 				break;
 			case EMISSIONE:
@@ -89,6 +90,13 @@ public class Operazione {
 		}
 		
 	}
+	public Tessera getTessera() {
+		return tessera;
+	}
+	public void setTessera(Tessera tessera) {
+		this.tessera = tessera;
+	}
+	
 	
 	
 	

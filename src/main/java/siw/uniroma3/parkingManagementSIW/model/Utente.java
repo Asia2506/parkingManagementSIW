@@ -1,9 +1,11 @@
 package siw.uniroma3.parkingManagementSIW.model;
 
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Utente {
@@ -13,7 +15,8 @@ public class Utente {
 		private String nome;
 		private String cognome;
 		private String password;
-		
+		@OneToMany
+		private List<Operazione> operazioni;
 		
 		
 		/*----METODI EUQALS AND HASHCODE----*/
@@ -63,6 +66,13 @@ public class Utente {
 		public void setPassword(String password) {
 			this.password = password;
 		}
+		public List<Operazione> getOperazioni() {
+			return operazioni;
+		}
+		public void setOperazioni(List<Operazione> operazioni) {
+			this.operazioni = operazioni;
+		}
+		
 		
 		
 }
