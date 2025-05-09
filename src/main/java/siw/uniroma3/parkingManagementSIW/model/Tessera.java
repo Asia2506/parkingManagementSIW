@@ -1,10 +1,13 @@
 package siw.uniroma3.parkingManagementSIW.model;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -14,9 +17,12 @@ public class Tessera {
 	private int numero;
 	private LocalDate dataEmissione;
 	private LocalDate dataScadenza;
-	
+	@ManyToOne
+	private DescrizioneTessera descrizioneTessera;
 	@OneToOne
 	private Cliente titolare;
+	@OneToMany(mappedBy ="tessera")
+	private List<Operazione> operazioni;
 
 	
 	
