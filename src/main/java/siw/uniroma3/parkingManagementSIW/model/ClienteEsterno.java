@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -16,7 +16,7 @@ public class ClienteEsterno extends Cliente{
 	
 	@OneToOne
 	private DatiFattura datiFatturazione;
-	@ManyToOne 
+	@OneToMany
 	private List<Tessera> tessereDipendenti;
 	
 	
