@@ -6,9 +6,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 @Entity
-public class DipendenteCC {
+public class DipendenteCC extends Cliente{
 	
 	
 	@Id
@@ -18,6 +19,9 @@ public class DipendenteCC {
 	private String cognome;
 	private String azienda;
 	private String targa;
+	
+	@OneToOne
+	private DipendenteCC titolare;
 	
 	
 	

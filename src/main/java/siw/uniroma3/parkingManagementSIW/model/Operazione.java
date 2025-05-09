@@ -78,7 +78,7 @@ public class Operazione {
 	public void setTipoOperazione(String tipoOperazione) {
 		this.tipoOperazione = TipoOperazione.valueOf(tipoOperazione.toUpperCase());
 		switch (this.tipoOperazione) {
-			case CANCELLAZIONE:
+			case RESTITUZIONE:
 				this.cauzione = -10;
 				break;
 			case EMISSIONE:

@@ -6,7 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class ClienteEsterno {
+public class ClienteEsterno extends Cliente{
 	
 	@Id
 	private String nome;
