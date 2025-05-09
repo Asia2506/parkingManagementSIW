@@ -1,9 +1,11 @@
 package siw.uniroma3.parkingManagementSIW.model;
 
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -14,6 +16,8 @@ public class ClienteEsterno extends Cliente{
 	
 	@OneToOne
 	private DatiFattura datiFatturazione;
+	@ManyToOne 
+	private List<Tessera> tessereDipendenti;
 	
 	
 	
