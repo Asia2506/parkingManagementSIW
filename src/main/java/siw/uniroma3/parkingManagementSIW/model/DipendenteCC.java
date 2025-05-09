@@ -15,7 +15,7 @@ public class DipendenteCC extends Cliente{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 	private String nome;
 	private String cognome;
 	private String azienda;
