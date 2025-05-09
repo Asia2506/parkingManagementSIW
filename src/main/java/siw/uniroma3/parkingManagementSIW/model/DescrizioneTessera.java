@@ -12,7 +12,7 @@ public class DescrizioneTessera {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 	private String tipoTessera;
 	private String descrizione;
 	private float importo;
