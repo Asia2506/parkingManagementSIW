@@ -9,7 +9,6 @@ import siw.uniroma3.parkingManagementSIW.repository.DescrizioneTesseraRepository
 @Service
 public class DescrizioneTesseraService {
 	
-<<<<<<< HEAD
 	@Autowired
 	private DescrizioneTesseraRepository descrizioneTesseraRepository;
 	
@@ -27,6 +26,4 @@ public class DescrizioneTesseraService {
 	public void save(DescrizioneTessera descrizioneTessera) {
 		descrizioneTesseraRepository.save(descrizioneTessera);	
 	}
-=======
->>>>>>> 320b77a40f6ef73e09b0c81e1f134a178e22fef5
 }
