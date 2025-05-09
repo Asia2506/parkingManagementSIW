@@ -22,7 +22,7 @@ public class DipendenteCC extends Cliente{
 	private String targa;
 	
 	@OneToOne
-	private DipendenteCC titolare;
+	private Tessera tessera;
 	@ManyToOne
 	private DatiFattura datiFatturazione;
 	
