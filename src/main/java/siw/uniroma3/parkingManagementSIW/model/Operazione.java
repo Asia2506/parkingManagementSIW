@@ -15,11 +15,13 @@ public class Operazione {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private LocalDate data;
-	//private tipologiaOperazione tipo;
+	private TipoOperazione tipoOperazione;
 	private String tipoPagamento;
+	private float cauzione;
+	private float importo;
 	
 	
-	
+
 	/*----METODI EQUALS AND HASHCODE----*/
 	@Override
 	public int hashCode() {
@@ -51,13 +53,41 @@ public class Operazione {
 	}
 	public void setData(LocalDate data) {
 		this.data = data;
+	}	
+	public float getCauzione() {
+		return cauzione;
 	}
-	
+	public void setCauzione(float cauzione) {
+		this.cauzione = cauzione;
+	}
+	public float getImporto() {
+		return importo;
+	}
+	public void setImporto(float importo) {
+		this.importo = importo;
+	}
 	public String getTipoPagamento() {
 		return tipoPagamento;
 	}
 	public void setTipoPagamento(String tipoPagamento) {
 		this.tipoPagamento = tipoPagamento;
+	}
+	public TipoOperazione getTipoOperazione() {
+		return tipoOperazione;
+	}
+	public void setTipoOperazione(String tipoOperazione) {
+		this.tipoOperazione = TipoOperazione.valueOf(tipoOperazione.toUpperCase());
+		switch (this.tipoOperazione) {
+			case CANCELLAZIONE:
+				this.cauzione = -10;
+				break;
+			case EMISSIONE:
+				this.cauzione = 10;
+				break;
+			default:  // RICARICA, SMARRIMENTO, DANNEGGIAMENTO
+				this.cauzione = 0;
+		}
+		
 	}
 	
 	
