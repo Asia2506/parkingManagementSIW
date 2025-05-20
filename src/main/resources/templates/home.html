@@ -7,7 +7,7 @@
     	<title>Home</title>
     	<link rel="stylesheet" href="/css/stile.css?version=2" />
   	</head>
-  	<section>
+	<body>
 		<div class="container"> 
 			<header>
 	            <h1>Parking Management</h1>
@@ -20,25 +20,57 @@
 			        </ul>
 			    </nav>
 		    </header>
-		            
+			<section class="info-section"> <h2 class="section-title">Operazioni di Oggi</h2>
+                <div th:if="${operazioniOggi.isEmpty()}">
+                    <p class="empty-message">Nessuna operazione registrata per oggi.</p>
+                </div>
+<!--DA RIVEDERE-->
+                <div th:unless="${operazioniOggi.isEmpty()}">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tipo Operazione</th>
+                                <th>Data</th>
+                                <th>Tipo Pagamento</th>
+                                <th>Cauzione</th>
+                                <th>Importo</th>
+                                <th>ID Tessera</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="operazione : ${operazioniOggi}">
+                                <td th:text="${operazione.id}"></td>
+                                <td th:text="${operazione.tipoOperazione}"></td>
+                                <td th:text="${#temporals.format(operazione.data, 'dd-MM-yyyy')}"></td>
+                                <td th:text="${operazione.tipoPagamento}"></td>
+                                <td th:text="${#numbers.formatDecimal(operazione.cauzione, 1, 2)}"></td>
+                                <td th:text="${#numbers.formatDecimal(operazione.importo, 1, 2)}"></td>
+                                <td th:text="${operazione.tessera != null ? operazione.tessera.id : 'N/A'}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+			</section> 
+<!--FINE DA RIVEDERE-->      
             <section class="info-section"> 
 				<p>Seleziona operazione:</p>
-                <di id="flex-container" class="operations-container"> 
-					<div class="col operation-item"> 
+                <div id="flex-container" class="operations-container"> 
+					<div class="operation-item"> 
 						<a th:href="@{'/restituzioneTessera'}"> Restituzione Tessera</a>
             		</div>
-                    <div class="col operation-item"> 
+                    <div class="operation-item"> 
 						<a th:href="@{'/emissioneTessera'}"> Emissione Tessera</a>
                     </div>
-                    <div class="col operation-item"> 
+                    <div class="operation-item"> 
 						<a th:href="@{'/danneggiamentoTessera'}"> Danneggiamento Tessera </a>
                     </div>
-                    <div class="col operation-item"> 
+                    <div class="operation-item"> 
 						<a th:href="@{'/smarrimentoTessera'}"> Smarrimento Tessera</a>
                     </div>
 				</div>
 			</section>
-
+		</div>
         <footer>
 			
 		</footer>

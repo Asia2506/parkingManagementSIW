@@ -191,6 +191,54 @@ h1 {
     color: #1b5e20; /* Darker green on hover */
 }
 
+/* --- Styles for the Table within info-section --- */
+.info-section table {
+    width: 100%; /* The table takes up the full available width */
+    border-collapse: collapse; /* Removes space between cells */
+    margin-top: 25px; /* Space above the table */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Light shadow for the table */
+    background-color: #ffffff; /* White background for the table */
+    border-radius: 8px; /* Rounded corners for the table */
+    overflow: hidden; /* Ensures rounded borders are applied correctly */
+}
+
+.info-section th,
+.info-section td {
+    padding: 12px 15px; /* Internal padding for cells */
+    text-align: left; /* Left align text */
+    border-bottom: 1px solid #e0e0e0; /* Thin line between rows */
+}
+
+.info-section th {
+    background-color: #f5f5f5; /* Slightly gray background for headers */
+    color: #444; /* Dark text color for headers */
+    font-weight: 600; /* Bolder header text */
+    text-transform: uppercase; /* Uppercase text for headers */
+    font-size: 0.9em; /* Slightly smaller font size for headers */
+    letter-spacing: 0.5px; /* Letter spacing for headers */
+}
+
+.info-section tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Alternating background for even rows */
+}
+
+.info-section tbody tr:hover {
+    background-color: #eef7ff; /* Light blue background on hover */
+    cursor: pointer; /* Change cursor to indicate interactivity */
+}
+
+.info-section td {
+    color: #555; /* Slightly lighter text color for data */
+}
+
+/* Styles for the "No operations" message */
+.info-section .empty-message {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-style: italic;
+}
+
 /* --- Responsive Adjustments --- */
 @media (max-width: 992px) {
     .container {
@@ -243,6 +291,52 @@ h1 {
     .operation-item {
         width: 90%; /* Make stacked items take up more width */
         max-width: 400px; /* Limit overall size */
+    }
+
+    /* Responsive Table (Basic adaptation for small screens) */
+    .info-section table {
+        display: block; /* Makes the table a block for horizontal scrolling */
+        overflow-x: auto; /* Enables horizontal scrolling if table is too wide */
+        white-space: nowrap; /* Keeps cell content on a single line */
+    }
+    .info-section thead,
+    .info-section tbody,
+    .info-section th,
+    .info-section td,
+    .info-section tr {
+        display: block; /* Makes table elements block-level */
+    }
+
+    .info-section thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px; /* Hides the table header on small screens */
+    }
+
+    .info-section tr {
+        border: 1px solid #e0e0e0; /* Border for each stacked row */
+        margin-bottom: 10px; /* Space between stacked rows */
+        border-radius: 5px;
+    }
+
+    .info-section td {
+        border: none; /* Removes internal cell borders */
+        border-bottom: 1px solid #eee; /* Bottom border for each cell */
+        position: relative;
+        padding-left: 50%; /* Space for the simulated label */
+        text-align: right; /* Right align text */
+    }
+
+    .info-section td:before {
+        content: attr(data-label); /* Uses the data-label attribute as a pseudo-element */
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+        color: #333;
     }
 }
 
