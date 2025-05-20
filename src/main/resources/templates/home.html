@@ -29,24 +29,35 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Tipo Operazione</th>
-                                <th>Data</th>
-                                <th>Tipo Pagamento</th>
-                                <th>Cauzione</th>
-                                <th>Importo</th>
-                                <th>ID Tessera</th>
+								<th>Data</th>
+                                <th>Cliente</th> 
+								<th>Azienda</th> 
+								<th>Tessera</th>
+	                            <th>Tipo Abbonamento</th>
+	                            <th>Cauzione(€)</th>
+	                            <th>Contanti(€)</th> 
+								<th>Carta(€)</th> 
+								<th>Fattura</th>                
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="operazione : ${operazioniOggi}">
-                                <td th:text="${operazione.id}"></td>
-                                <td th:text="${operazione.tipoOperazione}"></td>
+								
                                 <td th:text="${#temporals.format(operazione.data, 'dd-MM-yyyy')}"></td>
-                                <td th:text="${operazione.tipoPagamento}"></td>
-                                <td th:text="${#numbers.formatDecimal(operazione.cauzione, 1, 2)}"></td>
-                                <td th:text="${#numbers.formatDecimal(operazione.importo, 1, 2)}"></td>
-                                <td th:text="${operazione.tessera != null ? operazione.tessera.id : 'N/A'}"></td>
+                                <td th:text="${operazione.tessera.titolare.nome+ ' ' +operazione.tessera.titolare.cognome}"></td>
+                                <td th:text="${operazione.tessera.titolare.azienda}"></td>
+                                <td th:text="${operazione.tessera.numero}"></td>
+                                <td th:text="${operazione.tessera.descrizioneTessera.tipoTessera}"></td>
+                                <td th:text="${operazione.cauzione}"></td>
+								
+								<td th:if="${operazione.tipoPagamento=='contanti'}" th:text="${operazione.tessera.descrizioneTessera.importo}"></td>
+								<td th:unless="${operazione.tipoPagamento=='contanti'}" ></td>
+								
+								<td th:if="${operazione.tipoPagamento=='carta'}" th:text="${operazione.tessera.descrizioneTessera.importo}"></td>
+								<td th:unless="${operazione.tipoPagamento=='carta'}" > </td>
+								
+                                <td th:if="${operazione.tessera.titolare.datiFattura!=null}"> F </td>
+								<td th:if="${operazione.tessera.titolare.datiFattura==null}">  </td>
                             </tr>
                         </tbody>
                     </table>
