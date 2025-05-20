@@ -12,10 +12,6 @@ import jakarta.persistence.OneToOne;
 @Entity
 public class DipendenteCC extends Cliente{
 	
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
 	private String nome;
 	private String cognome;
 	private String azienda;
@@ -77,12 +73,6 @@ public class DipendenteCC extends Cliente{
 		this.targa = targa;
 	}
 	
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-
+	
 		
 }

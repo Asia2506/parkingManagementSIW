@@ -4,14 +4,12 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
 public class ClienteEsterno extends Cliente{
 	
-	@Id
 	private String nome;
 	
 	@OneToOne
