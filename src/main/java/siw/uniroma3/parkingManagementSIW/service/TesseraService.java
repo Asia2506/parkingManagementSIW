@@ -12,7 +12,7 @@ public class TesseraService {
 	@Autowired
 	private TesseraRepository tesseraRepository;
 	
-	public Tessera getTesseraById(int numero) {
+	public Tessera getTesseraById(Long numero) {
 	return tesseraRepository.findById(numero).get();
 	}
 	
@@ -24,7 +24,7 @@ public class TesseraService {
 		tesseraRepository.save(tessera);
 	}
 	
-	public void deleteById(int numero) {
+	public void deleteById(Long numero) {
 		tesseraRepository.deleteById(numero);
 	}
 

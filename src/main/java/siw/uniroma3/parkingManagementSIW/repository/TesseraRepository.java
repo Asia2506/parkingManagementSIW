@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import siw.uniroma3.parkingManagementSIW.model.Tessera;
 
-public interface TesseraRepository extends CrudRepository<Tessera,Integer>{
+public interface TesseraRepository extends CrudRepository<Tessera,Long>{
 
 }

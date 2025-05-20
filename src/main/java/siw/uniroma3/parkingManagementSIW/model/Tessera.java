@@ -14,7 +14,7 @@ import jakarta.persistence.OneToOne;
 public class Tessera {
 	
 	@Id
-	private int numero;
+	private Long numero;
 	private LocalDate dataEmissione;
 	private LocalDate dataScadenza;
 	@ManyToOne
@@ -47,10 +47,10 @@ public class Tessera {
 	
 	
 	/*----METODI GETTERS AND SETTERS----*/
-	public int getNumero() {
+	public Long getNumero() {
 		return numero;
 	}
-	public void setNumero(int numero) {
+	public void setNumero(Long numero) {
 		this.numero = numero;
 	}
 	
