@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<!-- PAGINA WEB CHE VIENE RESTITUITA NEL CASO DI UNA RICHIESTA DEL TIPO: "/"-->
+
+<html>
+  	<head>
+    	<title>Home</title>
+    	<link rel="stylesheet" href="/stile.css?version=2" />
+  	</head>
+  	<body>
+        <header>
+			<h1>Parking Management</h1>
+			<nav>
+				<ul>
+	                <li><a th:href="@{/tessereEmesse}">Tessere Emesse</a></li>
+					<li><a th:href="@{/tessereRestituite}">Tessere Restituite</a></li>
+					<li><a th:href="@{/tessereSmarriteDanneggiate}">Tessere Smarrite e Danneggiate</a></li>
+	                <li><a th:href="@{/operazioni}">Operazioni</a></li>
+	            </ul>
+			</nav>
+		</header>
+		
+        <section>
+	        <!-- main paragraph --> 
+	        <p>Seleziona operazione:</p>
+	        <div id="flex-container">
+	            <div class="col">
+					<a th:href="@{'/restituzioneTessera'}"> Restituzione Tessera</a>
+				</div>
+	            <div class="col">
+					<a th:href="@{'/emissioneTessera'}"> Emissione Tessera</a>
+				</div>
+				<div class="col">
+					<a th:href="@{'/danneggiamentoTessera'}"> Danneggiamento Tessera </a>
+				</div>
+				<div class="col"> 
+					<a th:href="@{'/smarrimentoTessera'}"> Smarrimento Tessera</a>
+				</div>
+	        </div>
+        </section>
+
+        <footer>
+			
+		</footer>
+		
+			
+  	</body>
+</html>
