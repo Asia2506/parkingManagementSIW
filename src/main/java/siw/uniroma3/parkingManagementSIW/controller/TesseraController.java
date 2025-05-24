@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 import siw.uniroma3.parkingManagementSIW.model.Tessera;
+import siw.uniroma3.parkingManagementSIW.service.DescrizioneTesseraService;
 import siw.uniroma3.parkingManagementSIW.service.TesseraService;
 
 @Controller
@@ -15,6 +16,8 @@ public class TesseraController {
 	
 	@Autowired
 	TesseraService tesseraService;
+	@Autowired
+	DescrizioneTesseraService	tipoTesseraService;
 
 	
 	@GetMapping("/tessera/{id}")
@@ -33,6 +36,7 @@ public class TesseraController {
 	  @GetMapping("/emissioneTessera")
 	  public String emettiNuovaTessera(Model model) {
 		  model.addAttribute("tessera", new Tessera());
+		  model.addAttribute("tipiTessere",this.tipoTesseraService.getAllDescrizioneTessera());
 		  return "emissioneTessera.html";
 	  }
 }

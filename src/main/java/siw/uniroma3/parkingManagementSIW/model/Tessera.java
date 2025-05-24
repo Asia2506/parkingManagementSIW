@@ -67,6 +67,25 @@ public class Tessera {
 	public void setDataScadenza(LocalDate dataScadenza) {
 		this.dataScadenza = dataScadenza;
 	}
+	public DescrizioneTessera getDescrizioneTessera() {
+		return descrizioneTessera;
+	}
+	public void setDescrizioneTessera(DescrizioneTessera descrizioneTessera) {
+		this.descrizioneTessera = descrizioneTessera;
+	}
+	public Cliente getTitolare() {
+		return titolare;
+	}
+	public void setTitolare(Cliente titolare) {
+		this.titolare = titolare;
+	}
+	public List<Operazione> getOperazioni() {
+		return operazioni;
+	}
+	public void setOperazioni(List<Operazione> operazioni) {
+		this.operazioni = operazioni;
+	}
+	
 	
 	
 }
