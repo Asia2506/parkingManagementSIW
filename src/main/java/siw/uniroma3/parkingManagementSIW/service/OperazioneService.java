@@ -37,6 +37,11 @@ public class OperazioneService {
 		
 		return operazioneRepository.findByData(dataDiOggi,DipendenteCC.class);
 	}
+	
+	
+	public void save(Operazione operazione) {
+		this.operazioneRepository.save(operazione);
+	}
 
 
 }

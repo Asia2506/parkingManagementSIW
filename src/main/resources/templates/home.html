@@ -68,16 +68,19 @@
 				<p>Seleziona operazione:</p>
                 <div id="flex-container" class="operations-container"> 
 					<div class="operation-item"> 
-						<a th:href="@{'/restituzioneTessera'}"> Restituzione Tessera</a>
+						<a th:href="@{'/formNewOperazione/ricarica'}"> Ricarica/Rinnovo</a>
             		</div>
                     <div class="operation-item"> 
-						<a th:href="@{'/emissioneTessera'}"> Emissione Tessera</a>
+						<a th:href="@{'/formNewOperazione/emissione'}"> Emissione Tessera</a>
+                    </div>
+					<div class="operation-item"> 
+						<a th:href="@{'/formNewOperazione/restituzione'}"> Restituzione Tessera</a>
+            		</div>
+                    <div class="operation-item"> 
+						<a th:href="@{'/formNewOperazione/danneggiamento'}"> Danneggiamento Tessera </a>
                     </div>
                     <div class="operation-item"> 
-						<a th:href="@{'/danneggiamentoTessera'}"> Danneggiamento Tessera </a>
-                    </div>
-                    <div class="operation-item"> 
-						<a th:href="@{'/smarrimentoTessera'}"> Smarrimento Tessera</a>
+						<a th:href="@{'/formNewOperazione/smarrimento'}"> Smarrimento Tessera</a>
                     </div>
 				</div>
 			</section>
