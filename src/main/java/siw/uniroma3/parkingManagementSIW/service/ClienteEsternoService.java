@@ -13,8 +13,8 @@ public class ClienteEsternoService {
 	private ClienteEsternoRepository clienteEsternoRepository;
 	
 	
-	public ClienteEsterno getClienteEsternoById(String nome) {
-		return clienteEsternoRepository.findById(nome).get();
+	public ClienteEsterno getClienteEsternoById(Long id) {
+		return clienteEsternoRepository.findById(id).get();
 	}
 
 	
