@@ -20,7 +20,7 @@ public class Tessera {
 	@ManyToOne
 	private DescrizioneTessera descrizioneTessera;
 	@OneToOne
-	private Cliente titolare;
+	private DipendenteCC titolare;
 	@OneToMany(mappedBy ="tessera")
 	private List<Operazione> operazioni;
 
@@ -73,10 +73,10 @@ public class Tessera {
 	public void setDescrizioneTessera(DescrizioneTessera descrizioneTessera) {
 		this.descrizioneTessera = descrizioneTessera;
 	}
-	public Cliente getTitolare() {
+	public DipendenteCC getTitolare() {
 		return titolare;
 	}
-	public void setTitolare(Cliente titolare) {
+	public void setTitolare(DipendenteCC titolare) {
 		this.titolare = titolare;
 	}
 	public List<Operazione> getOperazioni() {

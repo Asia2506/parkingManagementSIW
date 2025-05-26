@@ -27,5 +27,9 @@ public class TesseraService {
 	public void deleteById(Long numero) {
 		tesseraRepository.deleteById(numero);
 	}
+	
+	public boolean existsById(Long id) {
+        return tesseraRepository.existsById(id);
+    }
 
 }

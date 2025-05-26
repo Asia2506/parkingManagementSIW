@@ -12,6 +12,7 @@ public class DipendenteCCService {
 	@Autowired
 	private DipendenteCCRepository dipendenteCCRepository;
 	
+	
 	public DipendenteCC getDIpendenteCCById(Long id) {
 		return dipendenteCCRepository.findById(id).get();
 	}
@@ -20,10 +21,18 @@ public class DipendenteCCService {
 		return dipendenteCCRepository.findAll();
 	}
 
+	
 	public void save(DipendenteCC dipendenteCC) {
 		dipendenteCCRepository.save(dipendenteCC);
 	}
+	
+	
 	public void deleteById(Long id) {
 		dipendenteCCRepository.deleteById(id);
+	}
+	
+	
+	public Iterable<DipendenteCC> getAllDipendentiBy(String nome,String cognome){
+		return dipendenteCCRepository.findByNomeAndCognome(nome, cognome);
 	}
 }

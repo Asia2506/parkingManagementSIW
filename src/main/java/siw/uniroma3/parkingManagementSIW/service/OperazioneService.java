@@ -35,7 +35,7 @@ public class OperazioneService {
 		
 		return operazioniOggi;*/
 		
-		return operazioneRepository.findByData(dataDiOggi,DipendenteCC.class);
+		return operazioneRepository.findByData(dataDiOggi);
 	}
 	
 	
