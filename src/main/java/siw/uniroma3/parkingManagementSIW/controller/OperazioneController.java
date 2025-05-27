@@ -26,7 +26,7 @@ public class OperazioneController {
 	@Autowired
 	OperazioneService operazioneService;
 	@Autowired
-	DescrizioneTesseraService	tipoTesseraService;
+	DescrizioneTesseraService tipoTesseraService;
 	@Autowired
 	TesseraService tesseraService;
 	@Autowired
@@ -50,6 +50,7 @@ public class OperazioneController {
 	        case DANNEGGIAMENTO:
 	            return "danneggiamentoTessera.html";
 	        case RESTITUZIONE:
+	        	
 	            return "restituzioneTessera.html";
 	        default:
 	        	return "ricaricaTessera.html";

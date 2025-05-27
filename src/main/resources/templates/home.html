@@ -41,8 +41,8 @@
                             <tr th:each="operazione : ${operazioniOggi}">
 								
                                 <td th:text="${#temporals.format(operazione.data, 'dd-MM-yyyy')}"></td>
-                                <td th:text="${operazione.tessera.titolare.nome+ ' ' +operazione.tessera.titolare.cognome}"></td>
-                                <td th:text="${operazione.tessera.titolare.azienda}"></td>
+                                <td th:text="${operazione.cliente.nome+ ' ' +operazione.cliente.cognome}"></td>
+                                <td th:text="${operazione.cliente.azienda}"></td>
                                 <td th:text="${operazione.tessera.numero}"></td>
                                 <td th:text="${operazione.tessera.descrizioneTessera.tipoTessera}"></td>
                                 <td th:text="${operazione.cauzione}"></td>
@@ -53,8 +53,8 @@
 								<td th:if="${operazione.tipoPagamento=='carta'}" th:text="${operazione.tessera.descrizioneTessera.importo}"></td>
 								<td th:unless="${operazione.tipoPagamento=='carta'}" > </td>
 								
-                                <td th:if="${operazione.tessera.titolare.datiFatturazione!=null}"> F </td>
-								<td th:if="${operazione.tessera.titolare.datiFatturazione==null}">  </td>
+                                <td th:if="${operazione.cliente.datiFatturazione!=null}"> F </td>
+								<td th:if="${operazione.cliente.datiFatturazione==null}">  </td>
                             </tr>
                         </tbody>
                     </table>

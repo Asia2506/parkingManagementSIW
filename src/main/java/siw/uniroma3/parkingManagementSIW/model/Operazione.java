@@ -24,16 +24,16 @@ public class Operazione {
 	private Tessera tessera;
 	//per non perdere i dati delle operazioni
 	@ManyToOne
-	private DipendenteCC Cliente;
+	private DipendenteCC cliente;
 	
 	
 	
 
 	public DipendenteCC getCliente() {
-		return Cliente;
+		return cliente;
 	}
 	public void setCliente(DipendenteCC cliente) {
-		Cliente = cliente;
+		this.cliente = cliente;
 	}
 	public void setTipoOperazione(TipoOperazione tipoOperazione) {
 		this.tipoOperazione = tipoOperazione;
