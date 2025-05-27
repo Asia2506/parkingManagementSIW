@@ -13,11 +13,11 @@ public class TesseraService {
 	private TesseraRepository tesseraRepository;
 	
 	public Tessera getTesseraById(Long numero) {
-	return tesseraRepository.findById(numero).get();
+		return tesseraRepository.findById(numero).get();
 	}
 	
 	public Iterable<Tessera> getAllTessere() {
-	return tesseraRepository.findAll();
+		return tesseraRepository.findAll();
 	}
 
 	public void save(Tessera tessera) {
@@ -31,5 +31,9 @@ public class TesseraService {
 	public boolean existsById(Long id) {
         return tesseraRepository.existsById(id);
     }
+	
+	public boolean findTesseraById(Long numero) {
+		return tesseraRepository.existsById(numero);
+	}
 
 }

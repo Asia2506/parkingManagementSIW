@@ -98,4 +98,26 @@ public class TesseraController {
 		//restituisco la pagina con riepilogo 
 		return "formAssociaAnagrafica.html";
 	}
+	
+	@PostMapping("/riepilogoDatiTessera")
+	public String datiTessera(@RequestParam("numeroTessera") Long numeroTessera, Model model) {
+
+	    // Simuliamo un servizio per recuperare i dati
+	    
+
+	    if (!this.tesseraService.existsById(numeroTessera) ||
+	    		(this.tesseraService.existsById(numeroTessera) && this.tesseraService.getTesseraById(numeroTessera).getTitolare()==null)) {
+	        // Tessera non trovata
+	        return "restituzioneTessera.html"; // Pagina di errore o notifica
+	    }
+	    
+	    Tessera tessera = tesseraService.getTesseraById(numeroTessera);
+	    DipendenteCC titolare = tessera.getTitolare();
+	    // Aggiungo i dati di riepilogo alla vista
+	    model.addAttribute("tessera", tessera);
+	    model.addAttribute("titolare", titolare);
+
+	    // Restituisco la pagina con i dati della tessera e del titolare
+	    return "riepilogoTessera.html"; 
+	}
 }

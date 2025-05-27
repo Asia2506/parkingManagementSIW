@@ -97,6 +97,12 @@ public class OperazioneController {
 	        case DANNEGGIAMENTO:
 	        	
 	        case RESTITUZIONE:
+	        	o.setTipoOperazione(tipo);
+	        	t.setTitolare(null);
+	    		d.setTessera(null);
+	    		this.dipendenteCCService.save(d);
+	    		this.tesseraService.save(t);
+	    		
 	        	
 	        default:
 	        	

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restituzione Tessera</title>
+    <link rel="stylesheet" href="/css/stile.css?version=2" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Parking Management</h1>
+            <nav class="inline-menu-container">
+                <ul>
+                    <li><a th:href="@{/tessereEmesse}">Tessere Emesse</a></li>
+                    <li><a th:href="@{/tessereRestituite}">Tessere Restituite</a></li>
+                    <li><a th:href="@{/tessereSmarriteDanneggiate}">Tessere Smarrite e Danneggiate</a></li>
+                    <li><a th:href="@{/operazioni}">Operazioni</a></li>
+                </ul>
+            </nav>
+        </header>
+        <section class="info-section">
+            <h2 class="section-title">Restituzione Tessera</h2>
+            <form th:action="@{/riepilogoDatiTessera}" method="post" class="form-restituzione">
+                <label>Numero Tessera:</label>
+                <input 
+                    type="text" 
+                    id="numeroTessera" 
+                    name="numeroTessera" 
+                    placeholder="Inserisci il numero della tessera" 
+                    required>
+                <button type="submit">Conferma</button>
+            </form>
+        </section>
+    </div>
+    <footer>
+        <!-- Footer opzionale -->
+    </footer>
+</body>
+</html>

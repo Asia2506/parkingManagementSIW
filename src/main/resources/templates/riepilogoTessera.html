@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <title>Riepilogo Tessera</title>
+    <link rel="stylesheet" href="/css/stile.css?version=2" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Parking Management</h1>
+            <nav class="inline-menu-container">
+                <ul>
+                    <li><a th:href="@{/tessereEmesse}">Tessere Emesse</a></li>
+                    <li><a th:href="@{/tessereRestituite}">Tessere Restituite</a></li>
+                    <li><a th:href="@{/tessereSmarriteDanneggiate}">Tessere Smarrite e Danneggiate</a></li>
+                    <li><a th:href="@{/operazioni}">Operazioni</a></li>
+                </ul>
+            </nav>
+        </header>
+        <section class="info-section">
+            <h2 class="section-title">Riepilogo Tessera</h2>
+            <div class="table-responsive-container">
+                <table>
+                    <tr>
+                        <th>Numero Tessera</th>
+                        <td th:text="${tessera.numero}"></td>
+                    </tr>
+                    <tr>
+                        <th>Data di Emissione</th>
+                        <td th:text="${#temporals.format(tessera.dataEmissione, 'dd-MM-yyyy')}"></td>
+                    </tr>
+                    <tr>
+                        <th>Data di Scadenza</th>
+                        <td th:text="${#temporals.format(tessera.dataScadenza, 'dd-MM-yyyy')}"></td>
+                    </tr>
+                    <tr>
+                        <th>Descrizione Tessera</th>
+                        <td th:text="${tessera.descrizioneTessera.tipoTessera}"></td>
+                    </tr>
+                    <tr>
+                        <th>Titolare</th>
+                        <td th:text="${tessera.titolare.nome + ' ' + tessera.titolare.cognome}"></td>
+                    </tr>
+                    <tr>
+                        <th>Azienda</th>
+                        <td th:text="${tessera.titolare.azienda}"></td>
+                    </tr>
+                </table>
+				<form th:action="@{'/salvaOperazione/restituzione/' + ${tessera.numero} + '/' + ${tessera.titolare.id}}" method="post">
+				               <button type="submit" class="action-button">Conferma Restituzione</button>
+				           </form>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
