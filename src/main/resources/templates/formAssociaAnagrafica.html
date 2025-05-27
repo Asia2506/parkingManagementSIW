@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Emissione Tessera</title>
+		<link rel="stylesheet" href="/css/stile.css?version=2" />
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<h1><a th:href="@{/}">Parking Management</a></h1>
+				<nav class="inline-menu-container">
+					<ul>
+						<li><a th:href="@{/tessereEmesse}">Tessere Emesse</a></li>
+						<li><a th:href="@{/tessereRestituite}">Tessere Restituite</a></li>
+						<li><a th:href="@{/tessereSmarriteDanneggiate}">Tessere Smarrite e Danneggiate</a></li>
+						<li><a th:href="@{/operazioni}">Operazioni</a></li>
+					</ul>
+				</nav>
+			</header>
+
+			<section class="info-section">
+				<h2 class="section-title">Operazione: Emissione Tessera - Associa Anagrafica</h2>
+
+				<form th:action="@{'/salvaOperazione/emissione/'+${tessera.numero}+'/'+${titolare?.id}}" method="POST" th:object="${tessera}">
+					<div class="form-group">
+						<label>NUMERO TESSERA: </label>
+						<input type="text" th:value="${tessera.numero}"  readonly class="form-input-readonly" />
+						<label>TIPO ABBONAMENTO: </label>
+						<input type="text" th:value="${tessera.descrizioneTessera.tipoTessera}"  readonly class="form-input-readonly" />
+					</div>
+					<div class="form-group">
+						<label>TITOLARE SELEZIONATO:</label>
+						<span>
+							
+							<input type="text" th:if="${titolare!=null}" th:value="${titolare.nome + ' '+ titolare.cognome}" readonly class="form-input-readonly"/>
+						</span>
+						
+						<a th:href="@{'/cercaTitolareTessera/'+${tessera.numero}}" class="form-link-button"> Cerca Titolare </a>
+						
+						<a th:href="@{'/nuovoTitolareTessera/'+${tessera.numero}}" class="form-link-button"> Aggiungi Titolare </a>
+						
+					</div>
+					
+					
+					<div class="form-actions">
+						<span><button type="submit" class="form-button">Associa</button></span>
+					</div>
+				</form>
+			</section>
+		</div>
+	</body>
+</html>
+
+
+<!--<!DOCTYPE html>
+<html>
+	<head>
+		<title>Emissione Tessera</title>
+		<link rel="stylesheet" href="/css/stile.css?version=2" />
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<h1>Parking Management</h1>
+				<nav class="inline-menu-container">
+					<ul>
+						<li><a th:href="@{/tessereEmesse}">Tessere Emesse</a></li>
+						<li><a th:href="@{/tessereRestituite}">Tessere Restituite</a></li>
+						<li><a th:href="@{/tessereSmarriteDanneggiate}">Tessere Smarrite e Danneggiate</a></li>
+						<li><a th:href="@{/operazioni}">Operazioni</a></li>
+					</ul>
+				</nav>
+			</header>
+
+			<section class="info-section">
+				<h2 class="section-title">Operazione: Emissione Tessera - Associa Anagrafica</h2>
+
+				<form th:action="@{'/salvaOperazione/emissione/'+${tessera.numero}+'/'+${titolare?.id}}" method="POST" th:object="${tessera}">
+					<div>
+						<label>NUMERO TESSERA: </label>
+						<input type="text" th:value="${tessera.numero}"  readonly />
+						<label>TIPO ABBONAMENTO: </label>
+						<input type="text" th:value="${tessera.descrizioneTessera.tipoTessera}"  readonly />
+					</div>
+					<div>
+						<label>TITOLARE SELEZIONATO:</label>
+						<span>
+							
+							<input type="text" th:if="${titolare!=null}" th:value="${titolare.nome + ' '+ titolare.cognome}" readonly/>
+						</span>
+						
+							<a th:href="@{'/cercaTitolareTessera/'+${tessera.numero}}"> Cerca Titolare </a>
+						
+							<a th:href="@{'/nuovoTitolareTessera/'+${tessera.numero}}"> Aggiungi Titolare </a>
+						
+					</div>
+					
+					
+					<div>
+						<span><button type="submit">Associa</button></span>
+					</div>
+				</form>
+			</section>
+		</div>
+	</body>
+</html>-->

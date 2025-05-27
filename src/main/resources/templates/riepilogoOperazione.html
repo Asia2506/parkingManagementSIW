@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  	<head>
+    	<title>Conferma Operazione</title>
+    	<link rel="stylesheet" href="/css/stile.css?version=2" />
+  	</head>
+	<body>
+		<div class="container"> 
+			<header>
+	            <h1><a th:href="@{/}">Parking Management</a></h1>
+	            <nav class="inline-menu-container"> 
+					<ul>
+		                <li><a th:href="@{/tessereEmesse}">Tessere Emesse</a></li>
+		                <li><a th:href="@{/tessereRestituite}">Tessere Restituite</a></li>
+		                <li><a th:href="@{/tessereSmarriteDanneggiate}">Tessere Smarrite e Danneggiate</a></li>
+		                <li><a th:href="@{/operazioni}">Operazioni</a></li>
+			        </ul>
+			    </nav>
+		    </header>
+
+            <section class="info-section"> 
+                <h2 class="section-title">Dettagli Operazione</h2>
+                
+                <div th:if="${operazione == null}">
+                    <p class="empty-message">Nessun dettaglio operazione disponibile.</p>
+                </div>
+
+                <div th:unless="${operazione == null}" class="table-responsive-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+								<th>Dipendente Cliente</th>
+								<th>Azienda Titolare</th>
+								<th>Numero Tessera</th>
+								<th>Tipo Abbonamento</th>
+                                <th>Cauzione (€)</th>
+								<th>Importo Operazione</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td th:text="${#temporals.format(operazione.data, 'dd-MM-yyyy')}"></td>
+								<td th:if="${operazione.cliente != null}" th:text="${operazione.cliente.nome + ' ' + operazione.cliente.cognome}"></td>
+								<td th:unless="${operazione.cliente != null}">N.D.</td>
+								<td th:if="${operazione.tessera != null and operazione.tessera.titolare != null}" th:text="${operazione.tessera.titolare.azienda}"></td>
+								<td th:unless="${operazione.tessera != null and operazione.tessera.titolare != null}">N.D.</td>
+								<td th:if="${operazione.tessera != null}" th:text="${operazione.tessera.numero}"></td>
+								<td th:unless="${operazione.tessera != null}">N.D.</td>
+								<td th:if="${operazione.tessera != null and operazione.tessera.descrizioneTessera != null}" th:text="${operazione.tessera.descrizioneTessera.tipoTessera}"></td>
+								<td th:unless="${operazione.tessera != null and operazione.tessera.descrizioneTessera != null}">N.D.</td>                              
+								<td th:text="${operazione.cauzione}"></td>
+                                <td th:if="${operazione.tessera != null and operazione.tessera.descrizioneTessera != null}" th:text="${operazione.tessera.descrizioneTessera.importo}"></td>
+                                <td th:unless="${operazione.tessera != null and operazione.tessera.descrizioneTessera != null}">N.D.</td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+				
+                <h2 class="section-title">Seleziona Tipo di Pagamento</h2>
+                <form th:action="@{'/confermaOperazione/'+${operazione.id}}" method="post" class="payment-form">
+                    <div class="radio-group">
+                        <input type="radio" id="pagamentoContanti" name="tipoPagamento" value="contanti" required />
+                        <label for="pagamentoContanti">Contanti</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="pagamentoCarta" name="tipoPagamento" value="carta" required />
+                        <label for="pagamentoCarta">Carta</label>
+                    </div>
+                    
+                    <button type="submit" class="submit-button">Conferma Pagamento</button>
+                </form>
+            </section>
+		</div>
+        <footer>
+		</footer>
+			
+  	</body>
+</html>
+
+
+<!--<!DOCTYPE html>
+<html>
+  	<head>
+    	<title>Conferma Operazione</title>
+    	<link rel="stylesheet" href="/css/stile.css?version=2" />
+  	</head>
+	<body>
+		<div class="container"> 
+			<header>
+	            <h1>Parking Management</h1>
+	            <nav class="inline-menu-container"> 
+					<ul>
+		                <li><a th:href="@{/tessereEmesse}">Tessere Emesse</a></li>
+		                <li><a th:href="@{/tessereRestituite}">Tessere Restituite</a></li>
+		                <li><a th:href="@{/tessereSmarriteDanneggiate}">Tessere Smarrite e Danneggiate</a></li>
+		                <li><a th:href="@{/operazioni}">Operazioni</a></li>
+			        </ul>
+			    </nav>
+		    </header>
+
+            <section class="info-section"> 
+                <h2 class="section-title">Dettagli Operazione</h2>
+                
+                <div th:if="${operazione == null}">
+                    <p class="empty-message">Nessun dettaglio operazione disponibile.</p>
+                </div>
+
+                <div th:unless="${operazione == null}">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+								<th>Dipendente Cliente</th>
+								<th>Azienda Titolare</th>
+								<th>Numero Tessera</th>
+								<th>Tipo Abbonamento</th>
+                                <th>Cauzione (€)</th>
+								<th>Importo Operazione</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td th:text="${#temporals.format(operazione.data, 'dd-MM-yyyy')}"></td>
+								<td th:if="${operazione.cliente != null}" th:text="${operazione.cliente.nome + ' ' + operazione.cliente.cognome}"></td>
+								<td th:unless="${operazione.cliente != null}">N.D.</td>
+								<td th:if="${operazione.tessera != null and operazione.tessera.titolare != null}" th:text="${operazione.tessera.titolare.azienda}"></td>
+								<td th:unless="${operazione.tessera != null and operazione.tessera.titolare != null}">N.D.</td>
+								<td th:if="${operazione.tessera != null}" th:text="${operazione.tessera.numero}"></td>
+								<td th:unless="${operazione.tessera != null}">N.D.</td>
+								<td th:if="${operazione.tessera != null and operazione.tessera.descrizioneTessera != null}" th:text="${operazione.tessera.descrizioneTessera.tipoTessera}"></td>
+								<td th:unless="${operazione.tessera != null and operazione.tessera.descrizioneTessera != null}">N.D.</td>                              
+								<td th:text="${operazione.cauzione}"></td>
+                                <td th:if="${operazione.tessera != null and operazione.tessera.descrizioneTessera != null}" th:text="${operazione.tessera.descrizioneTessera.importo}"></td>
+                                <td th:unless="${operazione.tessera != null and operazione.tessera.descrizioneTessera != null}">N.D.</td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+				
+                <h2 class="section-title">Seleziona Tipo di Pagamento</h2>
+                <form th:action="@{'/confermaOperazione/'+${operazione.id}}" method="post">
+                    <div class="radio-group">
+                        <input type="radio" id="pagamentoContanti" name="tipoPagamento" value="contanti" required />
+                        <label for="pagamentoContanti">Contanti</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="pagamentoCarta" name="tipoPagamento" value="carta" required />
+                        <label for="pagamentoCarta">Carta</label>
+                    </div>
+                    
+                    <button type="submit" class="submit-button">Conferma Pagamento</button>
+                </form>
+            </section>
+		</div>
+        <footer>
+		</footer>
+			
+  	</body>
+</html>-->

@@ -23,23 +23,15 @@ insert into descrizione_tessera (id, tipo_tessera, descrizione, importo) values 
 insert into descrizione_tessera (id, tipo_tessera, descrizione, importo) values (nextval('descrizione_tessera_seq'), 'FERIALE', 'Tessera con validità dal primo all ultimo gg del mese esclusi i weekend', 12.00);
 
 
--- 3. Popola la tabella 'cliente' (con DTYPE per ClienteEsterno e DipendenteCC)
--- CLIENTE ESTERNO (nome, dati_fatturazione_id)
-insert into cliente (id, dtype, nome, dati_fatturazione_id) values (nextval('cliente_seq'), 'ClienteEsterno', 'Giuseppe Neri', NULL); -- Cliente Esterno senza dati fattura
-
 -- DIPENDENTE CC (nome, cognome, azienda, targa, dati_fatturazione_id)
-insert into cliente (id, dtype, nome, cognome, azienda, targa, dati_fatturazione_id) values (nextval('cliente_seq'), 'DipendenteCC', 'Anna', 'Bianchi', 'FootLocker', 'AB123CD',NULL);
-insert into cliente (id, dtype, nome, cognome, azienda, targa, dati_fatturazione_id) values (nextval('cliente_seq'), 'DipendenteCC', 'Carlo', 'Mancini', 'Footlocker', 'EF456GH',NULL);
-insert into cliente (id, dtype, nome, cognome, azienda, targa, dati_fatturazione_id) values (nextval('cliente_seq'), 'DipendenteCC', 'Francesca', 'Rizzo', 'Tezenis', 'LM789NO', (select id from dati_fattura where ragione_sociale = 'Azienda Alpha S.r.l.'));
+insert into dipendentecc (id, nome, cognome, azienda, targa, dati_fatturazione_id) values (nextval('dipendentecc_seq'),  'Anna', 'Bianchi', 'FootLocker', 'AB123CD',NULL);
+insert into dipendentecc (id, nome, cognome, azienda, targa, dati_fatturazione_id) values (nextval('dipendentecc_seq'),  'Carlo', 'Mancini', 'Footlocker', 'EF456GH',NULL);
+insert into dipendentecc (id, nome, cognome, azienda, targa, dati_fatturazione_id) values (nextval('dipendentecc_seq'),  'Francesca', 'Rizzo', 'Tezenis', 'LM789NO', (select id from dati_fattura where ragione_sociale = 'Azienda Alpha S.r.l.'));
+insert into dipendentecc (id, nome, cognome, azienda, targa, dati_fatturazione_id) values (nextval('dipendentecc_seq'),  'Mario', 'Rizzo', 'Tezenis', 'LC769hO', (select id from dati_fattura where ragione_sociale = 'Azienda Alpha S.r.l.'));
 
 
 -- 4. Popola la tabella 'tessera'
 -- 'numero' è la PK (non generato automaticamente)
-insert into tessera (numero, data_emissione, data_scadenza, descrizione_tessera_id, titolare_id) values (1001, '2024-01-01', '2025-01-01', (select id from descrizione_tessera where tipo_tessera = 'FULL'), (select id from cliente where nome = 'Giuseppe Neri' and dtype = 'ClienteEsterno'));
-insert into tessera (numero, data_emissione, data_scadenza, descrizione_tessera_id, titolare_id) values (1002, '2025-05-15', '2025-06-15', (select id from descrizione_tessera where tipo_tessera = 'FULL'), (select id from cliente where nome = 'Giuseppe Neri' and dtype = 'ClienteEsterno'));
-insert into tessera (numero, data_emissione, data_scadenza, descrizione_tessera_id, titolare_id) values (1003, '2025-05-20', '2025-05-21', (select id from descrizione_tessera where tipo_tessera = 'FULL'), (select id from cliente where nome = 'Giuseppe Neri' and dtype = 'ClienteEsterno'));
-
-insert into tessera (numero, data_emissione, data_scadenza, descrizione_tessera_id, titolare_id) values (2001, '2024-03-01', '2025-03-01', (select id from descrizione_tessera where tipo_tessera = 'FULL'), (select id from cliente where nome = 'Anna' and cognome = 'Bianchi' and dtype = 'DipendenteCC'));
-insert into tessera (numero, data_emissione, data_scadenza, descrizione_tessera_id, titolare_id) values (2002, '2025-05-10', '2025-06-10', (select id from descrizione_tessera where tipo_tessera = 'FULL'), (select id from cliente where nome = 'Carlo' and cognome = 'Mancini' and dtype = 'DipendenteCC'));
-insert into tessera (numero, data_emissione, data_scadenza, descrizione_tessera_id, titolare_id) values (2003, '2025-04-25', NULL, (select id from descrizione_tessera where tipo_tessera = 'SCALARE'), (select id from cliente where nome = 'Francesca' and cognome = 'Rizzo' and dtype = 'DipendenteCC'));
-
+insert into tessera (numero, data_emissione, data_scadenza, descrizione_tessera_id, titolare_id) values (2001, '2024-03-01', '2025-03-01', (select id from descrizione_tessera where tipo_tessera = 'FULL'), (select id from dipendentecc where nome = 'Anna' and cognome = 'Bianchi'));
+insert into tessera (numero, data_emissione, data_scadenza, descrizione_tessera_id, titolare_id) values (2002, '2025-05-10', '2025-06-10', (select id from descrizione_tessera where tipo_tessera = 'FULL'), (select id from dipendentecc where nome = 'Carlo' and cognome = 'Mancini'));
+insert into tessera (numero, data_emissione, data_scadenza, descrizione_tessera_id, titolare_id) values (2003, '2025-04-25', NULL, (select id from descrizione_tessera where tipo_tessera = 'SCALARE'), (select id from dipendentecc where nome = 'Francesca' and cognome = 'Rizzo' ));
