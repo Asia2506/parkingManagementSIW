@@ -41,6 +41,10 @@ public class OperazioneService {
 	public void save(Operazione operazione) {
 		this.operazioneRepository.save(operazione);
 	}
+	
+	public Operazione getOperazioneById(Long id) {
+		return this.operazioneRepository.findById(id).get();
+	}
 
 
 }

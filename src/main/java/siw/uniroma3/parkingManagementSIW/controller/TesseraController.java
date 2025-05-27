@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import siw.uniroma3.parkingManagementSIW.model.DipendenteCC;
 import siw.uniroma3.parkingManagementSIW.model.Tessera;
 import siw.uniroma3.parkingManagementSIW.service.DescrizioneTesseraService;
+import siw.uniroma3.parkingManagementSIW.service.DipendenteCCService;
 import siw.uniroma3.parkingManagementSIW.service.TesseraService;
 
 @Controller
@@ -24,6 +26,9 @@ public class TesseraController {
 	
 	@Autowired
 	DescrizioneTesseraService tipoTesseraService;
+	
+	@Autowired
+	DipendenteCCService dipendenteCCService;
 
 	
 	@GetMapping("/tessera/{id}")
@@ -76,10 +81,21 @@ public class TesseraController {
 	
 	
 	@GetMapping("/emissioneTessera/associaAnagrafica/{numeroTessera}")
-	public String associaAnagrafica(@PathVariable("numeroTessera") Long id,Model model) {
+	public String scegliTitolareTessera(@PathVariable("numeroTessera") Long id,Model model) {
 		
 		model.addAttribute("tessera",this.tesseraService.getTesseraById(id));
+		model.addAttribute("titolare",null);
 		return "formAssociaAnagrafica.html";
 			
+	}
+	
+	
+	@GetMapping("/emissioneTessera/associaAnagrafica/{numeroTessera}/{idCliente}")
+	public String associaTitolareATessera(@PathVariable("numeroTessera") Long numTesssera,@PathVariable("idCliente") Long idTitolare,Model model) {
+		
+		model.addAttribute("tessera",this.tesseraService.getTesseraById(numTesssera));
+		model.addAttribute("titolare",this.dipendenteCCService.getDIpendenteCCById(idTitolare));
+		//restituisco la pagina con riepilogo 
+		return "formAssociaAnagrafica.html";
 	}
 }
