@@ -29,15 +29,7 @@ public class Operazione {
 	
 	
 
-	public DipendenteCC getCliente() {
-		return cliente;
-	}
-	public void setCliente(DipendenteCC cliente) {
-		this.cliente = cliente;
-	}
-	public void setTipoOperazione(TipoOperazione tipoOperazione) {
-		this.tipoOperazione = tipoOperazione;
-	}
+	
 	/*----METODI EQUALS AND HASHCODE----*/
 	@Override
 	public int hashCode() {
@@ -113,6 +105,18 @@ public class Operazione {
 	public void setTessera(Tessera tessera) {
 		this.tessera = tessera;
 	}
+	
+	public DipendenteCC getCliente() {
+		return cliente;
+	}
+	public void setCliente(DipendenteCC cliente) {
+		this.cliente = cliente;
+	}
+	public void setTipoOperazione(TipoOperazione tipoOperazione) {
+		this.tipoOperazione = tipoOperazione;
+	}
+	
+	
 	
 	
 	

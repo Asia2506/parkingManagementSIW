@@ -58,8 +58,8 @@
                     </table>
                 </div>
 				
-                <h2 class="section-title">Seleziona Tipo di Pagamento</h2>
-                <form th:action="@{'/confermaOperazione/'+${operazione.id}}" method="post" class="payment-form">
+                <h2 th:if="${operazione.tipoOperazione=='EMISSIONE' or operazione.tipoOperazione=='RICARICA'}" class="section-title">Seleziona Tipo di Pagamento</h2>
+                <form th:if="${operazione.tipoOperazione=='EMISSIONE' or operazione.tipoOperazione=='RICARICA'}"th:action="@{'/confermaOperazione/'+${operazione.id}}" method="post" class="payment-form">
                     <div class="radio-group">
                         <input type="radio" id="pagamentoContanti" name="tipoPagamento" value="contanti" required />
                         <label for="pagamentoContanti">Contanti</label>
