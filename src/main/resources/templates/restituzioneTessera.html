@@ -7,8 +7,8 @@
 <body>
     <div class="container">
         <header>
-            <h1>Parking Management</h1>
-            <nav class="inline-menu-container">
+            <h1><a th:href="@{/}">Parking Management</a></h1> 
+			<nav class="inline-menu-container">
                 <ul>
                     <li><a th:href="@{/tessereEmesse}">Tessere Emesse</a></li>
                     <li><a th:href="@{/tessereRestituite}">Tessere Restituite</a></li>
@@ -19,20 +19,24 @@
         </header>
         <section class="info-section">
             <h2 class="section-title">Restituzione Tessera</h2>
-            <form th:action="@{/riepilogoDatiTessera}" method="post" class="form-restituzione">
-                <label>Numero Tessera:</label>
-                <input 
-                    type="text" 
-                    id="numeroTessera" 
-                    name="numeroTessera" 
-                    placeholder="Inserisci il numero della tessera" 
-                    required>
-                <button type="submit">Conferma</button>
+            <form th:action="@{/riepilogoDatiTessera}" method="post">
+                <div class="form-group">
+                    <label>Numero Tessera:</label>
+                    <input 
+                        type="text" 
+                        id="numeroTessera" 
+                        name="numeroTessera" 
+                        placeholder="Inserisci il numero della tessera" 
+                        required
+                        class="form-input">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="form-button">Conferma</button>
+                </div>
             </form>
         </section>
     </div>
     <footer>
-        <!-- Footer opzionale -->
-    </footer>
+        </footer>
 </body>
 </html>

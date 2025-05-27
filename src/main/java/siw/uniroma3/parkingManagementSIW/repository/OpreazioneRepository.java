@@ -9,8 +9,8 @@ import siw.uniroma3.parkingManagementSIW.model.Operazione;
 
 public interface OpreazioneRepository extends CrudRepository<Operazione,Long>{
 	
-	@Query("SELECT o FROM Operazione o JOIN FETCH o.tessera t JOIN FETCH t.titolare c JOIN FETCH t.descrizioneTessera WHERE o.data = :data")
-    List<Operazione> findByData(LocalDate data);
+	//@Query("SELECT o FROM Operazione o JOIN FETCH o.tessera t JOIN FETCH t.titolare c JOIN FETCH t.descrizioneTessera WHERE o.data = :data")
+    //List<Operazione> findByData2(LocalDate data);
 	
 	@Query("SELECT o FROM Operazione o " +
 	           "JOIN FETCH o.tessera t " +
@@ -18,5 +18,5 @@ public interface OpreazioneRepository extends CrudRepository<Operazione,Long>{
 	           "JOIN FETCH t.descrizioneTessera dt " + // Carica la descrizione della tessera
 	           "LEFT JOIN FETCH cl.datiFatturazione df " + // Carica i dati di fatturazione del cliente dell'operazione
 	           "WHERE o.data = :data")//List<Operazione> findByData(LocalDate data);
-	List<Operazione> findByData2(LocalDate data);
+	List<Operazione> findByData(LocalDate data);
 }

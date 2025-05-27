@@ -84,7 +84,7 @@ public class OperazioneController {
 	    switch (tipoEnum) {
 	        case EMISSIONE:
 	        	o.setTipoOperazione(tipo);
-	        	
+	        	o.setImporto(t.getDescrizioneTessera().getImporto());
 	        	//associo la tessera con il titolare e viceversa
 	    		t.setTitolare(d);
 	    		d.setTessera(t);
@@ -92,26 +92,37 @@ public class OperazioneController {
 	    		//salvo nel db le modifiche effettuate
 	    		this.dipendenteCCService.save(d);
 	    		this.tesseraService.save(t);
-	        	
+	        	break;
 	        case SMARRIMENTO:
-	            
+	            break;
 	        case DANNEGGIAMENTO:
-	        	
+	        	break;
 	        case RESTITUZIONE:
 	        	o.setTipoOperazione(tipo);
+	        	o.setImporto(0);
+	        	
 	        	t.setTitolare(null);
 	    		d.setTessera(null);
 	    		this.dipendenteCCService.save(d);
 	    		this.tesseraService.save(t);
-	    		
-	        	
+	    		break;
 	        default:
-	        	
-	       }
+	        	break;
+	    }
 	    
 	    this.operazioneService.save(o);
-	    model.addAttribute("operazione",o);
-	    return "riepilogoOperazione.html";
+	    //model.addAttribute("operazione",o);
+	    //return "riepilogoOperazione.html";
+	    if (tipoEnum == TipoOperazione.EMISSIONE || tipoEnum == TipoOperazione.RICARICA) {
+	        // Per EMISSIONE o RICARICA, vai alla pagina di riepilogo con selezione pagamento
+	        model.addAttribute("operazione", o);
+	        return "riepilogoOperazione.html";
+	    } else {
+	        // Per SMARRIMENTO, DANNEGGIAMENTO, RESTITUZIONE, vai direttamente alla home
+	        // e carica le operazioni di oggi direttamente qui
+	        model.addAttribute("operazioniOggi", this.operazioneService.getAllOperazioniDiOggi());
+	        return "home.html";
+	    }
 		
 	}
 	
@@ -121,7 +132,8 @@ public class OperazioneController {
     		@RequestParam("tipoPagamento") String tipoPagamento, Model model) {
 		
 		Operazione o=this.operazioneService.getOperazioneById(id);
-		o.setTipoPagamento(tipoPagamento);
+		if(tipoPagamento!=null)
+			o.setTipoPagamento(tipoPagamento);
 		this.operazioneService.save(o);
 		
 		model.addAttribute("operazioniOggi",this.operazioneService.getAllOperazioniDiOggi());

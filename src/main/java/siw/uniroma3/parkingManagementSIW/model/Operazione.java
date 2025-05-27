@@ -19,7 +19,7 @@ public class Operazione {
 	private TipoOperazione tipoOperazione;
 	private String tipoPagamento;
 	private float cauzione;
-	//private float importo;
+	private float importo;
 	@ManyToOne
 	private Tessera tessera;
 	//per non perdere i dati delle operazioni
@@ -69,12 +69,12 @@ public class Operazione {
 		this.cauzione = cauzione;
 	}
 	
-	/*public float getImporto() {
+	public float getImporto() {
 		return importo;
 	}
 	public void setImporto(float importo) {
 		this.importo = importo;
-	}*/
+	}
 	
 	public String getTipoPagamento() {
 		return tipoPagamento;

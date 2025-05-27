@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import siw.uniroma3.parkingManagementSIW.model.DipendenteCC;
 import siw.uniroma3.parkingManagementSIW.model.Tessera;
 import siw.uniroma3.parkingManagementSIW.service.DescrizioneTesseraService;
 import siw.uniroma3.parkingManagementSIW.service.DipendenteCCService;

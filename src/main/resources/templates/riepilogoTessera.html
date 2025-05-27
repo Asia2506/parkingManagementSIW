@@ -7,8 +7,8 @@
 <body>
     <div class="container">
         <header>
-            <h1>Parking Management</h1>
-            <nav class="inline-menu-container">
+            <h1><a th:href="@{/}">Parking Management</a></h1> 
+			<nav class="inline-menu-container">
                 <ul>
                     <li><a th:href="@{/tessereEmesse}">Tessere Emesse</a></li>
                     <li><a th:href="@{/tessereRestituite}">Tessere Restituite</a></li>
@@ -18,7 +18,7 @@
             </nav>
         </header>
         <section class="info-section">
-            <h2 class="section-title">Riepilogo Tessera</h2>
+            <h2 class="section-title">Riepilogo Tessera </h2>
             <div class="table-responsive-container">
                 <table>
                     <tr>
@@ -47,8 +47,8 @@
                     </tr>
                 </table>
 				<form th:action="@{'/salvaOperazione/restituzione/' + ${tessera.numero} + '/' + ${tessera.titolare.id}}" method="post">
-				               <button type="submit" class="action-button">Conferma Restituzione</button>
-				           </form>
+				    <div class="form-actions"> <button type="submit" class="info-section button">Conferma Restituzione</button> </div>
+	           	</form>
             </div>
         </section>
     </div>
