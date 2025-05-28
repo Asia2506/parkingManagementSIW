@@ -52,8 +52,9 @@ public class TesseraController {
 		return "formRicercaTitolareTessera.html";
 	}
 	
-	@GetMapping("/nuovoTitolareTessera")
-	public String newTitolare(Model model) {
+	@GetMapping("/nuovoTitolareTessera/{numeroTessera}")
+	public String newTitolare(@PathVariable("numeroTessera") Long id,Model model) {
+		model.addAttribute("tessera",this.tesseraService.getTesseraById(id));
 		return "formNewCliente.html";
 	}
 	 
