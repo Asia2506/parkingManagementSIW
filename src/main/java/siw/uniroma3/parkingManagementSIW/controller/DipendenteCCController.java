@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,30 +44,26 @@ public class DipendenteCCController {
 	
 	@PostMapping("/creaNuovoCliente/{numeroTessera}")
 	private String newCliente(@PathVariable("numeroTessera") Long id, // PathVariable for tessera number
-			@RequestParam(value = "nome", required = false) String nome,
+			@ModelAttribute("cliente") DipendenteCC cliente,
+			/*@RequestParam(value = "nome", required = false) String nome,
 			@RequestParam(value = "cognome", required = false) String cognome,
 			@RequestParam(value = "azienda", required = false) String azienda,
-			@RequestParam(value = "targa", required = false) String targa,
+			@RequestParam(value = "targa", required = false) String targa,*/
 			@RequestParam(value = "hasDatiFattura", required = false) boolean hasDatiFattura,
 			Model model) {
 		
-		DipendenteCC d=new DipendenteCC();
-		d.setNome(nome);
-		d.setCognome(cognome);
-		d.setAzienda(azienda);
-		d.setTarga(targa);
 		
-		this.dipendenteCCService.save(d);
+		this.dipendenteCCService.save(cliente);
 	
 		Tessera t=this.tesseraService.getTesseraById(id);
 		
 		if(hasDatiFattura) {
-			model.addAttribute("cliente",d);
+			model.addAttribute("cliente",cliente);
 			model.addAttribute("tessera",t);
 			return "formDatiFatturazione.html";
 		}
 		
-		return "redirect:/emissioneTessera/associaAnagrafica/"+t.getNumero()+"/"+d.getId();
+		return "redirect:/emissioneTessera/associaAnagrafica/"+t.getNumero()+"/"+cliente.getId();
 	}
 	
 	

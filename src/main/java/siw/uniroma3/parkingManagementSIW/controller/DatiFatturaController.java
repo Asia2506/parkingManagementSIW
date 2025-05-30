@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,28 +45,29 @@ public class DatiFatturaController {
 	
 	
 	@PostMapping("/creaNuoviDatiFatturazione/{numeroTessera}/{idCliente}")
-	private String findCliente(@PathVariable("numeroTessera") Long id,
+	private String newDatiFattura(@PathVariable("numeroTessera") Long id,
 			@PathVariable("idCliente") Long idCliente,
-			@RequestParam(value = "ragioneSociale", required = false) String ragioneSociale,
+			@ModelAttribute("datiFatturazione") DatiFattura datiFattura,
+			/*@RequestParam(value = "ragioneSociale", required = false) String ragioneSociale,
 			@RequestParam(value = "partitaIva", required = false) String partitaIva,
 			@RequestParam(value = "pec", required = false) String pec,
 			@RequestParam(value = "codiceUnivoco", required = false) String codiceUnivoco,
-			@RequestParam(value = "indirizzo", required = false) String indirizzo,
+			@RequestParam(value = "indirizzo", required = false) String indirizzo,*/
 			Model model) {
 		
 		DipendenteCC d=this.dipendenteCCService.getDIpendenteCCById(idCliente);
 		Tessera t=this.tesseraService.getTesseraById(id);
 		
-		DatiFattura df=new DatiFattura();
+		/*DatiFattura df=new DatiFattura();
 		df.setRagioneSociale(ragioneSociale);
 		df.setCodiceUnivoco(codiceUnivoco);
 		df.setCodiceUnivoco(indirizzo);
 		df.setPec(pec);
-		df.setPartitaIva(partitaIva);
+		df.setPartitaIva(partitaIva);*/
 		
-		this.datiFatturaService.save(df);
+		this.datiFatturaService.save(datiFattura);
 		
-		return "redirect:/emissioneTessera/creaNuovoCliente/associaDatiFatturazione/"+t.getNumero()+"/"+d.getId()+"/"+df.getId();
+		return "redirect:/emissioneTessera/creaNuovoCliente/associaDatiFatturazione/"+t.getNumero()+"/"+d.getId()+"/"+datiFattura.getId();
 	}
 
 }
