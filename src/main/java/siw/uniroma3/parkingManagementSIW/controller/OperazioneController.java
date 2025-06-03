@@ -101,6 +101,10 @@ public class OperazioneController {
 	            t.setSmarrita(true);
 	        case DANNEGGIAMENTO:
 	        	t.setDanneggiata(true);
+	        case RESTITUZIONE:
+	        	//se la tessera è smarrita si può restituire	
+	        	//devo cercare l'operazione di smarrimento per risalire all'ultimo titolare
+	        	
 	        default:
 	        	o.setTipoOperazione(tipo);
 	        	o.setImporto(0);
@@ -113,6 +117,7 @@ public class OperazioneController {
 	    }
 	    
 	    this.operazioneService.save(o);
+	    t.getOperazioni().add(o);
 	    //model.addAttribute("operazione",o);
 	    //return "riepilogoOperazione.html";
 	    if (tipoEnum == TipoOperazione.EMISSIONE || tipoEnum == TipoOperazione.RICARICA) {

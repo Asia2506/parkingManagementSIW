@@ -1,6 +1,7 @@
 package siw.uniroma3.parkingManagementSIW.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,11 +27,23 @@ public class Tessera {
 	private DipendenteCC titolare;
 	@OneToMany(mappedBy ="tessera")
 	private List<Operazione> operazioni;
-
+	
 	public Tessera() {
-		this.danneggiata = false;
-		this.smarrita = false;
+		
 	}
+	
+	public Tessera(Long numero) {
+		this.numero=numero;
+		this.dataEmissione=null;
+		this.danneggiata=false;
+		this.smarrita=false;
+		this.dataScadenza=null;
+		this.descrizioneTessera=null;
+		this.titolare=null;
+		this.operazioni=new ArrayList<Operazione>();
+	}
+
+	
 	
 	
 	/*----METODI EQUALS AND HASHCODE----*/
@@ -89,7 +102,7 @@ public class Tessera {
 		return operazioni;
 	}
 	public void setOperazioni(List<Operazione> operazioni) {
-		this.operazioni = operazioni;
+		this.operazioni=operazioni ;
 	}
 	public boolean isDanneggiata() {
 		return danneggiata;

@@ -61,11 +61,29 @@ public class TesseraController {
 	 
 	
 	@PostMapping("/emissioneTessera/associaAnagrafica")
-	public String newTessera(@ModelAttribute("tessera") Tessera tessera,@RequestParam("descrizioneTesseraId") Long descrizioneTesseraId,Model model) {
+	public String newTessera(@RequestParam("numeroTessera") Long numeroTessera,
+			@RequestParam("descrizioneTesseraId") Long descrizioneTesseraId,Model model) {
 		//se la tessera non esiste oppure se esiste e non ha un titolare
-		if(!this.tesseraService.existsById(tessera.getNumero()) ||
+		Tessera tessera;
+		//se la tessera non esiste creala
+		if(!this.tesseraService.existsById(numeroTessera))
+			tessera=new Tessera(numeroTessera);
+		else
+			tessera=this.tesseraService.getTesseraById(numeroTessera);
+		
+		if(tessera.getTitolare()==null && !tessera.isSmarrita() && !tessera.isDanneggiata()) {
+			tessera.setDescrizioneTessera(this.tipoTesseraService.getDescrizioneTesseraById(descrizioneTesseraId));
+			tessera.setDataEmissione(LocalDate.now());
+			if(tessera.getDescrizioneTessera().getTipoTessera().equals("FULL"))
+				tessera.setDataScadenza(LocalDate.now().with(TemporalAdjusters.lastDayOfMonth()));
+			this.tesseraService.save(tessera);
+			model.addAttribute("tessera",tessera);
+			return "formAssociaAnagrafica.html";
+		}else
+			return "redirect:/formNewOperazione/emissione";
+		/*if(!this.tesseraService.existsById(tessera.getNumero()) ||
 			(this.tesseraService.existsById(tessera.getNumero()) && 
-			 this.tesseraService.getTesseraById(tessera.getNumero()).getTitolare()==null)) {
+			 this.tesseraService.getTesseraById(tessera.getNumero()).getTitolare()==null && t)) {
 			//setta tutti i parametri tranne il titolare
 			tessera.setDataEmissione(LocalDate.now());
 			tessera.setDescrizioneTessera(this.tipoTesseraService.getDescrizioneTesseraById(descrizioneTesseraId));
@@ -81,7 +99,7 @@ public class TesseraController {
 			
 		}
 		model.addAttribute("tipiTessere",this.tipoTesseraService.getAllDescrizioneTessera());
-		return "emissioneTessera.html";
+		return "emissioneTessera.html";*/
 	}
 	
 	
@@ -103,6 +121,9 @@ public class TesseraController {
 		//restituisco la pagina con riepilogo 
 		return "formAssociaAnagrafica.html";
 	}
+	
+	
+	
 	
 	@PostMapping("/riepilogoDatiTessera/{tipoOperazione}")
 	public String datiTessera(@PathVariable("tipoOperazione") String tipoOperazione,
