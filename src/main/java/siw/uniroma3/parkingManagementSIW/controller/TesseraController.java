@@ -109,10 +109,35 @@ public class TesseraController {
 	    if (!this.tesseraService.existsById(numeroTessera) ||
 	    		(this.tesseraService.existsById(numeroTessera) && this.tesseraService.getTesseraById(numeroTessera).getTitolare()==null)) {
 	        // Tessera non trovata
+	    	model.addAttribute("error","Numero tessera non valido");
 	        return "restituzioneTessera.html"; // Pagina di errore o notifica
 	    }
 	    
 	    Tessera tessera = tesseraService.getTesseraById(numeroTessera);
+	    DipendenteCC titolare = tessera.getTitolare();
+	    tessera.setRestituita(true);
+	    // Aggiungo i dati di riepilogo alla vista
+	    model.addAttribute("tessera", tessera);
+	    model.addAttribute("titolare", titolare);
+
+	    // Restituisco la pagina con i dati della tessera e del titolare
+	    return "riepilogoTessera.html"; 
+	}
+	@PostMapping("/riepilogoDatiTesseraDanneggiata")
+	public String datiTesseraDanneggiata(@RequestParam("numeroTessera") Long numeroTessera, Model model) {
+
+	    // Simuliamo un servizio per recuperare i dati
+	    
+
+	    if (!this.tesseraService.existsById(numeroTessera) ||
+	    		(this.tesseraService.existsById(numeroTessera) && this.tesseraService.getTesseraById(numeroTessera).getTitolare()==null)) {
+	        // Tessera non trovata
+	    	model.addAttribute("error","Numero tessera non valido");
+	        return "danneggiamentoTessera.html"; // Pagina di errore o notifica
+	    }
+	    
+	    Tessera tessera = tesseraService.getTesseraById(numeroTessera);
+	    tessera.setDanneggiata(true);
 	    DipendenteCC titolare = tessera.getTitolare();
 	    // Aggiungo i dati di riepilogo alla vista
 	    model.addAttribute("tessera", tessera);

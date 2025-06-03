@@ -18,7 +18,10 @@
 	            </nav>
 	        </header>
 	        <section class="info-section">
-	            <h2 class="section-title">Restituzione Tessera</h2>
+	            <h2 class="section-title">Operazione: Restituzione Tessera</h2>
+				<div th:if="${error}" class="error-message">
+				       <p th:text="${error}"></p>
+				   </div>
 	            <form th:action="@{/riepilogoDatiTessera}" method="post">
 	                <div class="form-group">
 	                    <label>Numero Tessera:</label>

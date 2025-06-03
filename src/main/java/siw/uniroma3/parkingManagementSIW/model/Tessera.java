@@ -17,6 +17,9 @@ public class Tessera {
 	private Long numero;
 	private LocalDate dataEmissione;
 	private LocalDate dataScadenza;
+	private boolean danneggiata;
+	private boolean smarrita;
+	private boolean restituita;
 	@ManyToOne
 	private DescrizioneTessera descrizioneTessera;
 	@OneToOne
@@ -24,7 +27,11 @@ public class Tessera {
 	@OneToMany(mappedBy ="tessera")
 	private List<Operazione> operazioni;
 
-	
+	public Tessera() {
+		this.restituita = false;
+		this.danneggiata = false;
+		this.smarrita = false;
+	}
 	
 	
 	/*----METODI EQUALS AND HASHCODE----*/
@@ -85,6 +92,25 @@ public class Tessera {
 	public void setOperazioni(List<Operazione> operazioni) {
 		this.operazioni = operazioni;
 	}
+	public boolean isDanneggiata() {
+		return danneggiata;
+	}
+	public void setDanneggiata(boolean danneggiata) {
+		this.danneggiata = danneggiata;
+	}
+	public boolean isSmarrita() {
+		return smarrita;
+	}
+	public void setSmarrita(boolean smarrita) {
+		this.smarrita = smarrita;
+	}
+	public boolean isRestituita() {
+		return restituita;
+	}
+	public void setRestituita(boolean restituita) {
+		this.restituita = restituita;
+	}
+	
 	
 	
 	
