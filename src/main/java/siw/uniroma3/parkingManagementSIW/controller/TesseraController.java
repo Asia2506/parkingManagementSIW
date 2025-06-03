@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import siw.uniroma3.parkingManagementSIW.model.DipendenteCC;
 import siw.uniroma3.parkingManagementSIW.model.Tessera;
+import siw.uniroma3.parkingManagementSIW.model.TipoOperazione;
 import siw.uniroma3.parkingManagementSIW.service.DescrizioneTesseraService;
 import siw.uniroma3.parkingManagementSIW.service.DipendenteCCService;
 import siw.uniroma3.parkingManagementSIW.service.TesseraService;
@@ -68,6 +69,9 @@ public class TesseraController {
 			//setta tutti i parametri tranne il titolare
 			tessera.setDataEmissione(LocalDate.now());
 			tessera.setDescrizioneTessera(this.tipoTesseraService.getDescrizioneTesseraById(descrizioneTesseraId));
+			tessera.setDanneggiata(false);
+			tessera.setSmarrita(false);
+			
 			if(tessera.getDescrizioneTessera().getTipoTessera().equals("FULL"))
 				tessera.setDataScadenza(LocalDate.now().with(TemporalAdjusters.lastDayOfMonth()));			//imposta la scadenza all'ultimo giorno del mese
 			//salva la tessera nel db 
@@ -100,50 +104,42 @@ public class TesseraController {
 		return "formAssociaAnagrafica.html";
 	}
 	
-	@PostMapping("/riepilogoDatiTessera")
-	public String datiTessera(@RequestParam("numeroTessera") Long numeroTessera, Model model) {
+	@PostMapping("/riepilogoDatiTessera/{tipoOperazione}")
+	public String datiTessera(@PathVariable("tipoOperazione") String tipoOperazione,
+			@RequestParam("numeroTessera") Long numeroTessera, Model model) {
 
 	    // Simuliamo un servizio per recuperare i dati
-	    
-
 	    if (!this.tesseraService.existsById(numeroTessera) ||
 	    		(this.tesseraService.existsById(numeroTessera) && this.tesseraService.getTesseraById(numeroTessera).getTitolare()==null)) {
 	        // Tessera non trovata
 	    	model.addAttribute("error","Numero tessera non valido");
-	        return "restituzioneTessera.html"; // Pagina di errore o notifica
+	        return "redirect:/formNewOperazione/"+tipoOperazione; // Pagina di errore o notifica
 	    }
 	    
 	    Tessera tessera = tesseraService.getTesseraById(numeroTessera);
 	    DipendenteCC titolare = tessera.getTitolare();
-	    tessera.setRestituita(true);
 	    // Aggiungo i dati di riepilogo alla vista
 	    model.addAttribute("tessera", tessera);
 	    model.addAttribute("titolare", titolare);
-
-	    // Restituisco la pagina con i dati della tessera e del titolare
-	    return "riepilogoTessera.html"; 
-	}
-	@PostMapping("/riepilogoDatiTesseraDanneggiata")
-	public String datiTesseraDanneggiata(@RequestParam("numeroTessera") Long numeroTessera, Model model) {
-
-	    // Simuliamo un servizio per recuperare i dati
 	    
-
-	    if (!this.tesseraService.existsById(numeroTessera) ||
-	    		(this.tesseraService.existsById(numeroTessera) && this.tesseraService.getTesseraById(numeroTessera).getTitolare()==null)) {
-	        // Tessera non trovata
-	    	model.addAttribute("error","Numero tessera non valido");
-	        return "danneggiamentoTessera.html"; // Pagina di errore o notifica
+	    TipoOperazione tipoEnum = TipoOperazione.valueOf(tipoOperazione.toUpperCase());
+		
+	    switch (tipoEnum) {
+	        case SMARRIMENTO:
+	            tessera.setSmarrita(true);
+	            break;
+	        case DANNEGGIAMENTO:
+	        	tessera.setDanneggiata(true);
+	            break;
+	        default:
+	        	break;
 	    }
 	    
-	    Tessera tessera = tesseraService.getTesseraById(numeroTessera);
-	    tessera.setDanneggiata(true);
-	    DipendenteCC titolare = tessera.getTitolare();
-	    // Aggiungo i dati di riepilogo alla vista
-	    model.addAttribute("tessera", tessera);
-	    model.addAttribute("titolare", titolare);
-
 	    // Restituisco la pagina con i dati della tessera e del titolare
+	    model.addAttribute("tipoOperazione",tipoOperazione);
 	    return "riepilogoTessera.html"; 
 	}
+	
+	
+	
 }

@@ -69,5 +69,13 @@ public class DatiFatturaController {
 		
 		return "redirect:/emissioneTessera/creaNuovoCliente/associaDatiFatturazione/"+t.getNumero()+"/"+d.getId()+"/"+datiFattura.getId();
 	}
+	
+	
+	
+	@GetMapping("/datiFatturazione/{idDatiFattura}")
+	public String viewDatiFattura(@PathVariable("idDatiFattura") Long id, Model model) {
+		model.addAttribute("dati",this.datiFatturaService.getDatiFatturaById(id));
+		return "viewDatiFattura.html";
+	}
 
 }

@@ -18,7 +18,7 @@
             </nav>
         </header>
         <section class="info-section">
-            <h2 class="section-title">Riepilogo Tessera </h2>
+            <h2 class="section-title" th:text="'Riepilogo tessera '+${tipoOperazione}"></h2>
             <div class="table-responsive-container">
                 <table>
                     <tr>
@@ -46,8 +46,8 @@
                         <td th:text="${tessera.titolare.azienda}"></td>
                     </tr>
                 </table>
-				<form th:action="@{'/salvaOperazione/restituzione/' + ${tessera.numero} + '/' + ${tessera.titolare.id}}" method="post">
-				    <div class="form-actions"> <button type="submit" class="info-section button">Conferma Operazione</button> </div>
+				<form th:action="@{'/salvaOperazione/'+${tipoOperazione}+'/' + ${tessera.numero} + '/' + ${tessera.titolare.id}}" method="post">
+				    <div class="form-actions"> <button type="submit" class="info-section button" th:text="'Conferma '+${tipoOperazione}">Conferma Operazione</button> </div>
 	           	</form>
             </div>
         </section>

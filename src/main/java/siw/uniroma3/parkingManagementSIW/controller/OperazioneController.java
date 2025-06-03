@@ -45,16 +45,18 @@ public class OperazioneController {
 	        	model.addAttribute("tessera",new Tessera());
 	      		model.addAttribute("tipiTessere",this.tipoTesseraService.getAllDescrizioneTessera());
 	            return "emissioneTessera.html";
-	        case SMARRIMENTO:
+	        /*case SMARRIMENTO:
 	            return "smarrimentoTessera.html";
 	        case DANNEGGIAMENTO:
 	            return "danneggiamentoTessera.html";
 	        case RESTITUZIONE:
-	        	
-	            return "restituzioneTessera.html";
-	        default:
+	        	model.addAttribute("tipoOperazione",tipo);
+	            return "restituzioneTessera.html";*/
+	        case RICARICA:
 	        	return "ricaricaTessera.html";
-	        }
+	        default:
+	        	return "cercaTesseraPerOperazione.html";
+	    }
 			
 	}
 	
@@ -93,11 +95,13 @@ public class OperazioneController {
 	    		this.dipendenteCCService.save(d);
 	    		this.tesseraService.save(t);
 	        	break;
-	        case SMARRIMENTO:
-	            break;
-	        case DANNEGGIAMENTO:
+	        case RICARICA:
 	        	break;
-	        case RESTITUZIONE:
+	        case SMARRIMENTO:
+	            t.setSmarrita(true);
+	        case DANNEGGIAMENTO:
+	        	t.setDanneggiata(true);
+	        default:
 	        	o.setTipoOperazione(tipo);
 	        	o.setImporto(0);
 	        	
@@ -105,8 +109,6 @@ public class OperazioneController {
 	    		d.setTessera(null);
 	    		this.dipendenteCCService.save(d);
 	    		this.tesseraService.save(t);
-	    		break;
-	        default:
 	        	break;
 	    }
 	    
@@ -120,8 +122,9 @@ public class OperazioneController {
 	    } else {
 	        // Per SMARRIMENTO, DANNEGGIAMENTO, RESTITUZIONE, vai direttamente alla home
 	        // e carica le operazioni di oggi direttamente qui
-	        model.addAttribute("operazioniOggi", this.operazioneService.getAllOperazioniDiOggi());
-	        return "home.html";
+	        //model.addAttribute("operazioniOggi", this.operazioneService.getAllOperazioniDiOggi());
+	        //return "home.html";
+	    	return "redirect:/";
 	    }
 		
 	}
@@ -136,8 +139,9 @@ public class OperazioneController {
 			o.setTipoPagamento(tipoPagamento);
 		this.operazioneService.save(o);
 		
-		model.addAttribute("operazioniOggi",this.operazioneService.getAllOperazioniDiOggi());
-		return "home.html";
+		//model.addAttribute("operazioniOggi",this.operazioneService.getAllOperazioniDiOggi());
+		//return "home.html";
+		return "redirect:/";
 	}
 		
 

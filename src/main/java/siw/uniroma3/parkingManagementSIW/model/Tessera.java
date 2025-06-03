@@ -19,7 +19,7 @@ public class Tessera {
 	private LocalDate dataScadenza;
 	private boolean danneggiata;
 	private boolean smarrita;
-	private boolean restituita;
+	
 	@ManyToOne
 	private DescrizioneTessera descrizioneTessera;
 	@OneToOne
@@ -28,7 +28,6 @@ public class Tessera {
 	private List<Operazione> operazioni;
 
 	public Tessera() {
-		this.restituita = false;
 		this.danneggiata = false;
 		this.smarrita = false;
 	}
@@ -103,12 +102,6 @@ public class Tessera {
 	}
 	public void setSmarrita(boolean smarrita) {
 		this.smarrita = smarrita;
-	}
-	public boolean isRestituita() {
-		return restituita;
-	}
-	public void setRestituita(boolean restituita) {
-		this.restituita = restituita;
 	}
 	
 	

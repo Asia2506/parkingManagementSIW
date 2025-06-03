@@ -34,7 +34,7 @@
 	                            <th>Cauzione(€)</th>
 	                            <th>Contanti(€)</th> 
 								<th>Carta(€)</th> 
-								<th>Fattura</th>                
+								<th> </th>              
                             </tr>
                         </thead>
                         <tbody>
@@ -45,7 +45,9 @@
                                 <td th:text="${operazione.cliente.azienda}"></td>
                                 <td th:text="${operazione.tessera.numero}"></td>
                                 <td th:text="${operazione.tessera.descrizioneTessera.tipoTessera}"></td>
-                                <td th:text="${operazione.cauzione}"></td>
+								
+                                <td th:if="${operazione.cauzione!=0}" th:text="${operazione.cauzione}"></td>
+								<td th:unless="${operazione.cauzione!=0}" ></td>
 								
 								<td th:if="${operazione.tipoPagamento=='contanti'}" th:text="${operazione.tessera.descrizioneTessera.importo}"></td>
 								<td th:unless="${operazione.tipoPagamento=='contanti'}" ></td>
@@ -53,8 +55,14 @@
 								<td th:if="${operazione.tipoPagamento=='carta'}" th:text="${operazione.tessera.descrizioneTessera.importo}"></td>
 								<td th:unless="${operazione.tipoPagamento=='carta'}" > </td>
 								
-                                <td th:if="${operazione.cliente.datiFatturazione!=null}"> F </td>
-								<td th:if="${operazione.cliente.datiFatturazione==null}">  </td>
+                                <td th:if="${(operazione.tipoOperazione.name()=='EMISSIONE' or operazione.tipoOperazione.name()=='RICARICA') and operazione.cliente.datiFatturazione!=null}"> 
+									<a th:href="@{'/datiFatturazione/'+${operazione.cliente.datiFatturazione.id}}">F</a> 
+								</td>
+								<td th:if="${operazione.tipoOperazione.name()=='SMARRIMENTO'}"> S </td>
+								<td th:if="${operazione.tipoOperazione.name()=='DANNEGGIAMENTO'}"> D </td>
+								<td th:unless="${((operazione.tipoOperazione.name()=='EMISSIONE' or operazione.tipoOperazione.name()=='RICARICA') and operazione.cliente.datiFatturazione!=null) or
+												(operazione.tipoOperazione.name()=='SMARRIMENTO' and operazione.tipoOperazione.name()=='DANNEGGIAMENTO')}">  </td>
+								
                             </tr>
                         </tbody>
                     </table>
