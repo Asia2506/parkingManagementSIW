@@ -98,21 +98,43 @@ public class OperazioneController {
 	        case RICARICA:
 	        	break;
 	        case SMARRIMENTO:
-	            t.setSmarrita(true);
-	        case DANNEGGIAMENTO:
-	        	t.setDanneggiata(true);
-	        case RESTITUZIONE:
-	        	//se la tessera è smarrita si può restituire	
-	        	//devo cercare l'operazione di smarrimento per risalire all'ultimo titolare
-	        	
-	        default:
-	        	o.setTipoOperazione(tipo);
+	            o.setTipoOperazione(tipo);
 	        	o.setImporto(0);
+	        	t.setSmarrita(true);
 	        	
 	        	t.setTitolare(null);
 	    		d.setTessera(null);
 	    		this.dipendenteCCService.save(d);
 	    		this.tesseraService.save(t);
+	    		break;
+	        case DANNEGGIAMENTO:
+	        	o.setTipoOperazione(tipo);
+	        	o.setImporto(0);
+	        	t.setDanneggiata(true);
+	        	
+	        	t.setTitolare(null);
+	    		d.setTessera(null);
+	    		this.dipendenteCCService.save(d);
+	    		this.tesseraService.save(t);
+	    		break;
+	        case RESTITUZIONE:
+	        	//se la tessera che si sta restituendo era stata smarrita settare il parametro a false perchè ritrovata
+	        	o.setTipoOperazione(tipo);
+	        	o.setImporto(0);
+	        	
+	        	if(t.isSmarrita()) {
+	        		t.setSmarrita(false);
+	        	}else {
+		        	t.setTitolare(null);
+		    		d.setTessera(null);
+		    		this.dipendenteCCService.save(d);
+	        	}
+	        
+	    		this.tesseraService.save(t);
+	        	break;
+	        	
+	        default:
+	        	
 	        	break;
 	    }
 	    

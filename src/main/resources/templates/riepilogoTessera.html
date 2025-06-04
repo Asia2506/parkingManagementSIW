@@ -39,14 +39,14 @@
                     </tr>
                     <tr>
                         <th>Titolare</th>
-                        <td th:text="${tessera.titolare.nome + ' ' + tessera.titolare.cognome}"></td>
+                        <td th:text="${titolare.nome + ' ' + titolare.cognome}"></td>
                     </tr>
                     <tr>
                         <th>Azienda</th>
-                        <td th:text="${tessera.titolare.azienda}"></td>
+                        <td th:text="${titolare.azienda}"></td>
                     </tr>
                 </table>
-				<form th:action="@{'/salvaOperazione/'+${tipoOperazione}+'/' + ${tessera.numero} + '/' + ${tessera.titolare.id}}" method="post">
+				<form th:action="@{'/salvaOperazione/'+${tipoOperazione}+'/' + ${tessera.numero} + '/' + ${titolare.id}}" method="post">
 				    <div class="form-actions"> <button type="submit" class="info-section button" th:text="'Conferma '+${tipoOperazione}">Conferma Operazione</button> </div>
 	           	</form>
             </div>

@@ -15,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import siw.uniroma3.parkingManagementSIW.model.DipendenteCC;
 import siw.uniroma3.parkingManagementSIW.model.Tessera;
 import siw.uniroma3.parkingManagementSIW.model.TipoOperazione;
+import siw.uniroma3.parkingManagementSIW.repository.OpreazioneRepository;
 import siw.uniroma3.parkingManagementSIW.service.DescrizioneTesseraService;
 import siw.uniroma3.parkingManagementSIW.service.DipendenteCCService;
+import siw.uniroma3.parkingManagementSIW.service.OperazioneService;
 import siw.uniroma3.parkingManagementSIW.service.TesseraService;
 
 @Controller
 public class TesseraController {
+
+    private final OpreazioneRepository opreazioneRepository;
 	
 	@Autowired
 	TesseraService tesseraService;
@@ -30,6 +34,12 @@ public class TesseraController {
 	
 	@Autowired
 	DipendenteCCService dipendenteCCService;
+	
+
+
+    TesseraController(OpreazioneRepository opreazioneRepository) {
+        this.opreazioneRepository = opreazioneRepository;
+    }
 
 	
 	@GetMapping("/tessera/{id}")
@@ -81,25 +91,7 @@ public class TesseraController {
 			return "formAssociaAnagrafica.html";
 		}else
 			return "redirect:/formNewOperazione/emissione";
-		/*if(!this.tesseraService.existsById(tessera.getNumero()) ||
-			(this.tesseraService.existsById(tessera.getNumero()) && 
-			 this.tesseraService.getTesseraById(tessera.getNumero()).getTitolare()==null && t)) {
-			//setta tutti i parametri tranne il titolare
-			tessera.setDataEmissione(LocalDate.now());
-			tessera.setDescrizioneTessera(this.tipoTesseraService.getDescrizioneTesseraById(descrizioneTesseraId));
-			tessera.setDanneggiata(false);
-			tessera.setSmarrita(false);
-			
-			if(tessera.getDescrizioneTessera().getTipoTessera().equals("FULL"))
-				tessera.setDataScadenza(LocalDate.now().with(TemporalAdjusters.lastDayOfMonth()));			//imposta la scadenza all'ultimo giorno del mese
-			//salva la tessera nel db 
-			this.tesseraService.save(tessera);
-			model.addAttribute("tessera",tessera);
-			return "formAssociaAnagrafica.html";
-			
-		}
-		model.addAttribute("tipiTessere",this.tipoTesseraService.getAllDescrizioneTessera());
-		return "emissioneTessera.html";*/
+		
 	}
 	
 	
@@ -131,7 +123,8 @@ public class TesseraController {
 
 	    // Simuliamo un servizio per recuperare i dati
 	    if (!this.tesseraService.existsById(numeroTessera) ||
-	    		(this.tesseraService.existsById(numeroTessera) && this.tesseraService.getTesseraById(numeroTessera).getTitolare()==null)) {
+	    		(this.tesseraService.existsById(numeroTessera) && this.tesseraService.getTesseraById(numeroTessera).getTitolare()==null &&
+	    				!this.tesseraService.getTesseraById(numeroTessera).isSmarrita())) {
 	        // Tessera non trovata
 	    	model.addAttribute("error","Numero tessera non valido");
 	        return "redirect:/formNewOperazione/"+tipoOperazione; // Pagina di errore o notifica
@@ -140,8 +133,7 @@ public class TesseraController {
 	    Tessera tessera = tesseraService.getTesseraById(numeroTessera);
 	    DipendenteCC titolare = tessera.getTitolare();
 	    // Aggiungo i dati di riepilogo alla vista
-	    model.addAttribute("tessera", tessera);
-	    model.addAttribute("titolare", titolare);
+	    
 	    
 	    TipoOperazione tipoEnum = TipoOperazione.valueOf(tipoOperazione.toUpperCase());
 		
@@ -152,10 +144,16 @@ public class TesseraController {
 	        case DANNEGGIAMENTO:
 	        	tessera.setDanneggiata(true);
 	            break;
+	        case RESTITUZIONE:
+	        	if(tessera.isSmarrita()) {
+	        		titolare=this.tesseraService.getUltimaOperazioneSmarrimento(numeroTessera).getCliente();
+	        	}
 	        default:
 	        	break;
 	    }
 	    
+	    model.addAttribute("tessera", tessera);
+	    model.addAttribute("titolare", titolare);
 	    // Restituisco la pagina con i dati della tessera e del titolare
 	    model.addAttribute("tipoOperazione",tipoOperazione);
 	    return "riepilogoTessera.html"; 

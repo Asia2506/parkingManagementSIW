@@ -1,9 +1,13 @@
 package siw.uniroma3.parkingManagementSIW.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import siw.uniroma3.parkingManagementSIW.model.Operazione;
 import siw.uniroma3.parkingManagementSIW.model.Tessera;
+import siw.uniroma3.parkingManagementSIW.model.TipoOperazione;
 import siw.uniroma3.parkingManagementSIW.repository.TesseraRepository;
 
 @Service
@@ -35,5 +39,15 @@ public class TesseraService {
 	public boolean findTesseraById(Long numero) {
 		return tesseraRepository.existsById(numero);
 	}
+	
+	
+	/* Restituisce l'ultima operazione di smarrimento per una data tessera */
+    public Operazione getUltimaOperazioneSmarrimento(Long numeroTessera) {
+        List<Operazione> operazioniSmarrimento = tesseraRepository.findLastOperationByTesseraAndTipo(numeroTessera, TipoOperazione.SMARRIMENTO);
+        if (!operazioniSmarrimento.isEmpty()) {
+            return operazioniSmarrimento.get(0);
+        }
+        return null;
+    }
 
 }

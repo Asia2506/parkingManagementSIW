@@ -1,11 +1,14 @@
 package siw.uniroma3.parkingManagementSIW.service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import siw.uniroma3.parkingManagementSIW.model.DipendenteCC;
 import siw.uniroma3.parkingManagementSIW.model.Operazione;
+import siw.uniroma3.parkingManagementSIW.model.TipoOperazione;
 import siw.uniroma3.parkingManagementSIW.repository.OpreazioneRepository;
 
 @Service
@@ -45,6 +48,16 @@ public class OperazioneService {
 	public Operazione getOperazioneById(Long id) {
 		return this.operazioneRepository.findById(id).get();
 	}
+	
+	
+	/* Restituisce il cliente dell'ultima operazione di smarrimento per una data tessera */
+	/*public DipendenteCC getClienteUltimoSmarrimento(Long numeroTessera) {
+		List<Operazione> operazioni = this.operazioneRepository.findLastSmarrimentoOperationByTessera(numeroTessera, TipoOperazione.SMARRIMENTO);
+		if (!operazioni.isEmpty()) {
+			return operazioni.get(0).getCliente();
+		}
+		return null;
+	}*/
 
 
 }

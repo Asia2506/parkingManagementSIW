@@ -5,7 +5,10 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+
+import siw.uniroma3.parkingManagementSIW.model.DipendenteCC;
 import siw.uniroma3.parkingManagementSIW.model.Operazione;
+import siw.uniroma3.parkingManagementSIW.model.TipoOperazione;
 
 public interface OpreazioneRepository extends CrudRepository<Operazione,Long>{
 	
@@ -19,4 +22,12 @@ public interface OpreazioneRepository extends CrudRepository<Operazione,Long>{
 	           "LEFT JOIN FETCH cl.datiFatturazione df " + // Carica i dati di fatturazione del cliente dell'operazione
 	           "WHERE o.data = :data")//List<Operazione> findByData(LocalDate data);
 	List<Operazione> findByData(LocalDate data);
+	
+	
+	// l'ultima operazione di smarrimento per una tessera specifica
+	/*@Query("SELECT o FROM Operazione o " +
+		       "WHERE o.tessera.numero = :numeroTessera " +
+		       "AND o.tipoOperazione = :tipoOperazione " +
+		       "ORDER BY o.data DESC, o.id DESC")
+	List<Operazione> findLastSmarrimentoOperationByTessera(Long numeroTessera, TipoOperazione tipoOperazione);*/
 }
