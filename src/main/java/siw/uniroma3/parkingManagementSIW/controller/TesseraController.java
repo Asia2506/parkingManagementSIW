@@ -49,10 +49,10 @@ public class TesseraController {
 	}
 
 	
-	@GetMapping("/tessereEmesse")
+	@GetMapping("/tessereAttive")
 	public String showTessereEmesse(Model model) {
-		model.addAttribute("tessereEmesse", this.tesseraService.getAllTessere());
-		return "tessereEmesse.html";		
+		model.addAttribute("tessereAttive", this.tesseraService.getAllTessere());
+		return "tessereAttive.html";		
 	 }
 	
 	 

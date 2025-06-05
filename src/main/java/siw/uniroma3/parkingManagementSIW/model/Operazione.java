@@ -29,7 +29,6 @@ public class Operazione {
 	
 	
 
-	
 	/*----METODI EQUALS AND HASHCODE----*/
 	@Override
 	public int hashCode() {

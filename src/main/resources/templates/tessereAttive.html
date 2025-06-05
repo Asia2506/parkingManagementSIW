@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tessere Emesse</title>
+    <link rel="stylesheet" href="/css/stile2.css?version=2" />
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Tessere Emesse</h1>
+            <nav class="inline-menu-container">
+                <ul>
+					<li><a th:href="@{/}">Home</a></li>
+                    <li><a th:href="@{/tessereAttive}">Tessere Attive</a></li>
+					<li><a th:href="@{/operazioniPerTessera}">Operazioni per tessera</a></li>
+					<li><a th:href="@{/operazioniPerPeriodo}">Operazioni per data/periodo</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="info-section">
+            <h2 class="section-title">Lista delle Tessere Emesse</h2>
+            <div th:if="${tessereAttive.isEmpty()}">
+                <p class="empty-message">Non ci sono tessere emesse nel sistema.</p>
+            </div>
+            <div th:unless="${tessereAttive.isEmpty()}" class="table-responsive-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID Tessera</th>
+                            <th>Data Emissione</th>
+                            <th>Data Scadenza</th>
+                            <th>Cliente</th>
+                            <th>Azienda</th>
+                            <th>Dettagli</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="tessera : ${tessereAttive}">
+                            <td th:text="${tessera.numero}"></td>
+                            <td th:text="${#temporals.format(tessera.dataEmissione, 'dd-MM-yyyy')}"></td>
+                            <td th:text="${#temporals.format(tessera.dataScadenza, 'dd-MM-yyyy')}"></td>
+                            <td th:text="${tessera.titolare.nome + ' ' + tessera.titolare.cognome}"></td>
+                            <td th:text="${tessera.titolare.azienda}"></td>
+                            <td>
+                                <a th:href="@{'/tessera/' + ${tessera.numero}}" class="details-link">Visualizza</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Parking Management System</p>
+        </footer>
+    </div>
+</body>
+
+</html>
