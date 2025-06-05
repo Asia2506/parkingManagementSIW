@@ -3,7 +3,7 @@
 <html>
   	<head>
     	<title>Home</title>
-    	<link rel="stylesheet" href="/css/stile.css?version=2" />
+    	<link rel="stylesheet" href="/css/stile2.css?version=2" />
   	</head>
 	<body>
 		<div class="container"> 
@@ -56,7 +56,7 @@
 								<td th:unless="${operazione.tipoPagamento=='carta'}" > </td>
 								
                                 <td th:if="${(operazione.tipoOperazione.name()=='EMISSIONE' or operazione.tipoOperazione.name()=='RICARICA') and operazione.cliente.datiFatturazione!=null}"> 
-									<a th:href="@{'/datiFatturazione/'+${operazione.cliente.datiFatturazione.id}}">F</a> 
+									<a th:href="@{'/datiFatturazione/'+${operazione.cliente.datiFatturazione.id}}"  class="billing-link">F</a> 
 								</td>
 								<td th:if="${operazione.tipoOperazione.name()=='SMARRIMENTO'}"> S </td>
 								<td th:if="${operazione.tipoOperazione.name()=='DANNEGGIAMENTO'}"> D </td>

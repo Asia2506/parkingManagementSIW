@@ -70,6 +70,8 @@ public class TesseraController {
 	}
 	 
 	
+	
+	
 	@PostMapping("/emissioneTessera/associaAnagrafica")
 	public String newTessera(@RequestParam("numeroTessera") Long numeroTessera,
 			@RequestParam("descrizioneTesseraId") Long descrizioneTesseraId,Model model) {
@@ -93,6 +95,8 @@ public class TesseraController {
 			return "redirect:/formNewOperazione/emissione";
 		
 	}
+	
+	
 	
 	
 	@GetMapping("/emissioneTessera/associaAnagrafica/{numeroTessera}")

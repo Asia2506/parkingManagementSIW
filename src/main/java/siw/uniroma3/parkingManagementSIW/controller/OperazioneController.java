@@ -42,7 +42,7 @@ public class OperazioneController {
 	
 	    switch (tipoEnum) {
 	        case EMISSIONE:
-	        	model.addAttribute("tessera",new Tessera());
+	        	//model.addAttribute("tessera",new Tessera());
 	      		model.addAttribute("tipiTessere",this.tipoTesseraService.getAllDescrizioneTessera());
 	            return "emissioneTessera.html";
 	        /*case SMARRIMENTO:

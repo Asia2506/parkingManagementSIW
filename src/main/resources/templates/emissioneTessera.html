@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Emissione Tessera</title>
-		<link rel="stylesheet" href="/css/stile.css?version=2" />
+		<link rel="stylesheet" href="/css/stile2.css?version=2" />
 	</head>
 	<body>
 		<div class="container">
@@ -21,7 +21,7 @@
 			<section class="info-section">
 				<h2 class="section-title">Operazione: Emissione Tessera</h2>
 
-				<form th:action="@{/emissioneTessera/associaAnagrafica}" method="POST" th:object="${tessera}">
+				<form th:action="@{/emissioneTessera/associaAnagrafica}" method="POST" >
 					<div class="form-group">
 						<label>NUMERO TESSERA:</label>
 						<span><input type="text" name="numeroTessera" class="form-input" /></span>

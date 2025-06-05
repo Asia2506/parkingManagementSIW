@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Emissione Tessera</title>
-		<link rel="stylesheet" href="/css/stile.css?version=2" />
+		<link rel="stylesheet" href="/css/stile2.css?version=2" />
 	</head>
 	<body>
 		<div class="container">
@@ -32,7 +32,7 @@
 	                    <span><input type="text" id="cognome" name="cognome" placeholder="Inserisci il cognome" class="form-input" /></span>
 	                </div>
 	                <div class="form-actions">
-	                    <span><button type="submit" class="form-button">Cerca Cliente</button></span>
+	                    <button type="submit" class="form-button">🔍 Cerca Cliente</button>
 	                </div>
 	            </form>
 
@@ -54,7 +54,7 @@
 								<td  th:text="${cliente.azienda}"></td>
 								<td>
 	                                <a th:if="${cliente.tessera==null}" th:href="@{'/emissioneTessera/associaAnagrafica/'+${tessera.numero} +'/'+ ${cliente.id}}" class="form-link-button">imposta come titolare</a>
-									<label th:unless="${cliente.tessera==null}"class="empty-message">Già titolare di una tessera</label>
+									<span th:unless="${cliente.tessera==null}"class="info-text">Già titolare di una tessera</span>
 								</td>
 	                        </tr>
 	                    </tbody>

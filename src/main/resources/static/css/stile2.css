@@ -1,0 +1,529 @@
+/* === Reset di base === */
+/* Rimuove margini e padding predefiniti del browser e imposta il box-sizing per un layout più intuitivo */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* === Variabili CSS (Palette Colori) === */
+/* Definisce i colori principali utilizzati nell'applicazione per facilitare la gestione e la coerenza del tema */
+:root {
+  --primary-color: #1f4e79; /* Blu scuro principale per elementi chiave come header, intestazioni tabelle */
+  --secondary-color: #7f8c8d; /* Grigio secondario per bordi, testo meno prominente */
+  --accent-color: #2ecc71; /* Verde per elementi di accento, successo, interazione (hover/focus) */
+  --bg-color: #f4f6f8; /* Sfondo generale chiaro della pagina */
+  --white: #ffffff; /* Bianco per sfondi di contenitori e testo su sfondi scuri */
+  --text-color: #2c3e50; /* Colore del testo scuro generale */
+  --gray-light: #f4f4f4; /* Grigio molto chiaro, usato per sfondi di input readonly o righe alternate */
+  --error-color: #e74c3c; /* Rosso per messaggi di errore */
+  --success-color: #2ecc71; /* Verde per successo (duplicato, ma mantenuto per chiarezza semantica) */
+}
+
+/* === Stili del Corpo Pagina === */
+/* Imposta il font, il colore di sfondo e del testo, il padding e l'altezza della linea per l'intero documento */
+body {
+  font-family: 'Segoe UI', sans-serif; /* Stack di font moderno e pulito per la leggibilità */
+  background-color: var(--bg-color); /* Utilizza il colore di sfondo definito nelle variabili */
+  color: var(--text-color); /* Utilizza il colore del testo definito nelle variabili */
+  padding: 20px; /* Padding su tutti i lati del corpo */
+}
+
+/* === Contenitore Generale === */
+/* Definisce il contenitore principale per il layout, centrando il contenuto e limitandone la larghezza */
+.container {
+  max-width: 1200px; /* Larghezza massima del contenitore */
+  margin: 0 auto; /* Centra il contenitore orizzontalmente */
+}
+
+/* === Header === */
+/* Stili per l'intestazione principale della pagina */
+header {
+  background-color: var(--primary-color); /* Sfondo blu scuro */
+  color: var(--white); /* Testo bianco */
+  padding: 1rem 2rem; /* Padding interno */
+  margin-bottom: 2rem; /* Margine inferiore per separazione */
+  border-radius: 8px; /* Angoli arrotondati */
+}
+
+header h1 {
+  margin-bottom: 1rem; /* Margine inferiore per il titolo H1 nell'header */
+}
+
+/* === Menu di Navigazione (inline-menu-container) === */
+/* Stili per la barra di navigazione orizzontale */
+.inline-menu-container ul {
+  display: flex; /* Utilizza Flexbox per gli elementi del menu */
+  gap: 1.5rem; /* Spazio tra gli elementi del menu */
+  list-style: none; /* Rimuove i pallini della lista */
+  padding: 0; /* Rimuove il padding predefinito della lista */
+}
+
+.inline-menu-container a {
+  color: var(--white); /* Colore del testo del link */
+  text-decoration: none; /* Rimuove la sottolineatura */
+  font-weight: 500; /* Spessore del font */
+  transition: opacity 0.3s; /* Transizione fluida per l'opacità */
+}
+
+.inline-menu-container a:hover {
+  opacity: 0.75; /* Riduci l'opacità al passaggio del mouse */
+}
+
+/* === Sezioni Informative (info-section) === */
+/* Stili generali per le sezioni che contengono informazioni, form o tabelle */
+.info-section {
+  margin-bottom: 2rem; /* Margine inferiore per separare le sezioni */
+  background-color: var(--white); /* Sfondo bianco */
+  border: 1px solid #e0e0e0; /* Bordo sottile */
+  border-radius: 8px; /* Angoli arrotondati */
+  padding: 30px; /* Padding interno */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Ombra leggera ma visibile per dare profondità */
+}
+
+/* === Titoli di Sezione (section-title) === */
+/* Stili per i titoli principali all'interno delle sezioni */
+.section-title {
+  margin-bottom: 1.5rem; /* Margine inferiore per separazione */
+  font-size: 1.4rem; /* Dimensione del font */
+  color: var(--primary-color); /* Colore primario */
+  border-bottom: 2px solid var(--primary-color); /* Bordo inferiore per enfasi */
+  padding-bottom: 0.4rem; /* Padding sotto il bordo */
+}
+
+/* === Sottotitoli di Sezione (subsection-title) === */
+/* Stili per i sottotitoli all'interno delle sezioni, meno prominenti dei titoli principali */
+.subsection-title {
+  font-size: 1.2rem; /* Dimensione del font */
+  margin-top: 1.5rem; /* Margine superiore */
+  margin-bottom: 1rem; /* Margine inferiore */
+  color: var(--text-color); /* Colore del testo scuro */
+  border-bottom: 1px solid #ccc; /* Bordo più sottile */
+  padding-bottom: 0.4rem; /* Padding sotto il bordo */
+}
+
+/* === Messaggi di Stato (Es. Nessun Dato - empty-message) === */
+/* Stili per i messaggi che indicano l'assenza di dati */
+.empty-message {
+  background-color: #fdfdfd; /* Sfondo bianco leggero */
+  color: #555; /* Colore del testo */
+  padding: 1rem; /* Padding interno */
+  border-left: 5px solid var(--accent-color); /* Bordo sinistro colorato per visibilità */
+  margin: 1rem 0; /* Margine superiore e inferiore */
+  font-style: italic; /* Testo in corsivo */
+  border-radius: 4px; /* Angoli arrotondati */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Ombra leggera */
+}
+
+/* === Messaggi di Errore (error-message) === */
+/* Stili per i messaggi di errore */
+.error-message {
+  background-color: #fbeaea; /* Sfondo rosso chiaro */
+  color: #c0392b; /* Testo rosso scuro */
+  border-left: 4px solid var(--error-color); /* Bordo sinistro rosso per indicare errore */
+  padding: 1rem; /* Padding interno */
+  margin-bottom: 1rem; /* Margine inferiore */
+  border-radius: 6px; /* Angoli arrotondati */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Ombra leggera */
+}
+
+/* === Tabelle (table-responsive-container) === */
+/* Contenitore per tabelle responsive, permette lo scroll orizzontale su schermi piccoli */
+.table-responsive-container {
+  overflow-x: auto; /* Abilita lo scroll orizzontale se il contenuto supera la larghezza */
+  margin-top: 1rem; /* Margine superiore */
+  border: 1px solid #e0e0e0; /* Bordo sottile */
+  border-radius: 6px; /* Angoli arrotondati */
+  background-color: var(--white); /* Sfondo bianco */
+  box-shadow: 0 0 10px rgba(0,0,0,0.05); /* Ombra leggera */
+}
+
+.table-responsive-container table {
+  width: 100%; /* La tabella occupa tutta la larghezza disponibile */
+  border-collapse: collapse; /* Rimuove lo spazio tra le celle */
+  min-width: 800px; /* Larghezza minima per evitare che la tabella si stringa troppo */
+  margin-top: 0; /* Resetta il margine, gestito dal contenitore */
+}
+
+.table-responsive-container th,
+.table-responsive-container td {
+  padding: 0.75rem; /* Padding interno per celle e intestazioni */
+  border: 1px solid #ddd; /* Bordo tra le celle */
+  text-align: left; /* Allinea il testo a sinistra */
+}
+
+.table-responsive-container th {
+  background-color: var(--primary-color); /* Sfondo primario per le intestazioni della tabella */
+  color: var(--white); /* Testo bianco */
+  font-weight: bold; /* Grassetto */
+  text-transform: uppercase; /* Testo in maiuscolo */
+  font-size: 0.9rem; /* Dimensione del font leggermente più piccola */
+}
+
+.table-responsive-container tr:nth-child(even) {
+  background-color: #f2f2f2; /* Sfondo alternato per le righe pari */
+}
+
+.table-responsive-container tr:hover {
+  background-color: #f1f1f1; /* Sfondo al passaggio del mouse sulla riga */
+}
+
+/* === Link per Fattura / Billing (all'interno delle tabelle) === */
+/* Stili specifici per i link di fatturazione all'interno delle tabelle */
+.table-responsive-container .billing-link {
+  display: inline-block; /* Rende il link un blocco in linea per padding e bordi */
+  background-color: var(--accent-color); /* Colore di accento */
+  color: var(--white); /* Testo bianco */
+  padding: 0.25rem 0.5rem; /* Padding ridotto */
+  border-radius: 4px; /* Angoli arrotondati */
+  text-align: center;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease; /* Transizione fluida per il colore di sfondo */
+}
+
+.table-responsive-container .billing-link:hover {
+  background-color: #218838; /* Scurisce il colore di accento al passaggio del mouse */
+}
+
+/* === Contenitore Operazioni Rapide (Home Page - operations-container) === */
+/* Stili per le card delle operazioni rapide sulla home page */
+.operations-container {
+  display: flex; /* Utilizza Flexbox */
+  flex-wrap: wrap; /* Permette il wrapping su più righe */
+  gap: 1.5rem; /* Spazio tra gli elementi */
+  margin-top: 1.5rem; /* Margine superiore */
+  justify-content: center; /* Centra gli elementi orizzontalmente */
+}
+
+.operation-item {
+  flex: 1 1 220px; /* Base per 4 colonne su desktop, si adatta */
+  max-width: 280px; /* Larghezza massima per le card */
+  background-color: var(--white); /* Sfondo bianco */
+  border-left: 5px solid var(--primary-color); /* Bordo sinistro colorato */
+  padding: 1.5rem; /* Padding interno */
+  border-radius: 8px; /* Angoli arrotondati */
+  transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s; /* Transizioni per interazione */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Ombra leggera */
+  text-align: center;
+}
+
+.operation-item:hover {
+  border-left-color: var(--accent-color); /* Cambia colore del bordo sinistro al passaggio del mouse */
+  transform: translateY(-5px); /* Effetto di sollevamento */
+  box-shadow: 0 8px 15px rgba(0,0,0,0.1); /* Ombra più pronunciata */
+}
+
+.operation-item a {
+  text-decoration: none; /* Rimuove la sottolineatura */
+  color: var(--primary-color); /* Colore del testo primario */
+  font-weight: 600; /* Grassetto */
+  font-size: 1.1rem; /* Dimensione del font */
+  display: block; /* Rende l'intera area cliccabile */
+}
+
+/* === Form: Gruppi di Campi (form-group) === */
+/* Stili per i contenitori di label e input/select nei form */
+.form-group {
+  margin-bottom: 1.5rem; /* Spazio sotto ogni gruppo di form */
+}
+
+.form-group label {
+  display: block; /* Rende la label un blocco per andare a capo */
+  margin-bottom: 0.5rem; /* Margine inferiore */
+  font-weight: bold; /* Grassetto */
+  color: var(--text-color); /* Colore del testo */
+}
+
+.form-group span { /* Per contenere input o testo aggiuntivo, se necessario */
+  display: block;
+}
+
+/* === Form: Campi di Input Testo (form-input) === */
+/* Stili per i campi di input di testo */
+.form-input {
+  width: 100%; /* Larghezza completa */
+  padding: 0.75rem; /* Padding interno */
+  border: 1px solid var(--secondary-color); /* Bordo grigio secondario */
+  border-radius: 6px; /* Angoli arrotondati */
+  font-size: 1rem; /* Dimensione del font */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transizioni per focus */
+}
+
+.form-input:focus {
+  border-color: var(--accent-color); /* Bordo accentato al focus (verde) */
+  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2); /* Ombra esterna al focus */
+  outline: none; /* Rimuove l'outline predefinito del browser */
+}
+
+/* === Form: Campi di Input Readonly (form-input-readonly) === */
+/* Stili per i campi di input di sola lettura */
+.form-input-readonly {
+  width: 100%; /* Larghezza completa */
+  padding: 0.75rem; /* Padding interno */
+  background-color: var(--gray-light); /* Sfondo grigio chiaro */
+  color: #333; /* Colore del testo */
+  border: 1px solid var(--secondary-color); /* Bordo grigio secondario */
+  border-radius: 6px; /* Angoli arrotondati */
+  font-size: 1rem; /* Dimensione del font */
+  cursor: not-allowed; /* Cursore di non permesso */
+}
+
+/* === Form: Campi Select (form-select) === */
+/* Stili per i campi di selezione a discesa */
+.form-select {
+  width: 100%; /* Larghezza completa */
+  padding: 0.75rem; /* Padding interno */
+  border: 1px solid var(--secondary-color); /* Bordo grigio secondario */
+  border-radius: 6px; /* Angoli arrotondati */
+  font-size: 1rem; /* Dimensione del font */
+  background-color: var(--white); /* Sfondo bianco */
+  appearance: none; /* Rimuove lo stile predefinito del browser */
+  -webkit-appearance: none; /* Per Safari */
+  -moz-appearance: none; /* Per Firefox */
+  /* Icona freccia personalizzata per il select (SVG inlined) */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray"><path d="M4 6l4 4 4-4z"/></svg>');
+  background-repeat: no-repeat; /* Non ripetere l'immagine */
+  background-position: right 1rem center; /* Posiziona l'immagine a destra */
+  background-size: 1em; /* Dimensione dell'immagine */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transizioni per focus */
+}
+
+.form-select:focus {
+  border-color: var(--accent-color); /* Bordo accentato al focus (verde) */
+  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2); /* Ombra esterna al focus */
+  outline: none; /* Rimuove l'outline predefinito del browser */
+}
+
+/* === Form: Gruppi Radio Button (radio-group) === */
+/* Stili per i gruppi di radio button */
+.radio-group {
+  display: flex; /* Utilizza Flexbox */
+  align-items: center; /* Allinea verticalmente al centro */
+  gap: 1rem; /* Spazio tra gli elementi */
+  margin-top: 0.5rem; /* Margine superiore */
+}
+
+.radio-group input[type="radio"] {
+  accent-color: var(--accent-color); /* Colore dell'accento per i radio button */
+  transform: scale(1.1); /* Leggermente più grandi */
+}
+
+.radio-group label {
+  margin-right: 1rem; /* Margine destro */
+  font-weight: 500; /* Spessore del font */
+  font-size: 0.95rem; /* Dimensione del font */
+  color: var(--primary-color); /* Colore primario */
+}
+
+/* === Form: Azioni (Pulsanti - form-actions) === */
+/* Contenitore per i pulsanti di azione dei form */
+.form-actions {
+  margin-top: 1.5rem; /* Margine superiore */
+  display: flex; /* Utilizza Flexbox */
+  flex-wrap: wrap; /* Permette il wrapping */
+  gap: 1rem; /* Spazio tra i pulsanti */
+  justify-content: flex-end; /* Allinea i pulsanti a destra */
+}
+
+/* === Form: Pulsante Generico (form-button) === */
+/* Stili per i pulsanti principali dei form */
+.form-button {
+  background-color: var(--primary-color); /* Sfondo blu primario */
+  color: var(--white); /* Testo bianco */
+  padding: 0.75rem 1.5rem; /* Padding interno */
+  border: none; /* Nessun bordo */
+  border-radius: 6px; /* Angoli arrotondati */
+  cursor: pointer; /* Cursore a puntatore */
+  font-size: 1rem; /* Dimensione del font */
+  font-weight: 600; /* Grassetto */
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s; /* Transizioni per interazione */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Ombra leggera */
+}
+
+.form-button:hover {
+  background-color: var(--accent-color); /* Cambia colore al passaggio del mouse (verde) */
+  transform: scale(1.03); /* Leggero ingrandimento */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Ombra più pronunciata */
+}
+
+/* === Form: Link con Stile Bottone (form-link-button) === */
+/* Stili per i link che appaiono come pulsanti */
+.form-link-button {
+  display: inline-block; /* Rende il link un blocco in linea */
+  margin-top: 0.5rem; /* Margine superiore */
+  margin-right: 1rem; /* Spazio a destra per separazione */
+  background-color: var(--accent-color); /* Colore di accento (verde) */
+  color: var(--white); /* Testo bianco */
+  padding: 0.5rem 1rem; /* Padding interno */
+  border-radius: 6px; /* Angoli arrotondati */
+  text-decoration: none; /* Rimuove la sottolineatura */
+  font-weight: 500; /* Spessore del font */
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Transizioni per interazione */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Ombra leggera */
+}
+
+.form-link-button:hover {
+  background-color: var(--primary-color); /* Cambia colore al passaggio del mouse (blu primario) */
+  transform: scale(1.03); /* Leggero ingrandimento */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Ombra più pronunciata */
+}
+
+/* === Hint per Campi Opzionali (optional-hint) === */
+/* Stili per i suggerimenti sui campi opzionali */
+.optional-hint {
+  font-size: 0.8rem; /* Dimensione del font ridotta */
+  color: #777; /* Colore grigio */
+  font-style: italic; /* Testo in corsivo */
+  margin-top: 0.3rem; /* Margine superiore */
+}
+
+/* === Testo Informativo / Badge (info-text) === */
+/* Stili per testi informativi o badge */
+.info-text {
+  font-size: 0.9rem; /* Dimensione del font */
+  color: #d9534f; /* Colore rosso per info/warning */
+  font-weight: bold; /* Grassetto */
+}
+
+/* === Footer === */
+/* Stili per il piè di pagina */
+footer {
+  margin-top: 3rem; /* Margine superiore */
+  text-align: center; /* Allinea il testo al centro */
+  font-size: 0.9rem; /* Dimensione del font */
+  color: var(--secondary-color); /* Colore secondario */
+}
+
+/* === Adattamenti Responsive === */
+/* Media query per schermi fino a 768px di larghezza (tablet e dispositivi più piccoli) */
+@media (max-width: 768px) {
+  body {
+    padding: 10px; /* Riduci il padding del corpo */
+  }
+
+  .container {
+    padding: 0 15px; /* Riduci il padding del contenitore */
+  }
+
+  header h1 {
+    font-size: 1.8rem; /* Riduci la dimensione del titolo */
+  }
+
+  /* Menu di navigazione impilato verticalmente */
+  .inline-menu-container ul {
+    flex-direction: column; /* Impila gli elementi del menu */
+    gap: 0.8rem; /* Spazio tra gli elementi impilati */
+  }
+
+  .inline-menu-container a {
+    padding: 0.8rem 1.2rem; /* Aumenta l'area cliccabile dei link del menu */
+    text-align: center; /* Centra il testo */
+  }
+
+  /* Card delle operazioni impilate verticalmente */
+  .operations-container {
+    flex-direction: column; /* Impila le card delle operazioni */
+    align-items: center; /* Centra le card impilate */
+  }
+
+  .operation-item {
+    width: 90%; /* Rendi le card più larghe */
+    max-width: 350px; /* Limita la larghezza massima */
+  }
+
+  .table-responsive-container table {
+    min-width: unset; /* Rimuovi la larghezza minima per le tabelle */
+  }
+
+  /* Rendi le tabelle responsive "a blocchi" su schermi piccoli */
+  .table-responsive-container table,
+  .table-responsive-container thead,
+  .table-responsive-container tbody,
+  .table-responsive-container th,
+  .table-responsive-container td,
+  .table-responsive-container tr {
+    display: block; /* Rende gli elementi della tabella a livello di blocco */
+  }
+
+  .table-responsive-container thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px; /* Nasconde l'intestazione della tabella */
+  }
+
+  .table-responsive-container tr {
+    border: 1px solid #e0e0e0; /* Bordo per ogni riga impilata */
+    margin-bottom: 10px; /* Spazio tra le righe impilate */
+    border-radius: 5px;
+  }
+
+  .table-responsive-container td {
+    border: none; /* Rimuove i bordi interni delle celle */
+    border-bottom: 1px solid #eee; /* Bordo inferiore per ogni cella */
+    position: relative;
+    padding-left: 50%; /* Spazio per l'etichetta simulata */
+    text-align: right; /* Allinea il testo a destra */
+  }
+
+  .table-responsive-container td:before {
+    content: attr(data-label); /* Usa l'attributo data-label come pseudo-elemento per l'etichetta */
+    position: absolute;
+    left: 10px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+    color: #333;
+  }
+
+  /* Pulsanti dei form impilati verticalmente */
+  .form-actions {
+    flex-direction: column; /* Impila i pulsanti del form */
+  }
+
+  .form-button,
+  .form-link-button {
+    width: 100%; /* Larghezza completa per i pulsanti */
+    text-align: center; /* Centra il testo */
+  }
+
+  /* Radio button impilati verticalmente */
+  .radio-group {
+    flex-direction: column; /* Impila i radio button */
+    align-items: flex-start; /* Allinea a sinistra */
+  }
+}
+
+/* Media query per schermi fino a 480px di larghezza (smartphone) */
+@media (max-width: 480px) {
+  body {
+    font-size: 14px; /* Riduci ulteriormente la dimensione del font */
+  }
+
+  header h1 {
+    font-size: 1.5rem; /* Riduci la dimensione del titolo */
+  }
+
+  .section-title {
+    font-size: 1.2rem; /* Riduci la dimensione del titolo di sezione */
+  }
+
+  .inline-menu-container ul li a {
+    font-size: 1em; /* Riduci la dimensione del font dei link del menu */
+    padding: 8px 15px; /* Riduci il padding dei link del menu */
+  }
+
+  .form-input,
+  .form-select,
+  .form-input-readonly {
+    padding: 0.6rem 1rem; /* Riduci il padding degli input */
+  }
+
+  .form-button,
+  .form-link-button {
+    padding: 0.6rem 1rem; /* Riduci il padding dei pulsanti */
+    font-size: 0.9rem; /* Riduci la dimensione del font dei pulsanti */
+  }
+}

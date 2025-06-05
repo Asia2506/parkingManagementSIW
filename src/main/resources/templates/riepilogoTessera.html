@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <title>Riepilogo Tessera</title>
-    <link rel="stylesheet" href="/css/stile.css?version=2" />
+    <link rel="stylesheet" href="/css/stile2.css?version=2" />
 </head>
 <body>
     <div class="container">
@@ -47,7 +47,9 @@
                     </tr>
                 </table>
 				<form th:action="@{'/salvaOperazione/'+${tipoOperazione}+'/' + ${tessera.numero} + '/' + ${titolare.id}}" method="post">
-				    <div class="form-actions"> <button type="submit" class="info-section button" th:text="'Conferma '+${tipoOperazione}">Conferma Operazione</button> </div>
+				    <div class="form-actions"> 
+						<button type="submit" class="form-button" th:text="'Conferma '+${tipoOperazione}">Conferma Operazione</button> 
+					</div>
 	           	</form>
             </div>
         </section>
