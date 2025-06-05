@@ -48,10 +48,10 @@
                                 <td th:if="${operazione.cauzione!=0}" th:text="${operazione.cauzione}"></td>
 								<td th:unless="${operazione.cauzione!=0}" ></td>
 								
-								<td th:if="${operazione.tipoPagamento=='contanti'}" th:text="${operazione.tessera.descrizioneTessera.importo}"></td>
+								<td th:if="${operazione.tipoPagamento=='contanti'}" th:text="${operazione.importo}"></td>
 								<td th:unless="${operazione.tipoPagamento=='contanti'}" ></td>
 								
-								<td th:if="${operazione.tipoPagamento=='carta'}" th:text="${operazione.tessera.descrizioneTessera.importo}"></td>
+								<td th:if="${operazione.tipoPagamento=='carta'}" th:text="${operazione.importo}"></td>
 								<td th:unless="${operazione.tipoPagamento=='carta'}" > </td>
 								
                                 <td th:if="${(operazione.tipoOperazione.name()=='EMISSIONE' or operazione.tipoOperazione.name()=='RICARICA') and operazione.cliente.datiFatturazione!=null}"> 

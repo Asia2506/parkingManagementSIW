@@ -20,6 +20,11 @@ public class Operazione {
 	private String tipoPagamento;
 	private float cauzione;
 	private float importo;
+	
+	
+	private DescrizioneTessera tipoTessera;
+	
+	
 	@ManyToOne
 	private Tessera tessera;
 	//per non perdere i dati delle operazioni
@@ -81,6 +86,7 @@ public class Operazione {
 	public void setTipoPagamento(String tipoPagamento) {
 		this.tipoPagamento = tipoPagamento;
 	}
+	
 	public TipoOperazione getTipoOperazione() {
 		return tipoOperazione;
 	}
@@ -113,6 +119,15 @@ public class Operazione {
 	}
 	public void setTipoOperazione(TipoOperazione tipoOperazione) {
 		this.tipoOperazione = tipoOperazione;
+	}
+	
+	
+	public DescrizioneTessera getTipoTessera() {
+		return tipoTessera;
+	}
+	
+	public void setTipoTessera(DescrizioneTessera tipoTessera) {
+		this.tipoTessera = tipoTessera;
 	}
 	
 	

@@ -78,6 +78,7 @@ public class OperazioneController {
 		o.setData(LocalDate.now());
 		o.setCliente(d);
 		o.setTessera(t);
+		o.setTipoTessera(t.getDescrizioneTessera());
 		
 		//aggiungo alle operazioni associate alla tessera quella corrente
 		t.getOperazioni().add(o);
