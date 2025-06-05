@@ -2,6 +2,7 @@ package siw.uniroma3.parkingManagementSIW.controller;
 
 
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,8 +53,6 @@ public class OperazioneController {
 	        case RESTITUZIONE:
 	        	model.addAttribute("tipoOperazione",tipo);
 	            return "restituzioneTessera.html";*/
-	        case RICARICA:
-	        	return "ricaricaTessera.html";
 	        default:
 	        	return "cercaTesseraPerOperazione.html";
 	    }
@@ -97,6 +96,28 @@ public class OperazioneController {
 	    		this.tesseraService.save(t);
 	        	break;
 	        case RICARICA:
+	        	o.setTipoOperazione(tipo);
+	        	o.setImporto(t.getDescrizioneTessera().getImporto());
+	        	//oggi 5giugno
+	        	//scadenza perc 31maggio
+	        	//se scadenza<oggi allora ultimo giorno mese corrente
+	        	
+	        	//oggi 25giugno
+	        	//scadenza 30giugno
+	        	//se oggi<scadenza allora ultimo giorno mese dopo scadenza
+	        	if(t.getDescrizioneTessera().getTipoTessera()!="SCALARE" ) {
+	        		//ultimo giorno del mese successivo a quello dell'ultimo rinnovo
+	        		if(LocalDate.now().isAfter(t.getDataScadenza())) {
+	        			/*a.isAfter(b) == false
+						   a.isAfter(a) == false
+						   b.isAfter(a) == true*/
+	        			t.setDataScadenza(LocalDate.now().with(TemporalAdjusters.lastDayOfMonth()));
+	        		}else {
+	        			t.setDataScadenza(t.getDataScadenza().plusMonths(1).with(TemporalAdjusters.lastDayOfMonth()));
+	        		}
+	        	}
+	        	
+	        	this.tesseraService.save(t);
 	        	break;
 	        case SMARRIMENTO:
 	            o.setTipoOperazione(tipo);

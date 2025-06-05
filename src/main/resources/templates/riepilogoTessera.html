@@ -18,8 +18,10 @@
             </nav>
         </header>
         <section class="info-section">
-            <h2 class="section-title" th:text="'Riepilogo tessera '+${tipoOperazione}"></h2>
-            <div class="table-responsive-container">
+            <h2 th:unless="${tipoOperazione=='ricarica'}" class="section-title" th:text="'Riepilogo tessera '+${tipoOperazione}"></h2>
+			<h2 th:if="${tipoOperazione=='ricarica' and tessera.descrizioneTessera.tipoTessera!='SCALARE'}" class="section-title"> Riepilogo tessera per rinnovo</h2>
+			<h2 th:if="${tipoOperazione=='ricarica' and tessera.descrizioneTessera.tipoTessera=='SCALARE'}" class="section-title"> Riepilogo tessera per ricarica</h2>
+			<div class="table-responsive-container">
                 <table>
                     <tr>
                         <th>Numero Tessera</th>
@@ -48,7 +50,9 @@
                 </table>
 				<form th:action="@{'/salvaOperazione/'+${tipoOperazione}+'/' + ${tessera.numero} + '/' + ${titolare.id}}" method="post">
 				    <div class="form-actions"> 
-						<button type="submit" class="form-button" th:text="'Conferma '+${tipoOperazione}">Conferma Operazione</button> 
+						<button th:unless="${tipoOperazione=='ricarica'}" type="submit" class="form-button" th:text="'Conferma '+${tipoOperazione}">Conferma Operazione</button>
+						<button th:if="${tipoOperazione=='ricarica' and tessera.descrizioneTessera.tipoTessera!='SCALARE'}" type="submit" class="form-button" >Conferma Rinnovo</button>ù
+						<button th:if="${tipoOperazione=='ricarica' and tessera.descrizioneTessera.tipoTessera=='SCALARE'}" type="submit" class="form-button" >Conferma Ricarica</button>  
 					</div>
 	           	</form>
             </div>

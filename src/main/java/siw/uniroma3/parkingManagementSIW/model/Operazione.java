@@ -21,7 +21,7 @@ public class Operazione {
 	private float cauzione;
 	private float importo;
 	
-	
+	@ManyToOne
 	private DescrizioneTessera tipoTessera;
 	
 	

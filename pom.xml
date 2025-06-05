@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.5</version>
+		<version>3.4.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>siw.uniroma3</groupId>
-	<artifactId>parkingManagementSIW</artifactId>
+	<groupId>it.uniroma3</groupId>
+	<artifactId>my-siw-movie-01</artifactId>
 	<version>1.0</version>
-	<name>parkingManagementSIW</name>
-	<description>Siw JPA</description>
+	<name>my-siw-movie-01</name>
+	<description>Siw Movie</description>
 	<url/>
 	<licenses>
 		<license/>
