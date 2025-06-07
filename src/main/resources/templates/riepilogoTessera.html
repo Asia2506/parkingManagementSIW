@@ -51,7 +51,7 @@
 				<form th:action="@{'/salvaOperazione/'+${tipoOperazione}+'/' + ${tessera.numero} + '/' + ${titolare.id}}" method="post">
 				    <div class="form-actions"> 
 						<button th:unless="${tipoOperazione=='ricarica'}" type="submit" class="form-button" th:text="'Conferma '+${tipoOperazione}">Conferma Operazione</button>
-						<button th:if="${tipoOperazione=='ricarica' and tessera.descrizioneTessera.tipoTessera!='SCALARE'}" type="submit" class="form-button" >Conferma Rinnovo</button>ù
+						<button th:if="${tipoOperazione=='ricarica' and tessera.descrizioneTessera.tipoTessera!='SCALARE'}" type="submit" class="form-button" >Conferma Rinnovo</button>
 						<button th:if="${tipoOperazione=='ricarica' and tessera.descrizioneTessera.tipoTessera=='SCALARE'}" type="submit" class="form-button" >Conferma Ricarica</button>  
 					</div>
 	           	</form>
