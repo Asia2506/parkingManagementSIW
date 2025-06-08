@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import siw.uniroma3.parkingManagementSIW.model.DipendenteCC;
 import siw.uniroma3.parkingManagementSIW.model.Tessera;
 import siw.uniroma3.parkingManagementSIW.model.TipoOperazione;
@@ -75,6 +77,8 @@ public class TesseraController {
 	@PostMapping("/emissioneTessera/associaAnagrafica")
 	public String newTessera(@RequestParam("numeroTessera") Long numeroTessera,
 			@RequestParam("descrizioneTesseraId") Long descrizioneTesseraId,Model model) {
+		// gestione degli errori
+	
 		//se la tessera non esiste oppure se esiste e non ha un titolare
 		Tessera tessera;
 		//se la tessera non esiste creala
@@ -110,9 +114,9 @@ public class TesseraController {
 	
 	
 	@GetMapping("/emissioneTessera/associaAnagrafica/{numeroTessera}/{idCliente}")
-	public String associaTitolareATessera(@PathVariable("numeroTessera") Long numTesssera,@PathVariable("idCliente") Long idTitolare,Model model) {
-		
-		model.addAttribute("tessera",this.tesseraService.getTesseraById(numTesssera));
+	public String associaTitolareATessera(@PathVariable("numeroTessera") Long numTessera,@PathVariable("idCliente") Long idTitolare, Model model) {
+	   
+		model.addAttribute("tessera",this.tesseraService.getTesseraById(numTessera));
 		model.addAttribute("titolare",this.dipendenteCCService.getDIpendenteCCById(idTitolare));
 		//restituisco la pagina con riepilogo 
 		return "formAssociaAnagrafica.html";
@@ -131,7 +135,8 @@ public class TesseraController {
 	    				!this.tesseraService.getTesseraById(numeroTessera).isSmarrita())) {
 	        // Tessera non trovata
 	    	model.addAttribute("error","Numero tessera non valido");
-	        return "redirect:/formNewOperazione/"+tipoOperazione; // Pagina di errore o notifica
+	        //return "redirect:/formNewOperazione/"+tipoOperazione; // Pagina di errore o notifica
+	    	return "cercaTesseraPerOperazione.html";
 	    }
 	    
 	    Tessera tessera = tesseraService.getTesseraById(numeroTessera);

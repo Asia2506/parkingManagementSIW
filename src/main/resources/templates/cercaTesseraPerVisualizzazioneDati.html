@@ -32,6 +32,7 @@
 	                        placeholder="Inserisci il numero della tessera" 
 	                        required
 	                        class="form-input">
+						<span th:text="${error}">messaggio errore</span>
 	                </div>
 	                <div class="form-actions">
 	                    <button type="submit" class="form-button">Conferma</button>

@@ -209,7 +209,8 @@ public class OperazioneController {
 	    				!this.tesseraService.getTesseraById(numeroTessera).isSmarrita())) {
 	        // Tessera non trovata
 	    	model.addAttribute("error","Numero tessera non valido");
-	        return "redirect:/operazioniPerTessera"; // Pagina di errore o notifica
+	    	return "cercaTesseraPerVisualizzazioneDati.html";
+	       // return "redirect:/operazioniPerTessera"; // Pagina di errore o notifica
 	    }
 	    
 	    Tessera tessera = tesseraService.getTesseraById(numeroTessera);
