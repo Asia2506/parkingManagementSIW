@@ -40,6 +40,11 @@ public class OperazioneService {
 		return operazioneRepository.findByData(dataDiOggi);
 	}
 	
+	public Iterable<Operazione> getAllOperazioniPerData(int giorno, int mese, int anno){
+		LocalDate data = LocalDate.of(anno, mese, giorno);
+		return operazioneRepository.findByData(data);
+	}
+	
 	
 	public void save(Operazione operazione) {
 		this.operazioneRepository.save(operazione);

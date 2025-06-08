@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <title>Ricerca Giorno</title>
+	    <link rel="stylesheet" href="/css/stile2.css?version=2" />
+	</head>
+	<body>
+	    <div class="container">
+	        <header>
+	            <h1>Parking Management</h1> 
+				<nav class="inline-menu-container">
+	                <ul>
+						<li><a th:href="@{/}">Home</a></li>
+						<li><a th:href="@{/tessereAttive}">Tessere Attive</a></li>
+		                <li><a th:href="@{/operazioniPerTessera}">Operazioni per tessera</a></li>
+		                <li><a th:href="@{/operazioniPerPeriodo}">Operazioni per data/periodo</a></li>
+	                </ul>
+	            </nav>
+	        </header>
+	        <section class="info-section">
+	            <h2 class="section-title"th:text="'Seleziona data per visualizzare operazioni:'"></h2>
+				<div th:if="${error}" class="error-message">
+				       <p th:text="${error}"></p>
+				   </div>
+	            <form th:action="@{'/riepilogoOperazioniPerData'}" method="post">
+	                <div class="form-group">
+						<label for="giorno">Giorno:</label>
+	                    <span><input 
+							type="text" 
+							id="giorno" 
+	                        name="giorno" 
+	                        placeholder="Inserisci il giorno" 
+	                        required
+	                        class="form-input"></span>
+						<label for="mese">Mese:</label>
+						<span><input 
+							type="text" 
+							id="mese" 
+							name="mese" 
+							placeholder="Inserisci il mese" 
+							required
+				            class="form-input"></span>
+						<label for="anno">Anno:</label>
+					    <span><input 
+							 type="text" 
+							 id="anno" 
+							 name="anno" 
+							 placeholder="Inserisci l'anno" 
+							 required
+							 class="form-input"></span>              
+	                </div>
+	                <div class="form-actions">
+	                    <button type="submit" class="form-button">Conferma</button>
+	                </div>
+	            </form>
+	        </section>
+	    </div>
+	    <footer>
+	    </footer>
+	</body>
+</html>

@@ -231,6 +231,32 @@ public class OperazioneController {
 	    model.addAttribute("operazioniTessera", operazioniTessera);
 	    return "riepilogoOperazioniTessera.html"; 
 	}
+	
+	
+	@GetMapping("/operazioniPerPeriodo")
+	public String showOperazioniPerPeriodo(Model model) {
+		return "cercaOperazioniPerData.html";		
+	 }
+	@PostMapping("/riepilogoOperazioniPerData")
+	public String operazioniPerData(@RequestParam("giorno") int giorno, @RequestParam("mese") int mese, @RequestParam("anno") int anno, Model model) {
+
+	    // Simuliamo un servizio per recuperare i dati
+	   
+	    Iterable<Operazione> operazioniPerGiorno = this.operazioneService.getAllOperazioniPerData(giorno, mese, anno);
+//	    Iterator<Operazione> iterator = operazioniPerGiorno.iterator();
+//	    
+//	    // Prendo le operazioni associate a quel titolare
+//	    while (iterator.hasNext()) {
+//	        Operazione operazione = iterator.next();
+//	        if (!operazione.getCliente().equals(titolare)) {
+//	            iterator.remove();
+//	        }
+//	    }
+	    
+	    // Aggiungo i dati di riepilogo alla vista
+	    model.addAttribute("operazioniPerGiorno", operazioniPerGiorno);
+	    return "operazioniPerGiorno.html"; 
+	}
 		
 
 }
