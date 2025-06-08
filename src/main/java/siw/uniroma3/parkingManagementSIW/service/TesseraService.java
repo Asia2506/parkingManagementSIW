@@ -1,5 +1,6 @@
 package siw.uniroma3.parkingManagementSIW.service;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,18 @@ public class TesseraService {
 		return tesseraRepository.findById(numero).get();
 	}
 	
-	public Iterable<Tessera> getAllTessere() {
-		return tesseraRepository.findAll();
+	public Iterable<Tessera> getAllTessereAttive() {
+		Iterable<Tessera> tessereAttive = tesseraRepository.findAll();
+		Iterator<Tessera> iterator = tessereAttive.iterator();
+		    
+		    // Il sistema non elimina le tessera e sono di interesse solo quelle attive
+		    while (iterator.hasNext()) {
+		        Tessera tessera = iterator.next();
+		        if (tessera.isSmarrita() || tessera.isDanneggiata() ||tessera.getTitolare()==null) {
+		            iterator.remove();
+		        }
+		    }
+		return tessereAttive;
 	}
 
 	public void save(Tessera tessera) {
