@@ -45,7 +45,7 @@
                             <td th:text="${tessera.titolare.nome + ' ' + tessera.titolare.cognome}"></td>
                             <td th:text="${tessera.titolare.azienda}"></td>
                             <td>
-                                <a th:href="@{'/tessera/' + ${tessera.numero}}" class="details-link">Visualizza</a>
+                                <a th:href="@{'/tesseraDettagli/' + ${tessera.numero}}" class="details-link">Visualizza</a>
                             </td>
                         </tr>
                     </tbody>

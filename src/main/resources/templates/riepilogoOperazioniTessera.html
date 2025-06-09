@@ -38,11 +38,11 @@
                     </tr>
                     <tr>
                         <th>Titolare</th>
-                        <td th:text="${titolare.nome + ' ' + titolare.cognome}"></td>
+                        <td th:if="${titolare!=null}" th:text="${titolare.nome + ' ' + titolare.cognome}"></td>
                     </tr>
                     <tr>
                         <th>Azienda</th>
-                        <td th:text="${titolare.azienda}"></td>
+                        <td th:if="${titolare!=null}"  th:text="${titolare.azienda}"></td>
                     </tr>
                 </table>
 			</div>

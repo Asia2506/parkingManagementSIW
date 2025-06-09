@@ -50,7 +50,15 @@ public class TesseraController {
 		return "tessera.html";	
 	}
 
-	
+	@GetMapping("/tesseraDettagli/{id}")
+	public String getOperazioniTessera(@PathVariable("id") Long id, Model model) {	
+		Tessera tessera = this.tesseraService.getTesseraById(id);
+		DipendenteCC titolare = tessera.getTitolare();
+		model.addAttribute("tessera", tessera);
+		model.addAttribute("titolare", titolare);
+		return "riepilogoOperazioniTessera.html";	
+	}
+
 	@GetMapping("/tessereAttive")
 	public String showTessereEmesse(Model model) {
 		model.addAttribute("tessereAttive", this.tesseraService.getAllTessereAttive());
