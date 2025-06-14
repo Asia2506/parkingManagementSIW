@@ -26,7 +26,8 @@ import siw.uniroma3.parkingManagementSIW.service.TesseraService;
 @Controller
 public class TesseraController {
 
-    private final OpreazioneRepository opreazioneRepository;
+	@Autowired
+    OperazioneService operazioneService;
 	
 	@Autowired
 	TesseraService tesseraService;
@@ -37,11 +38,6 @@ public class TesseraController {
 	@Autowired
 	DipendenteCCService dipendenteCCService;
 	
-
-
-    TesseraController(OpreazioneRepository opreazioneRepository) {
-        this.opreazioneRepository = opreazioneRepository;
-    }
 
 	
 	@GetMapping("/tessera/{id}")
@@ -163,7 +159,7 @@ public class TesseraController {
 	            break;
 	        case RESTITUZIONE:
 	        	if(tessera.isSmarrita()) {
-	        		titolare=this.tesseraService.getUltimaOperazioneSmarrimento(numeroTessera).getCliente();
+	        		titolare=this.operazioneService.getUltimaOperazioneSmarrimento(numeroTessera).getCliente();
 	        	}
 	        default:
 	        	break;
@@ -175,6 +171,8 @@ public class TesseraController {
 	    model.addAttribute("tipoOperazione",tipoOperazione);
 	    return "riepilogoTessera.html"; 
 	}
+	
+	
 	
 	
 	

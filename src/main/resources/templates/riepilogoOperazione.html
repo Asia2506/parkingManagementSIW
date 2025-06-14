@@ -2,7 +2,7 @@
 <html>
   	<head>
     	<title>Conferma Operazione</title>
-    	<link rel="stylesheet" href="/css/stile2.css?version=2" />
+    	<link rel="stylesheet" href="/css/stile2.css?version=3" />
   	</head>
 	<body>
 		<div class="container"> 
@@ -39,7 +39,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr >
                                 <td th:text="${#temporals.format(operazione.data, 'dd-MM-yyyy')}"></td>
 								<td th:if="${operazione.cliente != null}" th:text="${operazione.cliente.nome + ' ' + operazione.cliente.cognome}"></td>
 								<td th:unless="${operazione.cliente != null}">N.D.</td>

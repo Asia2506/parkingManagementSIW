@@ -195,11 +195,26 @@ public class OperazioneController {
 		return "redirect:/";
 	}
 	
+	
+	
+	
+	
 	@GetMapping("/operazioniPerTessera")
 	public String showOperazioniPerTessera(Model model) {
 		return "cercaTesseraPerVisualizzazioneDati.html";		
 	 }
-
+	
+	
+	@PostMapping("/riepilogoOperazioniTessera")
+	public String riepilogoOperazioniTessera(@RequestParam("numeroTessera") Long numeroTessera,Model model) {
+		Tessera t=this.tesseraService.getTesseraById(numeroTessera);
+		model.addAttribute("tessera", t);
+	    model.addAttribute("titolare", t.getTitolare());
+	    model.addAttribute("operazioniTessera", this.operazioneService.getOperazioniCorrenti(numeroTessera));
+	    return "riepilogoOperazioniTessera.html"; 
+	}
+	
+	/*
 	@PostMapping("/riepilogoOperazioniTessera")
 	public String datiTessera(@RequestParam("numeroTessera") Long numeroTessera, Model model) {
 
@@ -232,12 +247,13 @@ public class OperazioneController {
 	    model.addAttribute("operazioniTessera", operazioniTessera);
 	    return "riepilogoOperazioniTessera.html"; 
 	}
-	
+	*/
 	
 	@GetMapping("/operazioniPerPeriodo")
 	public String showOperazioniPerPeriodo(Model model) {
 		return "cercaOperazioniPerData.html";		
 	 }
+	
 	@PostMapping("/riepilogoOperazioniPerData")
 	public String operazioniPerData(@RequestParam("giorno") int giorno, @RequestParam("mese") int mese, @RequestParam("anno") int anno, Model model) {
 

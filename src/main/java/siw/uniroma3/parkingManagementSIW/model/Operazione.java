@@ -23,8 +23,6 @@ public class Operazione {
 	
 	@ManyToOne
 	private DescrizioneTessera tipoTessera;
-	
-	
 	@ManyToOne
 	private Tessera tessera;
 	//per non perdere i dati delle operazioni

@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <title>Riepilogo Tessera</title>
-    <link rel="stylesheet" href="/css/stile2.css?version=2" />
+    <link rel="stylesheet" href="/css/stile2.css?version=3" />
 </head>
 <body>
     <div class="container">
@@ -19,6 +19,30 @@
         </header>
         <section class="info-section">
 			<div class="table-responsive-container">
+				<!-- Sezione Legenda -->
+                <div class="legend-container">
+                    <div class="legend-item">
+                        <div class="color-box legend-nuovo"></div>
+                        <span>Nuovo (Emissione)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="color-box legend-ricarica"></div>
+                        <span>Ricarica/Rinnovo</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="color-box legend-azzurro"></div>
+                        <span>S/D - Smarrita/Danneggiata</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="color-box legend-arancione"></div>
+                        <span>A - Restituita</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="color-box legend-fattura"></div>
+                        <span>F - Dati Fatturazione Associati</span>
+                    </div>
+                </div>
+	            <!-- Fine Sezione Legenda -->
 				<table>
 					<thead>
 					     <tr>
@@ -34,7 +58,7 @@
 					    </tr>
 				    </thead>
 				 <tbody>
-					<tr th:each="operazione : ${operazioniPerGiorno}">
+					<tr th:each="operazione : ${operazioniPerGiorno}" th:classappend="${'row-' + operazione.tipoOperazione.name().toLowerCase()}">
 										
 						<td th:text="${#temporals.format(operazione.data, 'dd-MM-yyyy')}"></td>
 						<td th:text="${operazione.cliente.nome+ ' ' +operazione.cliente.cognome}"></td>

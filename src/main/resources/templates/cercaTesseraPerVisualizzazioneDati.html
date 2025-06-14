@@ -2,7 +2,7 @@
 <html>
 	<head>
 	    <title>Ricerca Tessera</title>
-	    <link rel="stylesheet" href="/css/stile2.css?version=2" />
+	    <link rel="stylesheet" href="/css/stile2.css?version=3" />
 	</head>
 	<body>
 	    <div class="container">
@@ -18,7 +18,7 @@
 	            </nav>
 	        </header>
 	        <section class="info-section">
-	            <h2 class="section-title"th:text="'Cerca tessera:'"></h2>
+	            <h2 class="section-title"th:text="'Cerca operazioni relative alla tessera:'"></h2>
 				<div th:if="${error}" class="error-message">
 				       <p th:text="${error}"></p>
 				   </div>

@@ -3,7 +3,7 @@
 <html>
   	<head>
     	<title>Home</title>
-    	<link rel="stylesheet" href="/css/stile2.css?version=2" />
+    	<link rel="stylesheet" href="/css/stile2.css?version=3" />
   	</head>
 	<body>
 		<div class="container"> 
@@ -22,25 +22,51 @@
                     <p class="empty-message">Nessuna operazione registrata per oggi.</p>
                 </div>
 				<div th:unless="${operazioniOggi.isEmpty()}" class="table-responsive-container">
+					<!-- Sezione Legenda -->
+	                <div class="legend-container">
+	                    <div class="legend-item">
+	                        <div class="color-box legend-nuovo"></div>
+	                        <span>Nuovo (Emissione)</span>
+	                    </div>
+	                    <div class="legend-item">
+	                        <div class="color-box legend-ricarica"></div>
+	                        <span>Ricarica/Rinnovo</span>
+	                    </div>
+	                    <div class="legend-item">
+	                        <div class="color-box legend-azzurro"></div>
+	                        <span>S/D - Smarrita/Danneggiata</span>
+	                    </div>
+	                    <div class="legend-item">
+	                        <div class="color-box legend-arancione"></div>
+	                        <span>A - Restituita</span>
+	                    </div>
+	                    <div class="legend-item">
+	                        <div class="color-box legend-fattura"></div>
+	                        <span>F - Dati Fatturazione Associati</span>
+	                    </div>
+	                </div>
+		            <!-- Fine Sezione Legenda -->
                     <table>
                         <thead>
                             <tr>
 								<th>Data</th>
-                                <th>Cliente</th> 
-								<th>Azienda</th> 
+                                <th>Titolare</th> 
+								<th>Esercizio Commerciale</th> 
 								<th>Tessera</th>
-	                            <th>Tipo Abbonamento</th>
-	                            <th>Cauzione(€)</th>
-	                            <th>Contanti(€)</th> 
-								<th>Carta(€)</th> 
+	                            <th>Tipo</th>
+	                            <th>Importo cauzione</th>
+	                            <th>Importo contanti</th> 
+								<th>Importo carta</th> 
 								<th> </th>              
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="operazione : ${operazioniOggi}">
+                            <tr th:each="operazione : ${operazioniOggi}" th:classappend="${'row-' + operazione.tipoOperazione.name().toLowerCase()}">
 								
-                                <td th:text="${#temporals.format(operazione.data, 'dd-MM-yyyy')}"></td>
-                                <td th:text="${operazione.cliente.nome+ ' ' +operazione.cliente.cognome}"></td>
+								<td th:text="${#temporals.format(operazione.data, 'dd-MM-yyyy')}"></td>
+								
+								
+								<td th:text="${operazione.cliente.nome+ ' ' +operazione.cliente.cognome}"></td>
                                 <td th:text="${operazione.cliente.azienda}"></td>
                                 <td th:text="${operazione.tessera.numero}"></td>
                                 <td th:text="${operazione.tessera.descrizioneTessera.tipoTessera}"></td>
@@ -58,15 +84,17 @@
 									<a th:href="@{'/datiFatturazione/'+${operazione.cliente.datiFatturazione.id}}"  class="billing-link">F</a> 
 								</td>
 								<td th:if="${operazione.tipoOperazione.name()=='SMARRIMENTO'}"> S </td>
+								<td th:if="${operazione.tipoOperazione.name()=='RESTITUZIONE'}"> A </td>
 								<td th:if="${operazione.tipoOperazione.name()=='DANNEGGIAMENTO'}"> D </td>
 								<td th:unless="${((operazione.tipoOperazione.name()=='EMISSIONE' or operazione.tipoOperazione.name()=='RICARICA') and operazione.cliente.datiFatturazione!=null) or
-												(operazione.tipoOperazione.name()=='SMARRIMENTO' and operazione.tipoOperazione.name()=='DANNEGGIAMENTO')}">  </td>
+												operazione.tipoOperazione.name()=='SMARRIMENTO' or operazione.tipoOperazione.name()=='DANNEGGIAMENTO' or operazione.tipoOperazione.name()=='RESTITUZIONE'}">  </td>
 								
                             </tr>
                         </tbody>
                     </table>
                 </div>
 			</section> 
+			
 			<section class="info-section"> 
 				<p>Seleziona operazione:</p>
                 <div id="flex-container" class="operations-container"> 

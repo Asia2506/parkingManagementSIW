@@ -50,6 +50,64 @@ header h1 {
   margin-bottom: 1rem; /* Margine inferiore per il titolo H1 nell'header */
 }
 
+
+/*=== Legenda Operazioni (legend-section) === */
+/* Stili per la sezione che contiene la legenda completa */
+.legend-section {
+  margin-top: 3rem; /* Margine superiore per separare dalla tabella */
+}
+
+.legend-container {
+  display: flex; /* Usa flexbox per allineare gli elementi della legenda */
+  flex-wrap: wrap; /* Permette il wrapping su più righe se lo spazio è insufficiente */
+  gap: 20px; /* Spazio tra gli elementi della legenda */
+  justify-content: center; /* Centra gli elementi all'interno del contenitore */
+  padding: 15px; /* Padding interno */
+  border: 1px solid #e0e0e0; /* Bordo sottile */
+  border-radius: 8px; /* Angoli arrotondati */
+  background-color: #fcfcfc; /* Sfondo leggermente diverso per la legenda */
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Ombra interna per dare un effetto incassato */
+}
+
+.legend-item {
+  display: flex; /* Usa flexbox per allineare il box colore e il testo in ogni voce */
+  align-items: center; /* Centra verticalmente gli elementi */
+  gap: 10px; /* Spazio tra il box colore e il testo */
+  font-size: 0.95rem; /* Dimensione del font */
+  color: var(--text-color); /* Colore del testo */
+}
+
+.color-box {
+  width: 20px; /* Larghezza del quadratino colore */
+  height: 20px; /* Altezza del quadratino colore */
+  border-radius: 4px; /* Angoli leggermente arrotondati */
+  border: 1px solid rgba(0,0,0,0.1); /* Bordo sottile per delineare il box */
+  flex-shrink: 0; /* Impedisce al box di restringersi */
+}
+
+/* Colori specifici per i box nella legenda (devono corrispondere ai colori delle righe della tabella) */
+.legend-nuovo {
+  background-color: #ffffff; /* Bianco per Nuovo (Emissione) */
+}
+
+.legend-ricarica {
+  background-color: #e0ffe0; /* Verde molto chiaro per Ricarica/Rinnovo */
+}
+
+.legend-azzurro {
+  background-color: #e6f7ff; /* Azzurro chiaro per Smarrita/Danneggiata */
+}
+
+.legend-arancione {
+  background-color: #fff0e6; /* Arancio/Rosa chiaro per Restituita */
+}
+
+.legend-fattura {
+  background-color: var(--accent-color); /* Verde per F - Dati Fatturazione Associati */
+}
+
+
+
 /* === Menu di Navigazione (inline-menu-container) === */
 /* Stili per la barra di navigazione orizzontale */
 .inline-menu-container ul {
@@ -158,6 +216,34 @@ header h1 {
   font-weight: bold; /* Grassetto */
   text-transform: uppercase; /* Testo in maiuscolo */
   font-size: 0.9rem; /* Dimensione del font leggermente più piccola */
+}
+
+/* === Stili per i colori delle righe della tabella in base al tipo di operazione === */
+/* Questi stili sovrascriveranno gli sfondi alternati per le righe con queste classi */
+.table-responsive-container tbody tr.row-emissione {
+  background-color: #ffffff; /* Bianco per Emissione */
+}
+
+.table-responsive-container tbody tr.row-ricarica {
+  background-color: #e0ffe0; /* Verde molto chiaro per Ricarica */
+}
+
+.table-responsive-container tbody tr.row-restituzione {
+  background-color: #fff0e6; /* Arancio/Rosa chiaro per Restituzione */
+}
+
+.table-responsive-container tbody tr.row-danneggiamento,
+.table-responsive-container tbody tr.row-smarrimento {
+  background-color: #e6f7ff; /* Azzurro chiaro per Danneggiamento e Smarrimento */
+}
+
+/* Modifica l'effetto hover per le righe con colori specifici per mantenere un contrasto adeguato */
+.table-responsive-container tbody tr.row-emissione:hover,
+.table-responsive-container tbody tr.row-ricarica:hover,
+.table-responsive-container tbody tr.row-restituzione:hover,
+.table-responsive-container tbody tr.row-danneggiamento:hover,
+.table-responsive-container tbody tr.row-smarrimento:hover {
+  filter: brightness(0.95); /* Rendi il colore leggermente più scuro al passaggio del mouse */
 }
 
 .table-responsive-container tr:nth-child(even) {

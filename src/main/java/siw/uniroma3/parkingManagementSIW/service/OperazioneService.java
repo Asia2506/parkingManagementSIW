@@ -2,6 +2,7 @@ package siw.uniroma3.parkingManagementSIW.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,6 +64,22 @@ public class OperazioneService {
 		}
 		return null;
 	}*/
+	
+	/* Restituisce l'ultima operazione di smarrimento per una data tessera */
+    public Operazione getUltimaOperazioneSmarrimento(Long numeroTessera) {
+        /*List<Operazione> operazioniSmarrimento = operazioneRepository.findLastSmarrimentoOperationByTessera(numeroTessera, TipoOperazione.SMARRIMENTO);
+        if (!operazioniSmarrimento.isEmpty()) {
+            return operazioniSmarrimento.get(0);
+        }
+        return null;*/
+        Optional<Operazione> optionalOperazione = operazioneRepository.findSmarrimentoOperationByTessera(numeroTessera, TipoOperazione.SMARRIMENTO);
+        return optionalOperazione.orElse(null);
+    }
+    
+    
+    public List<Operazione> getOperazioniCorrenti(Long numeroTessera){
+    	return this.operazioneRepository.findOperazioniByTesseraAndTitolareCorrente(numeroTessera);
+    }
 
 
 }
