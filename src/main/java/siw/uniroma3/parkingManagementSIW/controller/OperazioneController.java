@@ -190,8 +190,6 @@ public class OperazioneController {
 			o.setTipoPagamento(tipoPagamento);
 		this.operazioneService.save(o);
 		
-		//model.addAttribute("operazioniOggi",this.operazioneService.getAllOperazioniDiOggi());
-		//return "home.html";
 		return "redirect:/";
 	}
 	
@@ -199,55 +197,6 @@ public class OperazioneController {
 	
 	
 	
-	@GetMapping("/operazioniPerTessera")
-	public String showOperazioniPerTessera(Model model) {
-		return "cercaTesseraPerVisualizzazioneDati.html";		
-	 }
-	
-	
-	@PostMapping("/riepilogoOperazioniTessera")
-	public String riepilogoOperazioniTessera(@RequestParam("numeroTessera") Long numeroTessera,Model model) {
-		Tessera t=this.tesseraService.getTesseraById(numeroTessera);
-		model.addAttribute("tessera", t);
-	    model.addAttribute("titolare", t.getTitolare());
-	    model.addAttribute("operazioniTessera", this.operazioneService.getOperazioniCorrenti(numeroTessera));
-	    return "riepilogoOperazioniTessera.html"; 
-	}
-	
-	/*
-	@PostMapping("/riepilogoOperazioniTessera")
-	public String datiTessera(@RequestParam("numeroTessera") Long numeroTessera, Model model) {
-
-	    // Simuliamo un servizio per recuperare i dati
-	    if (!this.tesseraService.existsById(numeroTessera) ||
-	    		(this.tesseraService.existsById(numeroTessera) && this.tesseraService.getTesseraById(numeroTessera).getTitolare()==null &&
-	    				!this.tesseraService.getTesseraById(numeroTessera).isSmarrita())) {
-	        // Tessera non trovata
-	    	model.addAttribute("error","Numero tessera non valido");
-	    	return "cercaTesseraPerVisualizzazioneDati.html";
-	       // return "redirect:/operazioniPerTessera"; // Pagina di errore o notifica
-	    }
-	    
-	    Tessera tessera = tesseraService.getTesseraById(numeroTessera);
-	    DipendenteCC titolare = tessera.getTitolare();
-	    List<Operazione> operazioniTessera = tessera.getOperazioni();
-	    Iterator<Operazione> iterator = operazioniTessera.iterator();
-	    
-	    // Prendo le operazioni associate a quel titolare
-	    while (iterator.hasNext()) {
-	        Operazione operazione = iterator.next();
-	        if (!operazione.getCliente().equals(titolare)) {
-	            iterator.remove();
-	        }
-	    }
-	    
-	    // Aggiungo i dati di riepilogo alla vista
-	    model.addAttribute("tessera", tessera);
-	    model.addAttribute("titolare", titolare);
-	    model.addAttribute("operazioniTessera", operazioniTessera);
-	    return "riepilogoOperazioniTessera.html"; 
-	}
-	*/
 	
 	@GetMapping("/operazioniPerPeriodo")
 	public String showOperazioniPerPeriodo(Model model) {

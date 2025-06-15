@@ -11,6 +11,16 @@ import siw.uniroma3.parkingManagementSIW.model.TipoOperazione;
 
 public interface TesseraRepository extends CrudRepository<Tessera,Long>{
 	
+
+	@Query("SELECT t FROM Tessera t " +
+		       "JOIN FETCH t.titolare tit " +
+		       "JOIN FETCH t.descrizioneTessera descr " +
+		       "WHERE t.smarrita = false " +
+		       "AND t.danneggiata = false " +
+		       "AND tit IS NOT NULL")
+	List<Tessera> findTessereAttive();
+	
+	
 	
 	/*@Query("SELECT o FROM Operazione o " +
 	           "JOIN FETCH o.cliente " + // Assicurati di caricare il cliente
@@ -23,4 +33,6 @@ public interface TesseraRepository extends CrudRepository<Tessera,Long>{
 	@Query("SELECT o FROM Operazione o "
 			+ "WHERE o.cliente=o.tessera.titolare")
 	List<Operazione> findOperazioniTesseraByTitolareAttuale();*/
+	
+	
 }

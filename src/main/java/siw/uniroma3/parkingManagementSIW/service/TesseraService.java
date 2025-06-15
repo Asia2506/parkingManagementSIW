@@ -21,18 +21,9 @@ public class TesseraService {
 		return tesseraRepository.findById(numero).get();
 	}
 	
+	
 	public Iterable<Tessera> getAllTessereAttive() {
-		Iterable<Tessera> tessereAttive = tesseraRepository.findAll();
-		Iterator<Tessera> iterator = tessereAttive.iterator();
-		    
-		    // Il sistema non elimina le tessera e sono di interesse solo quelle attive
-		    while (iterator.hasNext()) {
-		        Tessera tessera = iterator.next();
-		        if (tessera.isSmarrita() || tessera.isDanneggiata() ||tessera.getTitolare()==null) {
-		            iterator.remove();
-		        }
-		    }
-		return tessereAttive;
+		return this.tesseraRepository.findTessereAttive();
 	}
 
 	public void save(Tessera tessera) {

@@ -45,21 +45,6 @@ public class TesseraController {
 		model.addAttribute("tessera", this.tesseraService.getTesseraById(id));
 		return "tessera.html";	
 	}
-
-	@GetMapping("/tesseraDettagli/{id}")
-	public String getOperazioniTessera(@PathVariable("id") Long id, Model model) {	
-		Tessera tessera = this.tesseraService.getTesseraById(id);
-		DipendenteCC titolare = tessera.getTitolare();
-		model.addAttribute("tessera", tessera);
-		model.addAttribute("titolare", titolare);
-		return "riepilogoOperazioniTessera.html";	
-	}
-
-	@GetMapping("/tessereAttive")
-	public String showTessereEmesse(Model model) {
-		model.addAttribute("tessereAttive", this.tesseraService.getAllTessereAttive());
-		return "tessereAttive.html";		
-	 }
 	
 	 
 	  
@@ -129,7 +114,7 @@ public class TesseraController {
 	
 	
 	
-	@PostMapping("/riepilogoDatiTessera/{tipoOperazione}")
+	@GetMapping("/riepilogoDatiTessera/{tipoOperazione}")
 	public String datiTessera(@PathVariable("tipoOperazione") String tipoOperazione,
 			@RequestParam("numeroTessera") Long numeroTessera, Model model) {
 
@@ -170,6 +155,57 @@ public class TesseraController {
 	    // Restituisco la pagina con i dati della tessera e del titolare
 	    model.addAttribute("tipoOperazione",tipoOperazione);
 	    return "riepilogoTessera.html"; 
+	}
+	
+	
+	
+	
+	
+	@GetMapping("/tessereAttive")
+	public String showTessereEmesse(Model model) {
+		model.addAttribute("tessereAttive", this.tesseraService.getAllTessereAttive());
+		return "tessereAttive.html";		
+	 }
+	
+	
+	@GetMapping("/tesseraDettagli/{id}")
+	public String getOperazioniTessera(@PathVariable("id") Long id, Model model) {	
+		Tessera tessera = this.tesseraService.getTesseraById(id);
+		DipendenteCC titolare = tessera.getTitolare();
+		model.addAttribute("tessera", tessera);
+		model.addAttribute("titolare", titolare);
+		model.addAttribute("operazioni",this.operazioneService.getOperazioniCorrenti(id));
+		return "riepilogoOperazioniTessera.html";	
+	}
+
+	
+	
+	
+	@GetMapping("/operazioniPerTessera")
+	public String showOperazioniPerTessera(Model model) {
+		return "cercaTesseraPerVisualizzazioneDati.html";		
+	 }
+	
+	
+	@GetMapping("/riepilogoOperazioniTessera")
+	public String riepilogoOperazioniTessera(@RequestParam("numeroTessera") Long numeroTessera,Model model) {
+		
+		// Simuliamo un servizio per recuperare i dati
+	    if (!this.tesseraService.existsById(numeroTessera) ||
+	    		(this.tesseraService.existsById(numeroTessera) && this.tesseraService.getTesseraById(numeroTessera).getTitolare()==null &&
+	    				!this.tesseraService.getTesseraById(numeroTessera).isSmarrita())) {
+	        // Tessera non trovata
+	    	model.addAttribute("error","Numero tessera non valido");
+	    	return "cercaTesseraPerVisualizzazioneDati.html";
+	       // return "redirect:/operazioniPerTessera"; // Pagina di errore o notifica
+	    }
+	    
+		//Tessera t=this.tesseraService.getTesseraById(numeroTessera);
+		return "redirect:tesseraDettagli/"+numeroTessera;
+		/*model.addAttribute("tessera", t);
+	    model.addAttribute("titolare", t.getTitolare());
+	    model.addAttribute("operazioniTessera", this.operazioneService.getOperazioniCorrenti(numeroTessera));
+	    return "riepilogoOperazioniTessera.html"; */
 	}
 	
 	

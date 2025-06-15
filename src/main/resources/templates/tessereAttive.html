@@ -29,23 +29,26 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>ID Tessera</th>
+                            <th>Tessera</th>
+							<th>Tipo</th>
+							<th>Titolare</th> 
+							<th>Esercizio Commerciale</th>
                             <th>Data Emissione</th>
                             <th>Data Scadenza</th>
-                            <th>Cliente</th>
-                            <th>Azienda</th>
                             <th>Dettagli</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:each="tessera : ${tessereAttive}">
                             <td th:text="${tessera.numero}"></td>
+							<td th:text="${tessera.descrizioneTessera.tipoTessera}"></td>
+							<td th:text="${tessera.titolare.nome + ' ' + tessera.titolare.cognome}"></td>
+							<td th:text="${tessera.titolare.azienda}"></td>
                             <td th:text="${#temporals.format(tessera.dataEmissione, 'dd-MM-yyyy')}"></td>
                             <td th:text="${#temporals.format(tessera.dataScadenza, 'dd-MM-yyyy')}"></td>
-                            <td th:text="${tessera.titolare.nome + ' ' + tessera.titolare.cognome}"></td>
-                            <td th:text="${tessera.titolare.azienda}"></td>
+                           
                             <td>
-                                <a th:href="@{'/tesseraDettagli/' + ${tessera.numero}}" class="details-link">Visualizza</a>
+                                <a th:href="@{'/tesseraDettagli/' + ${tessera.numero}}" class="billing-link">Visualizza</a>
                             </td>
                         </tr>
                     </tbody>

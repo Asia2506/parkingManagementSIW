@@ -22,7 +22,7 @@
 				<div th:if="${error}" class="error-message">
 				       <p th:text="${error}"></p>
 				   </div>
-	            <form th:action="@{'/riepilogoDatiTessera/'+${tipoOperazione}}" method="post">
+	            <form th:action="@{'/riepilogoDatiTessera/'+${tipoOperazione}}" method="GET">
 	                <div class="form-group">
 	                    <label>Numero Tessera:</label>
 	                    <input 

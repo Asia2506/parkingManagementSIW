@@ -41,7 +41,7 @@ public interface OpreazioneRepository extends CrudRepository<Operazione,Long>{
 	           "JOIN FETCH o.cliente c " +           // Alias 'c' per il cliente dell'operazione
 	           "JOIN FETCH t.titolare tit " +        // Alias 'tit' per il titolare della tessera
 	           "JOIN FETCH t.descrizioneTessera dt " + // Per caricare anche la descrizione della tessera
-	           "WHERE o.tessera.numero = :numeroTessera AND c = tit") // Condizioni combinate con AND
+	           "WHERE t.numero = :numeroTessera AND c = tit") // Condizioni combinate con AND
 	List<Operazione> findOperazioniByTesseraAndTitolareCorrente(Long numeroTessera);
 	
 	
