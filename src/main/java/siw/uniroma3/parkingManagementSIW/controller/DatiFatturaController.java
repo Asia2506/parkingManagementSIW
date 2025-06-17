@@ -37,8 +37,8 @@ public class DatiFatturaController {
 			@RequestParam(value = "ragioneSociale", required = false) String ragioneSociale,
 			Model model) {
 		
-		model.addAttribute("cliente",this.dipendenteCCService.getDIpendenteCCById(id));
-		model.addAttribute(this.tesseraService.getTesseraById(numeroTessera));
+		model.addAttribute("dipendenteCC",this.dipendenteCCService.getDIpendenteCCById(id));
+		model.addAttribute("tessera",this.tesseraService.getTesseraById(numeroTessera));
 		model.addAttribute("datiFatturazione",this.datiFatturaService.getAllDatiFatturaByRagioneSociale(ragioneSociale));
 		return "formDatiFatturazione.html";
 	}

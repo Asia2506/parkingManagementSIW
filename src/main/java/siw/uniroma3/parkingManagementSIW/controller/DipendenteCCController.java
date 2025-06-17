@@ -3,18 +3,21 @@ package siw.uniroma3.parkingManagementSIW.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.validation.Valid;
 import siw.uniroma3.parkingManagementSIW.model.DatiFattura;
 import siw.uniroma3.parkingManagementSIW.model.DipendenteCC;
 import siw.uniroma3.parkingManagementSIW.model.Tessera;
 import siw.uniroma3.parkingManagementSIW.service.DatiFatturaService;
 import siw.uniroma3.parkingManagementSIW.service.DipendenteCCService;
 import siw.uniroma3.parkingManagementSIW.service.TesseraService;
+import siw.uniroma3.parkingManagementSIW.validator.DipendenteCCValidator;
 
 @Controller
 public class DipendenteCCController {
@@ -23,10 +26,14 @@ public class DipendenteCCController {
 	DipendenteCCService dipendenteCCService;
 	
 	@Autowired
+	DipendenteCCValidator dipendenteCCValidator;
+	
+	@Autowired
 	TesseraService tesseraService;
 	
 	@Autowired
 	DatiFatturaService datiFatturaService;
+	
 	
 	
 	
@@ -44,26 +51,34 @@ public class DipendenteCCController {
 	
 	@PostMapping("/creaNuovoCliente/{numeroTessera}")
 	private String newCliente(@PathVariable("numeroTessera") Long id, // PathVariable for tessera number
-			@ModelAttribute("cliente") DipendenteCC cliente,
+			@RequestParam(value = "hasDatiFattura", required = false) boolean hasDatiFattura,
+			@Valid @ModelAttribute("dipendenteCC") DipendenteCC dipendenteCC, BindingResult bindingResult,Model model
 			/*@RequestParam(value = "nome", required = false) String nome,
 			@RequestParam(value = "cognome", required = false) String cognome,
 			@RequestParam(value = "azienda", required = false) String azienda,
 			@RequestParam(value = "targa", required = false) String targa,*/
-			@RequestParam(value = "hasDatiFattura", required = false) boolean hasDatiFattura,
-			Model model) {
+			) {
 		
+		//dipendenteCC = this.dipendenteCCService.getDIpendenteCCById(idDip);
+		this.dipendenteCCValidator.validate(dipendenteCC, bindingResult);
+		if(bindingResult.hasErrors()) {
+			Tessera t = this.tesseraService.getTesseraById(id);
+		    model.addAttribute("tessera", t);
+		    model.addAttribute("dipendenteCC", dipendenteCC);
+			return "formNewCliente.html";
+		}
 		
-		this.dipendenteCCService.save(cliente);
+		this.dipendenteCCService.save(dipendenteCC);
 	
 		Tessera t=this.tesseraService.getTesseraById(id);
 		
 		if(hasDatiFattura) {
-			model.addAttribute("cliente",cliente);
+			model.addAttribute("dipendenteCC",dipendenteCC);
 			model.addAttribute("tessera",t);
 			return "formDatiFatturazione.html";
 		}
 		
-		return "redirect:/emissioneTessera/associaAnagrafica/"+t.getNumero()+"/"+cliente.getId();
+		return "redirect:/emissioneTessera/associaAnagrafica/"+t.getNumero()+"/"+dipendenteCC.getId();
 	}
 	
 	

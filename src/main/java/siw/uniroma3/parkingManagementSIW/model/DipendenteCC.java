@@ -8,6 +8,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class DipendenteCC{
@@ -15,9 +17,13 @@ public class DipendenteCC{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@NotBlank
 	private String nome;
+	@NotNull
 	private String cognome;
+	@NotNull
 	private String azienda;
+	@NotBlank
 	private String targa;
 	
 	@OneToOne(mappedBy="titolare")

@@ -22,23 +22,30 @@
 				<h2 class="section-title">Operazione: Emissione Tessera - Nuovo Titolare</h2>
 				
 
-				<form th:action="@{'/creaNuovoCliente/'+${tessera.numero}}" method="POST" >
-	                <div class="form-group">
+				<form th:object="${dipendenteCC}" th:action="@{'/creaNuovoCliente/'+${tessera.numero}}" method="POST" >
+					<div th:if="${#fields.hasGlobalErrors()}">
+					        <p class="error-message" th:each="err : ${#fields.globalErrors()}" th:text="${err}">Errore</p> 
+					</div>
+					 <div class="form-group">
 	                    <label for="nome">Nome:</label>
-	                    <span><input type="text" name="nome" placeholder="Inserisci il nome" class="form-input" /></span>
+	                    <span><input type="text" id="nome" th:field="*{nome}" placeholder="Inserisci il nome" required class="form-input" /></span>
+						<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
 	                </div>
 	                <div class="form-group">
 	                    <label for="cognome">Cognome:</label>
-	                    <span><input type="text" name="cognome" placeholder="Inserisci il cognome" class="form-input" /></span>
+	                    <span><input type="text" id="cognome" th:field="*{cognome}" placeholder="Inserisci il cognome" required class="form-input" /></span>
+						<span th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></span>
 	                </div>
 					<div class="form-group">
-	                    <label for="cognome">Azienda:</label>
-	                    <span><input type="text" name="azienda" placeholder="Inserisci l'azienda per cui lavora" class="form-input"  /></span>
+	                    <label for="azienda">Azienda:</label>
+	                    <span><input type="text" id="azienda" th:field="*{azienda}" placeholder="Inserisci l'azienda per cui lavora" required class="form-input"  /></span>
+						<span th:if="${#fields.hasErrors('azienda')}" th:errors="*{azienda}"></span>
 	                </div>
 					<div class="form-group">
-	                    <label for="cognome">Targa Auto:</label>
-	                    <span><input type="text" name="targa" placeholder="Inserisci la targa dell'auto" class="form-input"  /></span>
-	                </div>
+	                    <label for="targa">Targa Auto:</label>
+	                    <span><input type="text" id="targa" th:field="*{targa}" placeholder="Inserisci la targa dell'auto" required class="form-input"  /></span>
+						<span th:if="${#fields.hasErrors('targa')}" th:errors="*{targa}"></span>
+					 </div>
 					<div class="form-group">
 						<label>Vuoi associare dati di fatturazione?</label>
 						<span class="radio-group">

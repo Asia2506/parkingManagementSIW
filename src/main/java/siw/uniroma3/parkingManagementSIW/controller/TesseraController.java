@@ -57,6 +57,8 @@ public class TesseraController {
 	@GetMapping("/nuovoTitolareTessera/{numeroTessera}")
 	public String newTitolare(@PathVariable("numeroTessera") Long id,Model model) {
 		model.addAttribute("tessera",this.tesseraService.getTesseraById(id));
+		DipendenteCC d = new DipendenteCC();
+		model.addAttribute("dipendenteCC", d);
 		return "formNewCliente.html";
 	}
 	 
