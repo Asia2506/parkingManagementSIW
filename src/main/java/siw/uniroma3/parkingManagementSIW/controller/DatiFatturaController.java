@@ -48,11 +48,6 @@ public class DatiFatturaController {
 	private String newDatiFattura(@PathVariable("numeroTessera") Long id,
 			@PathVariable("idCliente") Long idCliente,
 			@ModelAttribute("datiFatturazione") DatiFattura datiFattura,
-			/*@RequestParam(value = "ragioneSociale", required = false) String ragioneSociale,
-			@RequestParam(value = "partitaIva", required = false) String partitaIva,
-			@RequestParam(value = "pec", required = false) String pec,
-			@RequestParam(value = "codiceUnivoco", required = false) String codiceUnivoco,
-			@RequestParam(value = "indirizzo", required = false) String indirizzo,*/
 			Model model) {
 		
 		DipendenteCC d=this.dipendenteCCService.getDIpendenteCCById(idCliente);

@@ -38,18 +38,24 @@ public class OperazioneService {
 		
 		return operazioniOggi;*/
 		
-		return operazioneRepository.findByData(dataDiOggi);
+		return this.operazioneRepository.findByData(dataDiOggi);
 	}
 	
-	public Iterable<Operazione> getAllOperazioniPerData(int giorno, int mese, int anno){
+	
+	/*public Iterable<Operazione> getAllOperazioniPerData(int giorno, int mese, int anno){
 		LocalDate data = LocalDate.of(anno, mese, giorno);
 		return operazioneRepository.findByData(data);
+	}*/
+	
+	public List<Operazione> getOperazionePerPeriodo(LocalDate dataInizio,LocalDate dataFine){
+		return this.operazioneRepository.findByPeriodo(dataInizio, dataFine);
 	}
 	
 	
 	public void save(Operazione operazione) {
 		this.operazioneRepository.save(operazione);
 	}
+	
 	
 	public Operazione getOperazioneById(Long id) {
 		return this.operazioneRepository.findById(id).get();
@@ -80,6 +86,10 @@ public class OperazioneService {
     public List<Operazione> getOperazioniCorrenti(Long numeroTessera){
     	return this.operazioneRepository.findOperazioniByTesseraAndTitolareCorrente(numeroTessera);
     }
+    
+    
+    
+    
 
 
 }

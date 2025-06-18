@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <title>Riepilogo Tessera</title>
+    <title>Operazioni</title>
     <link rel="stylesheet" href="/css/stile2.css?version=3" />
 </head>
 <body>
@@ -17,8 +17,15 @@
                 </ul>
             </nav>
         </header>
-        <section class="info-section">
-			<div class="table-responsive-container">
+        <section class="info-section"> 
+			<h2 class="section-title">Operazioni dal 
+				<span th:text="${#temporals.format(dataInizio, 'dd-MM-yyyy')}"></span> 
+				al <span th:text="${#temporals.format(dataFine, 'dd-MM-yyyy')}"></span>
+			</h2>
+			<div th:if="${operazioni.isEmpty()}">
+	           <p class="empty-message">Nessuna operazione registrata in questo periodo.</p>
+            </div>
+			<div th:unless="${operazioni.isEmpty()}" class="table-responsive-container">
 				<!-- Sezione Legenda -->
                 <div class="legend-container">
                     <div class="legend-item">
@@ -58,7 +65,7 @@
 					    </tr>
 				    </thead>
 				 <tbody>
-					<tr th:each="operazione : ${operazioniPerGiorno}" th:classappend="${'row-' + operazione.tipoOperazione.name().toLowerCase()}">
+					<tr th:each="operazione : ${operazioni}" th:classappend="${'row-' + operazione.tipoOperazione.name().toLowerCase()}">
 										
 						<td th:text="${#temporals.format(operazione.data, 'dd-MM-yyyy')}"></td>
 						<td th:text="${operazione.cliente.nome+ ' ' +operazione.cliente.cognome}"></td>

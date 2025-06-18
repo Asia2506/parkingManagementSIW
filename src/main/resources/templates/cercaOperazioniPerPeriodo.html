@@ -18,12 +18,18 @@
 	            </nav>
 	        </header>
 	        <section class="info-section">
-	            <h2 class="section-title"th:text="'Seleziona data per visualizzare operazioni:'"></h2>
+	            <h2 class="section-title"th:text="'Seleziona periodo per visualizzare operazioni:'"></h2>
 				<div th:if="${error}" class="error-message">
 				       <p th:text="${error}"></p>
 				   </div>
-	            <form th:action="@{'/riepilogoOperazioniPerData'}" method="post">
-	                <div class="form-group">
+	            <form th:action="@{'/riepilogoOperazioniPerPeriodo'}" method="post">
+					<div class="form-group">
+						<label for="dataInizio">Da:</label>
+						<span><input type="date" id="dataInizio" name="dataInizio" class="form-input"></span>
+						<label for="dataFine">A:</label>
+						<span><input type="date" id="dataFine" name="dataFine" class="form-input"></span>
+					</div>
+	                <!--<div class="form-group">
 						<label for="giorno">Giorno:</label>
 	                    <span><input 
 							type="text" 
@@ -48,10 +54,11 @@
 							 placeholder="Inserisci l'anno" 
 							 required
 							 class="form-input"></span>              
-	                </div>
+	                </div>-->
 	                <div class="form-actions">
-	                    <button type="submit" class="form-button">Conferma</button>
+	                    <button type="submit" class="form-button">Cerca</button>
 	                </div>
+					
 	            </form>
 	        </section>
 	    </div>
