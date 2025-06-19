@@ -29,23 +29,10 @@ public class OperazioneService {
 	public Iterable<Operazione> getAllOperazioniDiOggi() {
 		LocalDate dataDiOggi = LocalDate.now();
 		
-		/*List<Operazione> operazioniOggi = new ArrayList<>();
-		
-		for(Operazione operazione: this.getAllOperazioni()) {
-			if(operazione.getData()==dataDiOggi)
-				operazioniOggi.add(operazione);
-		}
-		
-		return operazioniOggi;*/
-		
 		return this.operazioneRepository.findByData(dataDiOggi);
 	}
 	
 	
-	/*public Iterable<Operazione> getAllOperazioniPerData(int giorno, int mese, int anno){
-		LocalDate data = LocalDate.of(anno, mese, giorno);
-		return operazioneRepository.findByData(data);
-	}*/
 	
 	public List<Operazione> getOperazionePerPeriodo(LocalDate dataInizio,LocalDate dataFine){
 		return this.operazioneRepository.findByPeriodo(dataInizio, dataFine);
@@ -57,27 +44,20 @@ public class OperazioneService {
 	}
 	
 	
+	public void delete(Operazione operazione) {
+		this.operazioneRepository.delete(operazione);
+	}
+	
+	
 	public Operazione getOperazioneById(Long id) {
 		return this.operazioneRepository.findById(id).get();
 	}
 	
 	
-	/* Restituisce il cliente dell'ultima operazione di smarrimento per una data tessera */
-	/*public DipendenteCC getClienteUltimoSmarrimento(Long numeroTessera) {
-		List<Operazione> operazioni = this.operazioneRepository.findLastSmarrimentoOperationByTessera(numeroTessera, TipoOperazione.SMARRIMENTO);
-		if (!operazioni.isEmpty()) {
-			return operazioni.get(0).getCliente();
-		}
-		return null;
-	}*/
+	
 	
 	/* Restituisce l'ultima operazione di smarrimento per una data tessera */
     public Operazione getUltimaOperazioneSmarrimento(Long numeroTessera) {
-        /*List<Operazione> operazioniSmarrimento = operazioneRepository.findLastSmarrimentoOperationByTessera(numeroTessera, TipoOperazione.SMARRIMENTO);
-        if (!operazioniSmarrimento.isEmpty()) {
-            return operazioniSmarrimento.get(0);
-        }
-        return null;*/
         Optional<Operazione> optionalOperazione = operazioneRepository.findSmarrimentoOperationByTessera(numeroTessera, TipoOperazione.SMARRIMENTO);
         return optionalOperazione.orElse(null);
     }

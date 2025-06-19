@@ -3,7 +3,7 @@
 <html>
   	<head>
     	<title>Home</title>
-    	<link rel="stylesheet" href="/css/stile2.css?version=3" />
+    	<link rel="stylesheet" href="/css/stile2.css?version=4" />
   	</head>
 	<body>
 		<div class="container"> 
@@ -49,6 +49,7 @@
                     <table>
                         <thead>
                             <tr>
+								<th th:if="${cancella}"> </th>
 								<th>Data</th>
                                 <th>Titolare</th> 
 								<th>Esercizio Commerciale</th> 
@@ -63,6 +64,7 @@
                         <tbody>
                             <tr th:each="operazione : ${operazioniOggi}" th:classappend="${'row-' + operazione.tipoOperazione.name().toLowerCase()}">
 								
+								<td th:if="${cancella}" > <a th:href="@{'/effettuaCancellazione/'+${operazione.id}}" class="delete-link-button"> - </a></td>
 								<td th:text="${#temporals.format(operazione.data, 'dd-MM-yyyy')}"></td>
 								
 								
@@ -112,6 +114,9 @@
                     </div>
                     <div class="operation-item"> 
 						<a th:href="@{'/formNewOperazione/smarrimento'}"> Smarrimento Tessera</a>
+                    </div>
+					<div class="operation-item"> 
+						<a th:href="@{'/cancellaOperazione'}"> Cancella Operazione</a>
                     </div>
 				</div>
 			</section>

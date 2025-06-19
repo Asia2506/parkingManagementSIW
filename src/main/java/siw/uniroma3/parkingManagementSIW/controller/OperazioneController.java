@@ -214,6 +214,62 @@ public class OperazioneController {
 	    model.addAttribute("operazioni", this.operazioneService.getOperazionePerPeriodo(dataInizio, dataFine));
 	    return "operazioniPerPeriodo.html"; 
 	}
+	
+	
+	
+	@GetMapping("/cancellaOperazione")
+	public String operazioneCancellazione(Model model) {
+		model.addAttribute("cancella",true);
+		model.addAttribute("operazioniOggi",this.operazioneService.getAllOperazioniDiOggi());
+		return "home.html";	
+	}
+	
+	
+	@GetMapping("/effettuaCancellazione/{idOperazione}")
+	public String effettuaCancellazione(@PathVariable("idOperazione") Long id,Model model) {
+		Operazione o=this.operazioneService.getOperazioneById(id);
+		Tessera t=o.getTessera();
+		t.getOperazioni().remove(o);
+		
+		DipendenteCC c=o.getCliente();
+		
+		switch(o.getTipoOperazione()) {
+		
+			case RICARICA:
+				if(o.getTipoTessera().getTipoTessera()=="FULL" || o.getTipoTessera().getTipoTessera()=="FERIALE")
+					t.setDataScadenza(t.getDataScadenza().minusMonths(1).with(TemporalAdjusters.lastDayOfMonth())); 
+				break;
+			case EMISSIONE:
+				//scollego la tessera dal titolare e viceversa
+				c.setTessera(null);
+				t.setTitolare(null);
+				break;
+			case DANNEGGIAMENTO:
+				t.setDanneggiata(false);
+				c.setTessera(t);
+				t.setTitolare(c);
+				break;
+			case RESTITUZIONE:
+				//ricollego la tessera al vecchio titolare e viceversa
+				t.setTitolare(c);
+				c.setTessera(t);
+				break;
+			case SMARRIMENTO:
+				t.setSmarrita(false);
+				c.setTessera(t);
+				t.setTitolare(c);
+				break;
+			default:
+				break;
+		}
+		
+		
+		this.dipendenteCCService.save(c);
+		this.tesseraService.save(t);
+		this.operazioneService.delete(o);
+		
+		return "redirect:/";
+	}
 		
 
 }

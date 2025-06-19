@@ -16,6 +16,7 @@ public class MainController {
 	
 		@GetMapping("/")
 		public String index(Model model) {
+			model.addAttribute("cancella",false);
 			model.addAttribute("operazioniOggi",this.operazioneService.getAllOperazioniDiOggi());
 			return "home.html";	
 		}

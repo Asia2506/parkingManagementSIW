@@ -50,7 +50,7 @@ public interface OpreazioneRepository extends CrudRepository<Operazione,Long>{
 	           "JOIN FETCH o.cliente cl " + // Carica il cliente dell'operazione
 	           "JOIN FETCH t.descrizioneTessera dt " + // Carica la descrizione della tessera
 	           "LEFT JOIN FETCH cl.datiFatturazione df " + // Carica i dati di fatturazione del cliente dell'operazione
-	           "WHERE o.data >= :dataInizio AND o.data <= :dataFine")//List<Operazione> findByData(LocalDate data);
+	           "WHERE o.data >= :dataInizio AND o.data <= :dataFine")
 	List<Operazione> findByPeriodo(LocalDate dataInizio,LocalDate dataFine);
 	
 	

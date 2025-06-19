@@ -18,6 +18,8 @@
   --gray-light: #f4f4f4; /* Grigio molto chiaro, usato per sfondi di input readonly o righe alternate */
   --error-color: #e74c3c; /* Rosso per messaggi di errore */
   --success-color: #2ecc71; /* Verde per successo (duplicato, ma mantenuto per chiarezza semantica) */
+  --red-button-color: #e74c3c; /* Colore rosso specifico per i pulsanti di cancellazione */
+  --red-button-hover-color: #c0392b; /* Colore rosso più scuro per l'hover */
 }
 
 /* === Stili del Corpo Pagina === */
@@ -253,6 +255,54 @@ header h1 {
 .table-responsive-container tr:hover {
   background-color: #f1f1f1; /* Sfondo al passaggio del mouse sulla riga */
 }
+
+
+/* === Stile per il link di cancellazione nella tabella (a.delete-link-button) === */
+/* Questo intero blocco è stato aggiunto per stilizzare il link come un pulsante tondo e rosso */
+.table-responsive-container a.delete-link-button {
+    background-color: var(--red-button-color); /* Rosso per il pulsante */
+    color: var(--white); /* Testo bianco */
+    text-align: center; /* Centra il trattino */
+    border-radius: 50%; /* Rende il pulsante tondo */
+    width: 35px; /* Larghezza del pulsante tondo */
+    height: 35px; /* Altezza del pulsante tondo */
+    line-height: 35px; /* Centra verticalmente il testo (prima di display: flex) */
+    padding: 0; /* Rimuovi padding predefinito */
+    cursor: pointer; /* Cambia il cursore in puntatore */
+    text-decoration: none; /* Rimuove la sottolineatura del link */
+    display: inline-flex; /* Usa flexbox per un centraggio perfetto */
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem; /* Dimensione del font per il trattino */
+    font-weight: bold; /* Grassetto */
+    border: 2px solid var(--red-button-hover-color); /* Bordo per un aspetto più pulito */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Ombra per profondità */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; /* Transizioni per effetto hover */
+}
+
+/* Stile per l'hover del pulsante di cancellazione */
+.table-responsive-container a.delete-link-button:hover {
+    background-color: var(--red-button-hover-color); /* Rosso più scuro all'hover */
+    transform: scale(1.05); /* Leggero ingrandimento */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Ombra più pronunciata all'hover */
+}
+
+
+/* Stili per la lettera nella colonna 'Info' della tabella */
+.legend-letter { /* Rinominato da .legend-letter per mantenere la stilizzazione delle lettere nella tabella */
+    display: inline-block;
+    padding: 0.2em 0.5em;
+    border-radius: 3px;
+    font-weight: bold;
+    color: var(--white);
+    background-color: var(--secondary-color); /* Colore di default, verrà sovrascritto se necessario */
+}
+
+/* Colori specifici per le lettere nella colonna 'Info' (se non sono link) */
+span.legend-letter {
+    background-color: #8c9095; /* Grigio medio per S, D, A per coerenza visiva con la legenda */
+}
+
 
 /* === Link per Fattura / Billing (all'interno delle tabelle) === */
 /* Stili specifici per i link di fatturazione all'interno delle tabelle */
