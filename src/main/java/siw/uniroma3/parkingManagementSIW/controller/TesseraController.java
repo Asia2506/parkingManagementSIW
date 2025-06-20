@@ -86,8 +86,27 @@ public class TesseraController {
 			this.tesseraService.save(tessera);
 			model.addAttribute("tessera",tessera);
 			return "formAssociaAnagrafica.html";
-		}else
-			return "redirect:/formNewOperazione/emissione";
+		}else {
+			if(tessera.isDanneggiata()) {
+				model.addAttribute("tipiTessere",this.tipoTesseraService.getAllDescrizioneTessera());
+				model.addAttribute("error", "Questa tessera è stata danneggiata");
+				return "emissioneTessera.html";
+			}
+			if(tessera.isSmarrita()) {
+				model.addAttribute("tipiTessere",this.tipoTesseraService.getAllDescrizioneTessera());
+				model.addAttribute("error", "Questa tessera è stata smarrita");
+				return "emissioneTessera.html";
+			}
+			if(tessera.getTitolare()!=null) {
+				model.addAttribute("tipiTessere",this.tipoTesseraService.getAllDescrizioneTessera());
+				model.addAttribute("error", "Questa tessera ha già un titolare");
+				return "emissioneTessera.html";
+			}
+			model.addAttribute("tipiTessere",this.tipoTesseraService.getAllDescrizioneTessera());
+			model.addAttribute("error", "Numero tessera non valido");
+			return "emissioneTessera.html";
+		}
+			//return "redirect:/formNewOperazione/emissione";
 		
 	}
 	

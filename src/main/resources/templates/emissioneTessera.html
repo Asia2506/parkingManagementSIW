@@ -20,7 +20,9 @@
 
 			<section class="info-section">
 				<h2 class="section-title">Operazione: Emissione Tessera</h2>
-
+				<div th:if="${error}" class="error-message">
+					 <p th:text="${error}"></p>
+			    </div>
 				<form th:action="@{/emissioneTessera/associaAnagrafica}" method="POST" >
 					<div class="form-group">
 						<label>NUMERO TESSERA:</label>
