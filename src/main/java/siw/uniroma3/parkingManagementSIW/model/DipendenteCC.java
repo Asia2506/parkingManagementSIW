@@ -32,7 +32,40 @@ public class DipendenteCC{
 	private DatiFattura datiFatturazione;
 	
 	
+
 	
+	/*----METODI EUQALS AND HASHCODE----*/
+	@Override
+	public int hashCode() {
+		return Objects.hash(azienda, cognome, nome, targa);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DipendenteCC other = (DipendenteCC) obj;
+		return Objects.equals(azienda, other.azienda) && Objects.equals(cognome, other.cognome)
+				&& Objects.equals(nome, other.nome) && Objects.equals(targa, other.targa);
+	}
+	
+	/*----METODI GETTERS AND SETTERS----*/
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	public String getCognome() {
+		return cognome;
+	}
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
 	
 	public Long getId() {
 		return id;
@@ -52,41 +85,6 @@ public class DipendenteCC{
 	public void setDatiFatturazione(DatiFattura datiFatturazione) {
 		this.datiFatturazione = datiFatturazione;
 	}
-	/*----METODI EUQALS AND HASHCODE----*/
-	@Override
-	public int hashCode() {
-		return Objects.hash(azienda, cognome, nome, targa);
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		DipendenteCC other = (DipendenteCC) obj;
-		return Objects.equals(azienda, other.azienda) && Objects.equals(cognome, other.cognome)
-				&& Objects.equals(nome, other.nome) && Objects.equals(targa, other.targa);
-	}
-	
-	
-	
-	/*----METODI GETTERS AND SETTERS----*/
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	
-	public String getCognome() {
-		return cognome;
-	}
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
-	}
-	
 	public String getAzienda() {
 		return azienda;
 	}
@@ -100,6 +98,7 @@ public class DipendenteCC{
 	public void setTarga(String targa) {
 		this.targa = targa;
 	}
+	
 	
 	
 		

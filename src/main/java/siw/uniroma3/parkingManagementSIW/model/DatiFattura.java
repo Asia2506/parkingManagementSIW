@@ -18,9 +18,7 @@ public class DatiFattura {
     private String partitaIva;
     private String ragioneSociale;
     private String indirizzo;
-
-   
-    
+ 
     /*----METODI EQUALS AND HASHCODE----*/
     @Override
 	public int hashCode() {

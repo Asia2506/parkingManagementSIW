@@ -45,16 +45,11 @@ public class OperazioneController {
 	
 	    switch (tipoEnum) {
 	        case EMISSIONE:
-	        	//model.addAttribute("tessera",new Tessera());
 	      		model.addAttribute("tipiTessere",this.tipoTesseraService.getAllDescrizioneTessera());
 	            return "emissioneTessera.html";
-	        /*case SMARRIMENTO:
-	            return "smarrimentoTessera.html";
-	        case DANNEGGIAMENTO:
-	            return "danneggiamentoTessera.html";
-	        case RESTITUZIONE:
-	        	model.addAttribute("tipoOperazione",tipo);
-	            return "restituzioneTessera.html";*/
+	        /*case RICARICA/RINNOVO, SMARRIMENTO, DANNEGGIAMENTO, RESTITUZIONE:
+	         richiedono tutte la ricerca della tessera in quanto devono effettuare
+	         l'operazione su una tessera già presente nel sistema */
 	        default:
 	        	return "cercaTesseraPerOperazione.html";
 	    }

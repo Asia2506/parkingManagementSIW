@@ -51,15 +51,7 @@ public class DatiFatturaController {
 			Model model) {
 		
 		DipendenteCC d=this.dipendenteCCService.getDIpendenteCCById(idCliente);
-		Tessera t=this.tesseraService.getTesseraById(id);
-		
-		/*DatiFattura df=new DatiFattura();
-		df.setRagioneSociale(ragioneSociale);
-		df.setCodiceUnivoco(codiceUnivoco);
-		df.setCodiceUnivoco(indirizzo);
-		df.setPec(pec);
-		df.setPartitaIva(partitaIva);*/
-		
+		Tessera t=this.tesseraService.getTesseraById(id);	
 		this.datiFatturaService.save(datiFattura);
 		
 		return "redirect:/emissioneTessera/creaNuovoCliente/associaDatiFatturazione/"+t.getNumero()+"/"+d.getId()+"/"+datiFattura.getId();

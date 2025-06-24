@@ -42,14 +42,5 @@ public class TesseraService {
 		return tesseraRepository.existsById(numero);
 	}
 	
-	
-	/* Restituisce l'ultima operazione di smarrimento per una data tessera */
-    /*public Operazione getUltimaOperazioneSmarrimento(Long numeroTessera) {
-        List<Operazione> operazioniSmarrimento = tesseraRepository.findLastOperationByTesseraAndTipo(numeroTessera, TipoOperazione.SMARRIMENTO);
-        if (!operazioniSmarrimento.isEmpty()) {
-            return operazioniSmarrimento.get(0);
-        }
-        return null;
-    }*/
 
 }

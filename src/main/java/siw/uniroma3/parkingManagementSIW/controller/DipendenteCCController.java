@@ -36,8 +36,6 @@ public class DipendenteCCController {
 	
 	
 	
-	
-	
 	@GetMapping("/ricercaCliente/{numeroTessera}")
 	private String findCliente(@PathVariable("numeroTessera") Long id, // PathVariable for tessera number
 			@RequestParam(value = "nome", required = false) String nome,
@@ -53,10 +51,6 @@ public class DipendenteCCController {
 	private String newCliente(@PathVariable("numeroTessera") Long id, // PathVariable for tessera number
 			@RequestParam(value = "hasDatiFattura", required = false) boolean hasDatiFattura,
 			@Valid @ModelAttribute("dipendenteCC") DipendenteCC dipendenteCC, BindingResult bindingResult,Model model
-			/*@RequestParam(value = "nome", required = false) String nome,
-			@RequestParam(value = "cognome", required = false) String cognome,
-			@RequestParam(value = "azienda", required = false) String azienda,
-			@RequestParam(value = "targa", required = false) String targa,*/
 			) {
 		
 		//dipendenteCC = this.dipendenteCCService.getDIpendenteCCById(idDip);
@@ -99,9 +93,5 @@ public class DipendenteCCController {
 		
 		return "redirect:/emissioneTessera/associaAnagrafica/"+t.getNumero()+"/"+d.getId();
 	}
-	
-	
-	
-	
-	
+		
 }

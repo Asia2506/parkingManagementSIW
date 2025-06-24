@@ -111,8 +111,6 @@ public class TesseraController {
 	}
 	
 	
-	
-	
 	@GetMapping("/emissioneTessera/associaAnagrafica/{numeroTessera}")
 	public String scegliTitolareTessera(@PathVariable("numeroTessera") Long id,Model model) {
 		
@@ -132,20 +130,20 @@ public class TesseraController {
 		return "formAssociaAnagrafica.html";
 	}
 	
-	
-	
-	
+		
 	@GetMapping("/riepilogoDatiTessera/{tipoOperazione}")
 	public String datiTessera(@PathVariable("tipoOperazione") String tipoOperazione,
 			@RequestParam("numeroTessera") Long numeroTessera, Model model) {
 
-	    // Simuliamo un servizio per recuperare i dati
+	    /* Simuliamo un servizio per recuperare i dati:
+	     * - la tessera deve essere già presente nel sistema per effettuarvi operazioni
+	     * - se la tessera esiste non deve essere stata smarrita, danneggiata, restituita
+	     * */
 	    if (!this.tesseraService.existsById(numeroTessera) ||
 	    		(this.tesseraService.existsById(numeroTessera) && this.tesseraService.getTesseraById(numeroTessera).getTitolare()==null &&
 	    				!this.tesseraService.getTesseraById(numeroTessera).isSmarrita())) {
 	        // Tessera non trovata
 	    	model.addAttribute("error","Numero tessera non valido");
-	        //return "redirect:/formNewOperazione/"+tipoOperazione; // Pagina di errore o notifica
 	    	return "cercaTesseraPerOperazione.html";
 	    }
 	    

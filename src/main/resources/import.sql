@@ -1,10 +1,8 @@
--- Questo script popola il database con dati di esempio.
--- Assicurati che le tabelle siano già state create (ad esempio, tramite JPA/Hibernate DDL generation).
--- Le sequenze (es. parkingManagement_seq, operazione_seq) dovrebbero essere gestite automaticamente da Hibernate
--- o create manualmente se il tuo setup lo richiede.
+-- Questo script popola il database con dei dati 
+-- Importante: le tabelle devono essere state già create ( tramite JPA/Hibernate).
+-- Le sequenze (es. parkingManagement_seq, operazione_seq) sono gestite automaticamente da Hibernate
 
--- Elimina i dati esistenti (opzionale, utile per ripristino durante lo sviluppo)
--- Se il tuo database ha vincoli di integrità referenziale, è consigliabile eliminare i dati
+-- Rispettare i vincoli di integrità referenziale del database
 -- nell'ordine inverso di creazione (prima operazione, poi tessera, poi cliente/dati_fattura/descrizione_tessera).
 -- delete from operazione;
 -- delete from tessera;

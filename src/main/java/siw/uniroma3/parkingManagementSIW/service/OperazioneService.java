@@ -23,8 +23,6 @@ public class OperazioneService {
 		return operazioneRepository.findAll();
 	}
 	
-	
-	
 	/*Restituisce tutte le operazioni effettuate in data odierna*/
 	public Iterable<Operazione> getAllOperazioniDiOggi() {
 		LocalDate dataDiOggi = LocalDate.now();
@@ -52,9 +50,6 @@ public class OperazioneService {
 	public Operazione getOperazioneById(Long id) {
 		return this.operazioneRepository.findById(id).get();
 	}
-	
-	
-	
 	
 	/* Restituisce l'ultima operazione di smarrimento per una data tessera */
     public Operazione getUltimaOperazioneSmarrimento(Long numeroTessera) {

@@ -47,57 +47,8 @@
 				
 			</section>
 		</div>
+		<footer>
+			<p>&copy; 2025 Parking Management System</p>
+		</footer>
 	</body>
 </html>
-
-
-
-<!--<!DOCTYPE html>
-<html>
-	<head>
-		<title>Emissione Tessera</title>
-		<link rel="stylesheet" href="/css/stile.css?version=2" />
-	</head>
-	<body>
-		<div class="container">
-			<header>
-				<h1>Parking Management</h1>
-				<nav class="inline-menu-container">
-					<ul>
-						<li><a th:href="@{/tessereEmesse}">Tessere Emesse</a></li>
-						<li><a th:href="@{/tessereRestituite}">Tessere Restituite</a></li>
-						<li><a th:href="@{/tessereSmarriteDanneggiate}">Tessere Smarrite e Danneggiate</a></li>
-						<li><a th:href="@{/operazioni}">Operazioni</a></li>
-					</ul>
-				</nav>
-			</header>
-
-			<section class="info-section">
-				<h2 class="section-title">Operazione: Emissione Tessera</h2>
-
-				<form th:action="@{/emissioneTessera/associaAnagrafica}" method="POST" th:object="${tessera}">
-					<div>
-						<label>NUMERO TESSERA:</label>
-						<span><input type="text" th:field="${tessera.numero}" /></span>
-					</div>
-
-					<div>
-						<label>TIPO TESSERA:</label>
-						<span>
-							<select name="descrizioneTesseraId">
-								<option value="">-- Seleziona una tipologia --</option>
-								<option th:each="tipo : ${tipiTessere}" th:value="${tipo.id}" th:text="${tipo.tipoTessera}"></option>
-							</select>
-						</span>	
-					</div>
-					
-					<div>
-						<span><button type="submit">Conferma</button></span>
-					</div>
-				</form>
-				
-				
-			</section>
-		</div>
-	</body>
-</html>-->

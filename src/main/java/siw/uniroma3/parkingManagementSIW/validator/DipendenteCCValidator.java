@@ -25,7 +25,7 @@ public class DipendenteCCValidator implements Validator{
 
 	@Override
 	public boolean supports(Class<?> aClass) {
-		// TODO Auto-generated method stub
+		
 		return DipendenteCC.class.equals(aClass);
 	}
 
