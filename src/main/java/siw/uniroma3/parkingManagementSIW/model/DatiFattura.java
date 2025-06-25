@@ -10,13 +10,25 @@ import jakarta.persistence.Id;
 @Entity
 public class DatiFattura {
 	
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    @NotBlank
+    @Size(min = 6, max = 7)
     private String codiceUnivoco;
+    
+    @NotBlank
+    @Email
     private String pec;
+    
+    @NotBlank
     private String partitaIva;
+    
+    @NotBlank
     private String ragioneSociale;
+    
+    @NotBlank
     private String indirizzo;
  
     /*----METODI EQUALS AND HASHCODE----*/
