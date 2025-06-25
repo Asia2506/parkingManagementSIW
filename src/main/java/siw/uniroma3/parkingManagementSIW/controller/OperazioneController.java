@@ -102,7 +102,7 @@ public class OperazioneController {
 	        	//oggi 25giugno
 	        	//scadenza 30giugno
 	        	//se oggi<scadenza allora ultimo giorno mese dopo scadenza
-	        	if(t.getDescrizioneTessera().getTipoTessera()!="SCALARE" ) {
+	        	if(!t.getDescrizioneTessera().getTipoTessera().equals("SCALARE" )) {
 	        		//ultimo giorno del mese successivo a quello dell'ultimo rinnovo
 	        		if(LocalDate.now().isAfter(t.getDataScadenza())) {
 	        			/*a.isAfter(b) == false
