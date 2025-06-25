@@ -20,7 +20,7 @@
 
 			<section class="info-section">
 				<h2 class="section-title">Operazione: Emissione Tessera - Dati Fatturazione</h2>
-				
+
 
 				<form th:action="@{'/ricercaDatiFatturazione/'+${tessera.numero}+'/'+${dipendenteCC.id}}" method="GET">
 	                <div class="form-group">
@@ -48,7 +48,7 @@
 	                    <tbody>
 	                        <tr th:each="dati : ${datiFatturazione}">
 	                            <td th:text="${dati.ragioneSociale}"></td>
-	                            <td th:text="${dati.partitaIva}"></td> 
+	                            <td th:text="${dati.partitaIva}"></td>
 								<td  th:text="${dati.pec}"></td>
                                 <td  th:text="${dati.codiceUnivoco}"></td>
                                 <td  th:text="${dati.indirizzo}"></td>
@@ -60,36 +60,43 @@
 	                </table>
 	            </div>
 
-				
-	            <div th:if="${datiFatturazione != null and datiFatturazione.isEmpty()}">
-	                <p class="empty-message">Non sono presenti dati di fatturazione con la ragione sociale ricercata.</p>
-					<form th:object="${datiFatturazione}" th:action="@{'/creaNuoviDatiFatturazione/'+${tessera.numero}+'/'+${dipendenteCC.id}}" method="POST">
-		                <div class="form-group">
+
+				<div th:if="${datiFatturazione != null and datiFatturazione.isEmpty()}">
+	                <p class="empty-message">Non sono presenti dati di fatturazione con la ragione sociale ricercata. Compila il form per inserirli.</p>
+					<form th:object="${datiFattura}" th:action="@{'/creaNuoviDatiFatturazione/'+${tessera.numero}+'/'+${dipendenteCC.id}}" method="POST">
+					    <div th:if="${#fields.hasGlobalErrors()}">
+					        <p class="error-message" th:each="err : ${#fields.globalErrors()}" th:text="${err}">Errore</p> 
+					    </div>
+					<div class="form-group">
 		                    <label for="ragioneSociale">Ragione Sociale:</label>
-		                    <span><input type="text" id="ragioneSociale" name="ragioneSociale" placeholder="Inserisci la ragione sociale" class="form-input" required /></span>
+		                    <span><input type="text" id="ragioneSociale" th:field="*{ragioneSociale}" placeholder="Inserisci la ragione sociale" class="form-input" required /></span>
+							<span style="color: red;" th:if="${#fields.hasErrors('ragioneSociale')}" th:errors="*{ragioneSociale}"></span>
 		                </div>
 		                <div class="form-group">
 		                    <label for="partitaIva">Partita IVA:</label>
-		                    <span><input type="text" id="partitaIva" name="partitaIva" placeholder="Inserisci la Partita IVA" class="form-input" required /></span>
+		                    <span><input type="text" id="partitaIva" th:field="*{partitaIva}" placeholder="Inserisci la Partita IVA" class="form-input" required /></span>
+							<span style="color: red;" th:if="${#fields.hasErrors('partitaIva')}" th:errors="*{partitaIva}"></span>
 		                </div>
 						<div class="form-group">
 		                    <label for="pec">PEC:</label>
-		                    <span><input type="email" id="pec" name="pec" placeholder="Inserisci l'indirizzo PEC" class="form-input" /></span>
+		                    <span><input type="email" id="pec" th:field="*{pec}" placeholder="Inserisci l'indirizzo PEC" class="form-input" /></span>
+							<span style="color: red;" th:if="${#fields.hasErrors('pec')}" th:errors="*{pec}"></span>
 		                </div>
 						<div class="form-group">
 		                    <label for="codiceUnivoco">Codice Univoco:</label>
-		                    <span><input type="text" id="codiceUnivoco" name="codiceUnivoco" placeholder="Inserisci il codice univoco" class="form-input" /></span>
+		                    <span><input type="text" id="codiceUnivoco" th:field="*{codiceUnivoco}" placeholder="Inserisci il codice univoco" class="form-input" /></span>
+							<span style="color: red;" th:if="${#fields.hasErrors('codiceUnivoco')}" th:errors="*{codiceUnivoco}"></span>
 		                </div>
 		                <div class="form-group">
 		                    <label for="indirizzo">Indirizzo:</label>
-		                    <span><input type="text" id="indirizzo" name="indirizzo" placeholder="Inserisci l'indirizzo completo" class="form-input" /></span>
+		                    <span><input type="text" id="indirizzo" th:field="*{indirizzo}" placeholder="Inserisci l'indirizzo completo" class="form-input" /></span>
 		                </div>
 		                <div class="form-actions">
 		                    <span><button type="submit" class="form-button">Salva Dati Fatturazione</button></span>
 		                </div>
 		            </form>
 	            </div>
-	            
+
 	            <div class="form-actions">
 	                <a th:href="@{'/emissioneTessera/associaAnagrafica/'+${tessera.numero}}" class="form-link-button">Torna ad Emissione Tessera</a>
 	                <a th:href="@{'/nuovoTitolareTessera/'+${tessera.numero}}" class="form-link-button">Crea Nuovo Titolare</a>

@@ -69,6 +69,7 @@ public class DipendenteCCController {
 		if(hasDatiFattura) {
 			model.addAttribute("dipendenteCC",dipendenteCC);
 			model.addAttribute("tessera",t);
+			model.addAttribute("datiFattura", new DatiFattura()); // Aggiungi questa riga
 			return "formDatiFatturazione.html";
 		}
 		

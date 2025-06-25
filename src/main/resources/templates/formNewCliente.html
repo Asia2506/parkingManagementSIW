@@ -29,22 +29,22 @@
 					 <div class="form-group">
 	                    <label for="nome">Nome:</label>
 	                    <span><input type="text" id="nome" th:field="*{nome}" placeholder="Inserisci il nome" required class="form-input" /></span>
-						<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+						<span style="color: red;" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
 	                </div>
 	                <div class="form-group">
 	                    <label for="cognome">Cognome:</label>
 	                    <span><input type="text" id="cognome" th:field="*{cognome}" placeholder="Inserisci il cognome" required class="form-input" /></span>
-						<span th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></span>
+						<span style="color: red;" th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></span>
 	                </div>
 					<div class="form-group">
 	                    <label for="azienda">Azienda:</label>
 	                    <span><input type="text" id="azienda" th:field="*{azienda}" placeholder="Inserisci l'azienda per cui lavora" required class="form-input"  /></span>
-						<span th:if="${#fields.hasErrors('azienda')}" th:errors="*{azienda}"></span>
+						<span style="color: red;" th:if="${#fields.hasErrors('azienda')}" th:errors="*{azienda}"></span>
 	                </div>
 					<div class="form-group">
 	                    <label for="targa">Targa Auto:</label>
 	                    <span><input type="text" id="targa" th:field="*{targa}" placeholder="Inserisci la targa dell'auto" required class="form-input"  /></span>
-						<span th:if="${#fields.hasErrors('targa')}" th:errors="*{targa}"></span>
+						<span style="color: red;" th:if="${#fields.hasErrors('targa')}" th:errors="*{targa}"></span>
 					 </div>
 					<div class="form-group">
 						<label>Vuoi associare dati di fatturazione?</label>
